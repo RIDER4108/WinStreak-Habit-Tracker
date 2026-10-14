@@ -9,51 +9,61 @@
   <style>
     /* Theme Color Variables */
     :root {
-      /* Dark Theme (Default) */
-      --bg: #090d16;
-      --card-bg: rgba(22, 30, 49, 0.75);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --inner-bg: rgba(15, 23, 42, 0.6);
+      /* Dark Glass Theme (Default) */
+      --bg: #070b14;
+      --card-bg: rgba(18, 26, 44, 0.58);
+      --card-border: 1px solid rgba(255, 255, 255, 0.14);
+      --card-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      --inner-bg: rgba(15, 23, 42, 0.45);
+      --inner-border: 1px solid rgba(255, 255, 255, 0.08);
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
       --accent: #38bdf8;
       --accent-hover: #0284c7;
-      --accent-glow: rgba(56, 189, 248, 0.35);
+      --accent-glow: rgba(56, 189, 248, 0.4);
       --completed: #34d399;
-      --completed-glow: rgba(52, 211, 153, 0.25);
-      --completed-bg: rgba(52, 211, 153, 0.08);
+      --completed-glow: rgba(52, 211, 153, 0.35);
+      --completed-bg: rgba(52, 211, 153, 0.12);
       --danger: #f87171;
-      --border: #243049;
+      --border: rgba(255, 255, 255, 0.1);
       --streak-fire: #fb923c;
-      --streak-bg: rgba(249, 115, 22, 0.12);
-      --item-bg: rgba(15, 23, 42, 0.7);
-      --input-bg: rgba(15, 23, 42, 0.85);
+      --streak-bg: rgba(249, 115, 22, 0.15);
+      --item-bg: rgba(15, 23, 42, 0.55);
+      --item-border: 1px solid rgba(255, 255, 255, 0.08);
+      --input-bg: rgba(11, 18, 33, 0.65);
       --modal-overlay: rgba(0, 0, 0, 0.75);
-      --shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+      --orb-1: rgba(56, 189, 248, 0.22);
+      --orb-2: rgba(168, 85, 247, 0.2);
+      --orb-3: rgba(52, 211, 153, 0.15);
     }
 
-    /* Light Theme */
+    /* Light Liquid Glass Theme */
     body.light-theme {
-      --bg: #f8fafc;
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --card-border: rgba(0, 0, 0, 0.08);
-      --inner-bg: #f1f5f9;
+      --bg: #e2e8f0;
+      --card-bg: rgba(255, 255, 255, 0.65);
+      --card-border: 1px solid rgba(255, 255, 255, 0.8);
+      --card-highlight: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 20px 35px -10px rgba(100, 116, 139, 0.25);
+      --inner-bg: rgba(241, 245, 249, 0.6);
+      --inner-border: 1px solid rgba(255, 255, 255, 0.6);
       --text-main: #0f172a;
       --text-sub: #64748b;
       --accent: #0284c7;
       --accent-hover: #0369a1;
       --accent-glow: rgba(2, 132, 199, 0.25);
       --completed: #10b981;
-      --completed-glow: rgba(16, 185, 129, 0.2);
-      --completed-bg: rgba(16, 185, 129, 0.08);
+      --completed-glow: rgba(16, 185, 129, 0.25);
+      --completed-bg: rgba(16, 185, 129, 0.12);
       --danger: #ef4444;
-      --border: #e2e8f0;
+      --border: rgba(0, 0, 0, 0.08);
       --streak-fire: #ea580c;
-      --streak-bg: rgba(234, 88, 12, 0.1);
-      --item-bg: #ffffff;
-      --input-bg: #ffffff;
-      --modal-overlay: rgba(15, 23, 42, 0.45);
-      --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      --streak-bg: rgba(234, 88, 12, 0.12);
+      --item-bg: rgba(255, 255, 255, 0.6);
+      --item-border: 1px solid rgba(255, 255, 255, 0.85);
+      --input-bg: rgba(255, 255, 255, 0.8);
+      --modal-overlay: rgba(15, 23, 42, 0.4);
+      --orb-1: rgba(56, 189, 248, 0.35);
+      --orb-2: rgba(192, 132, 252, 0.3);
+      --orb-3: rgba(110, 231, 183, 0.3);
     }
 
     * {
@@ -73,25 +83,64 @@
       padding: 24px 12px;
       min-height: 100vh;
       overflow-x: hidden;
-      background-image: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08), transparent 40%);
+      position: relative;
     }
 
-    body.light-theme {
-      background-image: radial-gradient(circle at 50% 0%, rgba(2, 132, 199, 0.06), transparent 40%);
+    /* Ambient Glow Orbs that create the visible frosted-glass effect */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: 0;
+      pointer-events: none;
+      animation: floatOrb 14s ease-in-out infinite alternate;
     }
 
+    .orb-1 {
+      width: 280px;
+      height: 280px;
+      top: -40px;
+      left: -40px;
+      background: var(--orb-1);
+    }
+
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      bottom: 10%;
+      right: -60px;
+      background: var(--orb-2);
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 220px;
+      height: 220px;
+      top: 45%;
+      left: 10%;
+      background: var(--orb-3);
+      animation-delay: -9s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(25px, 35px) scale(1.12); }
+    }
+
+    /* Primary Glass Container */
     .app-container {
       background: var(--card-bg);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       width: 100%;
       max-width: 500px;
       padding: 22px 18px;
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      border: var(--card-border);
+      box-shadow: var(--card-highlight);
       height: fit-content;
       position: relative;
+      z-index: 1;
     }
 
     .header-top {
@@ -122,16 +171,20 @@
       font-size: 0.75rem;
       color: var(--accent);
       background: var(--inner-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       padding: 5px 12px;
       border-radius: 20px;
-      border: 1px solid var(--border);
+      border: var(--inner-border);
       font-weight: 600;
       white-space: nowrap;
     }
 
     .icon-btn {
       background: var(--inner-bg);
-      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: var(--inner-border);
       color: var(--text-sub);
       width: 34px;
       height: 34px;
@@ -156,7 +209,7 @@
       margin-bottom: 18px;
     }
 
-    /* Streak Dashboard */
+    /* Streak Dashboard Glass */
     .streak-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -166,13 +219,15 @@
 
     .streak-card {
       background: var(--streak-bg);
-      border: 1px solid rgba(249, 115, 22, 0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(249, 115, 22, 0.3);
       padding: 12px 14px;
-      border-radius: 14px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.05);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 8px 16px -4px rgba(249, 115, 22, 0.1);
     }
 
     .streak-icon {
@@ -199,10 +254,13 @@
     /* 7-Day History Bubbles */
     .week-history {
       background: var(--inner-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: var(--inner-border);
+      border-radius: 16px;
       padding: 12px 14px;
       margin-bottom: 16px;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
     }
 
     .week-header {
@@ -241,7 +299,7 @@
       height: 32px;
       border-radius: 50%;
       background: var(--item-bg);
-      border: 1.5px solid var(--border);
+      border: var(--item-border);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -253,7 +311,7 @@
 
     .day-bubble.today {
       border-color: var(--accent);
-      box-shadow: 0 0 10px var(--accent-glow);
+      box-shadow: 0 0 12px var(--accent-glow);
     }
 
     .day-bubble.done {
@@ -261,15 +319,19 @@
       border-color: var(--completed);
       color: var(--completed);
       transform: scale(1.05);
+      box-shadow: 0 0 10px var(--completed-glow);
     }
 
     /* Progress Section with Shimmer */
     .progress-section {
       background: var(--inner-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       padding: 16px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
+      border-radius: 16px;
+      border: var(--inner-border);
       margin-bottom: 20px;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
     }
 
     .progress-header {
@@ -290,11 +352,15 @@
     .progress-bar-bg {
       width: 100%;
       height: 10px;
-      background-color: var(--border);
+      background-color: rgba(255, 255, 255, 0.08);
       border-radius: 999px;
       overflow: hidden;
       margin-bottom: 9px;
       position: relative;
+    }
+
+    body.light-theme .progress-bar-bg {
+      background-color: rgba(0, 0, 0, 0.08);
     }
 
     .progress-bar-fill {
@@ -303,7 +369,7 @@
       background: linear-gradient(90deg, var(--accent), var(--completed));
       border-radius: 999px;
       transition: width 0.45s cubic-bezier(0.34, 1.25, 0.64, 1);
-      box-shadow: 0 0 12px var(--accent-glow);
+      box-shadow: 0 0 14px var(--accent-glow);
       position: relative;
       overflow: hidden;
     }
@@ -315,7 +381,7 @@
       left: 0;
       bottom: 0;
       right: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
       animation: shimmer 2s infinite;
     }
 
@@ -341,13 +407,16 @@
     .input-form input {
       width: 100%;
       background: var(--input-bg);
-      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: var(--inner-border);
       color: var(--text-main);
       padding: 12px 16px;
       border-radius: 12px;
       font-size: 0.95rem;
       outline: none;
       transition: all 0.2s ease;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
     }
 
     .input-form input:focus, .category-select:focus, .edit-input:focus, .edit-select:focus {
@@ -364,10 +433,12 @@
     .category-select {
       flex: 1;
       background: var(--input-bg);
-      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: var(--inner-border);
       color: var(--text-main);
       padding: 11px 12px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 0.88rem;
       outline: none;
       cursor: pointer;
@@ -379,12 +450,12 @@
       border: none;
       font-weight: 700;
       padding: 0 20px;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       font-size: 0.92rem;
       transition: all 0.2s ease;
       flex-shrink: 0;
-      box-shadow: 0 4px 12px var(--accent-glow);
+      box-shadow: 0 4px 15px var(--accent-glow);
     }
 
     body:not(.light-theme) .add-btn {
@@ -412,7 +483,9 @@
 
     .filter-btn {
       background: var(--inner-bg);
-      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: var(--inner-border);
       color: var(--text-sub);
       padding: 6px 13px;
       border-radius: 20px;
@@ -425,7 +498,7 @@
     }
 
     .filter-btn:hover {
-      border-color: var(--text-sub);
+      border-color: rgba(255, 255, 255, 0.3);
       color: var(--text-main);
     }
 
@@ -433,7 +506,7 @@
       background: var(--accent);
       color: #ffffff;
       border-color: var(--accent);
-      box-shadow: 0 2px 8px var(--accent-glow);
+      box-shadow: 0 2px 10px var(--accent-glow);
     }
 
     body:not(.light-theme) .filter-btn.active {
@@ -450,11 +523,11 @@
       white-space: nowrap;
     }
 
-    .cat-coding { background: rgba(56, 189, 248, 0.15); color: #0284c7; border: 1px solid rgba(56, 189, 248, 0.3); }
-    .cat-fitness { background: rgba(249, 115, 22, 0.15); color: #ea580c; border: 1px solid rgba(249, 115, 22, 0.3); }
-    .cat-study { background: rgba(168, 85, 247, 0.15); color: #9333ea; border: 1px solid rgba(168, 85, 247, 0.3); }
-    .cat-mindset { background: rgba(52, 211, 153, 0.15); color: #16a34a; border: 1px solid rgba(52, 211, 153, 0.3); }
-    .cat-general { background: rgba(148, 163, 184, 0.15); color: #64748b; border: 1px solid rgba(148, 163, 184, 0.3); }
+    .cat-coding { background: rgba(56, 189, 248, 0.18); color: #0284c7; border: 1px solid rgba(56, 189, 248, 0.35); }
+    .cat-fitness { background: rgba(249, 115, 22, 0.18); color: #ea580c; border: 1px solid rgba(249, 115, 22, 0.35); }
+    .cat-study { background: rgba(168, 85, 247, 0.18); color: #9333ea; border: 1px solid rgba(168, 85, 247, 0.35); }
+    .cat-mindset { background: rgba(52, 211, 153, 0.18); color: #16a34a; border: 1px solid rgba(52, 211, 153, 0.35); }
+    .cat-general { background: rgba(148, 163, 184, 0.18); color: #64748b; border: 1px solid rgba(148, 163, 184, 0.35); }
 
     body:not(.light-theme) .cat-coding { color: #38bdf8; }
     body:not(.light-theme) .cat-fitness { color: #fb923c; }
@@ -462,7 +535,7 @@
     body:not(.light-theme) .cat-mindset { color: #4ade80; }
     body:not(.light-theme) .cat-general { color: #cbd5e1; }
 
-    /* Habit Items & Micro-Interactions */
+    /* Habit Items with True Glass Shading */
     .habit-list {
       list-style: none;
       display: flex;
@@ -475,12 +548,15 @@
       align-items: center;
       justify-content: space-between;
       background: var(--item-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
+      border-radius: 14px;
+      border: var(--item-border);
       gap: 10px;
       transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1);
       position: relative;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .habit-item:active {
@@ -488,8 +564,9 @@
     }
 
     .habit-item.done {
-      border-color: rgba(52, 211, 153, 0.35);
+      border-color: rgba(52, 211, 153, 0.45);
       background: var(--completed-bg);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 0 15px var(--completed-glow);
     }
 
     .habit-left {
@@ -507,12 +584,13 @@
       width: 22px;
       height: 22px;
       border-radius: 7px;
-      border: 2px solid #64748b;
+      border: 2px solid rgba(148, 163, 184, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
       transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .habit-item.done .custom-checkbox {
@@ -590,15 +668,15 @@
 
     .action-btn:hover {
       color: var(--accent);
-      background: rgba(56, 189, 248, 0.1);
+      background: rgba(56, 189, 248, 0.15);
     }
 
     .action-btn.delete-btn:hover {
       color: var(--danger);
-      background: rgba(248, 113, 113, 0.1);
+      background: rgba(248, 113, 113, 0.15);
     }
 
-    /* Edit Mode */
+    /* Inline Edit */
     .edit-mode-container {
       display: flex;
       flex-direction: column;
@@ -614,8 +692,8 @@
 
     .edit-input {
       width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+      background: var(--input-bg);
+      border: var(--inner-border);
       color: var(--text-main);
       padding: 9px 12px;
       border-radius: 8px;
@@ -625,8 +703,8 @@
 
     .edit-select {
       flex: 1;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+      background: var(--input-bg);
+      border: var(--inner-border);
       color: var(--text-main);
       padding: 7px 10px;
       border-radius: 8px;
@@ -651,7 +729,7 @@
 
     .edit-btn-cancel {
       background: transparent;
-      border: 1px solid var(--border);
+      border: var(--inner-border);
       color: var(--text-sub);
       padding: 7px 12px;
       border-radius: 8px;
@@ -659,7 +737,7 @@
       cursor: pointer;
     }
 
-    /* Settings Modal */
+    /* Frosted Settings Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -667,8 +745,8 @@
       width: 100vw;
       height: 100vh;
       background: var(--modal-overlay);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -682,13 +760,14 @@
 
     .modal-card {
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: var(--card-border);
+      border-radius: 22px;
       width: 100%;
       max-width: 400px;
       padding: 22px;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--card-highlight);
       animation: modalSlideUp 0.25s ease-out;
     }
 
@@ -703,7 +782,7 @@
       align-items: center;
       margin-bottom: 16px;
       padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: var(--inner-border);
     }
 
     .modal-header h2 {
@@ -725,7 +804,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 13px 0;
-      border-bottom: 1px solid var(--border);
+      border-bottom: var(--inner-border);
     }
 
     .setting-info h4 {
@@ -742,7 +821,8 @@
     .theme-toggle-wrap {
       display: flex;
       background: var(--inner-bg);
-      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      border: var(--inner-border);
       border-radius: 30px;
       padding: 3px;
       gap: 2px;
@@ -792,9 +872,15 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: var(--border);
+      background-color: rgba(255, 255, 255, 0.15);
       transition: .25s;
       border-radius: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    body.light-theme .slider {
+      background-color: rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(0, 0, 0, 0.08);
     }
 
     .slider:before {
@@ -802,15 +888,17 @@
       content: "";
       height: 18px;
       width: 18px;
-      left: 3px;
-      bottom: 3px;
+      left: 2px;
+      bottom: 2px;
       background-color: white;
       transition: .25s;
       border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.25);
     }
 
     input:checked + .slider {
       background-color: var(--completed);
+      border-color: var(--completed);
     }
 
     input:checked + .slider:before {
@@ -832,6 +920,11 @@
 </head>
 <body>
 
+  <!-- Ambient Glowing Orbs behind the frosted glass -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+
   <div class="app-container">
     <header>
       <div class="header-top">
@@ -849,7 +942,7 @@
       <p>Keep your daily momentum alive.</p>
     </header>
 
-    <!-- Streak Counters -->
+    <!-- Streak Dashboard -->
     <div class="streak-container">
       <div class="streak-card">
         <div class="streak-icon">🔥</div>
@@ -919,7 +1012,7 @@
     <ul class="habit-list" id="habitList"></ul>
   </div>
 
-  <!-- Settings Modal -->
+  <!-- Frosted Settings Modal -->
   <div class="modal-overlay" id="settingsModal">
     <div class="modal-card">
       <div class="modal-header">
@@ -930,7 +1023,7 @@
       <div class="setting-group">
         <div class="setting-info">
           <h4>Appearance</h4>
-          <p>Switch between dark and light interface</p>
+          <p>Switch between dark and light glass</p>
         </div>
         <div class="theme-toggle-wrap">
           <button class="theme-btn active" id="darkThemeBtn" data-theme="dark">🌙 Dark</button>
@@ -989,7 +1082,7 @@
     let soundEnabled = localStorage.getItem(STORAGE_KEY_SOUND) !== 'false';
     let hapticEnabled = localStorage.getItem(STORAGE_KEY_HAPTIC) !== 'false';
 
-    // --- Web Audio Synthesizer (Zero Audio Files Needed) ---
+    // --- Web Audio Synthesizer ---
     let audioCtx = null;
     function playChime(isDone) {
       if (!soundEnabled) return;
@@ -1007,15 +1100,13 @@
 
         osc.type = 'sine';
         if (isDone) {
-          // Ascending crisp chime
           osc.frequency.setValueAtTime(587.33, now); // D5
           osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
-          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.setValueAtTime(0.2, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
           osc.start(now);
           osc.stop(now + 0.35);
         } else {
-          // Subtle descending pop
           osc.frequency.setValueAtTime(440, now);
           osc.frequency.exponentialRampToValueAtTime(260, now + 0.1);
           gain.gain.setValueAtTime(0.12, now);
@@ -1026,15 +1117,13 @@
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-      } catch (err) {
-        // Fallback for strict browser autoplay permissions
-      }
+      } catch (err) {}
     }
 
     function triggerHaptic() {
       if (!hapticEnabled) return;
       if (window.navigator && window.navigator.vibrate) {
-        window.navigator.vibrate(18); // 18ms gentle micro-buzz
+        window.navigator.vibrate(18);
       }
     }
 
