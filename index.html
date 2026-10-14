@@ -3,74 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Daily Habit Tracker</title>
-  <!-- Confetti Library CDN -->
+  <title>WinStreak — Habit Tracker</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <style>
-    /* Theme Color Variables */
     :root {
-      /* Dark Glass Theme (Default) */
-      --bg: #070b14;
-      --card-bg: rgba(18, 26, 44, 0.58);
-      --card-border: 1px solid rgba(255, 255, 255, 0.14);
-      --card-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 20px 40px -15px rgba(0, 0, 0, 0.7);
-      --inner-bg: rgba(15, 23, 42, 0.45);
-      --inner-border: 1px solid rgba(255, 255, 255, 0.08);
+      --bg: #030712;
+      --card-bg: rgba(15, 23, 42, 0.65);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 20px 50px -10px rgba(0, 0, 0, 0.8);
+      --inner-bg: rgba(30, 41, 59, 0.45);
+      --inner-border: rgba(255, 255, 255, 0.08);
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
       --accent: #38bdf8;
-      --accent-hover: #0284c7;
       --accent-glow: rgba(56, 189, 248, 0.4);
-      --completed: #34d399;
-      --completed-glow: rgba(52, 211, 153, 0.35);
-      --completed-bg: rgba(52, 211, 153, 0.12);
-      --danger: #f87171;
-      --border: rgba(255, 255, 255, 0.1);
+      --completed: #10b981;
+      --completed-glow: rgba(16, 185, 129, 0.35);
+      --completed-bg: rgba(16, 185, 129, 0.12);
+      --danger: #f43f5e;
       --streak-fire: #fb923c;
-      --streak-bg: rgba(249, 115, 22, 0.15);
+      --streak-bg: rgba(251, 146, 60, 0.12);
+      --streak-border: rgba(251, 146, 60, 0.28);
       --item-bg: rgba(15, 23, 42, 0.55);
-      --item-border: 1px solid rgba(255, 255, 255, 0.08);
-      --input-bg: rgba(11, 18, 33, 0.65);
-      --modal-overlay: rgba(0, 0, 0, 0.75);
-      --orb-1: rgba(56, 189, 248, 0.22);
-      --orb-2: rgba(168, 85, 247, 0.2);
-      --orb-3: rgba(52, 211, 153, 0.15);
+      --item-border: rgba(255, 255, 255, 0.08);
+      --input-bg: rgba(2, 6, 23, 0.75);
+      --modal-overlay: rgba(0, 0, 0, 0.8);
+      --orb-1: rgba(56, 189, 248, 0.28);
+      --orb-2: rgba(168, 85, 247, 0.24);
+      --orb-3: rgba(16, 185, 129, 0.18);
     }
 
-    /* Light Liquid Glass Theme */
     body.light-theme {
       --bg: #e2e8f0;
-      --card-bg: rgba(255, 255, 255, 0.65);
-      --card-border: 1px solid rgba(255, 255, 255, 0.8);
-      --card-highlight: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 20px 35px -10px rgba(100, 116, 139, 0.25);
-      --inner-bg: rgba(241, 245, 249, 0.6);
-      --inner-border: 1px solid rgba(255, 255, 255, 0.6);
+      --card-bg: rgba(255, 255, 255, 0.75);
+      --card-border: rgba(255, 255, 255, 0.9);
+      --card-highlight: inset 0 1px 2px rgba(255, 255, 255, 1), 0 20px 40px -10px rgba(100, 116, 139, 0.25);
+      --inner-bg: rgba(241, 245, 249, 0.65);
+      --inner-border: rgba(255, 255, 255, 0.7);
       --text-main: #0f172a;
       --text-sub: #64748b;
       --accent: #0284c7;
-      --accent-hover: #0369a1;
-      --accent-glow: rgba(2, 132, 199, 0.25);
-      --completed: #10b981;
-      --completed-glow: rgba(16, 185, 129, 0.25);
-      --completed-bg: rgba(16, 185, 129, 0.12);
-      --danger: #ef4444;
-      --border: rgba(0, 0, 0, 0.08);
+      --accent-glow: rgba(2, 132, 199, 0.3);
+      --completed: #059669;
+      --completed-glow: rgba(5, 150, 105, 0.3);
+      --completed-bg: rgba(16, 185, 129, 0.14);
+      --danger: #e11d48;
       --streak-fire: #ea580c;
       --streak-bg: rgba(234, 88, 12, 0.12);
-      --item-bg: rgba(255, 255, 255, 0.6);
-      --item-border: 1px solid rgba(255, 255, 255, 0.85);
-      --input-bg: rgba(255, 255, 255, 0.8);
-      --modal-overlay: rgba(15, 23, 42, 0.4);
-      --orb-1: rgba(56, 189, 248, 0.35);
-      --orb-2: rgba(192, 132, 252, 0.3);
-      --orb-3: rgba(110, 231, 183, 0.3);
+      --streak-border: rgba(234, 88, 12, 0.25);
+      --item-bg: rgba(255, 255, 255, 0.7);
+      --item-border: rgba(255, 255, 255, 0.9);
+      --input-bg: rgba(255, 255, 255, 0.85);
+      --modal-overlay: rgba(15, 23, 42, 0.5);
+      --orb-1: rgba(56, 189, 248, 0.4);
+      --orb-2: rgba(192, 132, 252, 0.35);
+      --orb-3: rgba(110, 231, 183, 0.35);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
       -webkit-tap-highlight-color: transparent;
     }
@@ -86,57 +80,33 @@
       position: relative;
     }
 
-    /* Ambient Glow Orbs that create the visible frosted-glass effect */
     .ambient-orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(80px);
+      filter: blur(85px);
       z-index: 0;
       pointer-events: none;
-      animation: floatOrb 14s ease-in-out infinite alternate;
+      animation: floatMesh 16s ease-in-out infinite alternate;
     }
 
-    .orb-1 {
-      width: 280px;
-      height: 280px;
-      top: -40px;
-      left: -40px;
-      background: var(--orb-1);
-    }
+    .orb-1 { width: 320px; height: 320px; top: -60px; left: -60px; background: var(--orb-1); }
+    .orb-2 { width: 340px; height: 340px; bottom: 5%; right: -80px; background: var(--orb-2); animation-delay: -6s; }
+    .orb-3 { width: 260px; height: 260px; top: 40%; left: 5%; background: var(--orb-3); animation-delay: -11s; }
 
-    .orb-2 {
-      width: 300px;
-      height: 300px;
-      bottom: 10%;
-      right: -60px;
-      background: var(--orb-2);
-      animation-delay: -5s;
-    }
-
-    .orb-3 {
-      width: 220px;
-      height: 220px;
-      top: 45%;
-      left: 10%;
-      background: var(--orb-3);
-      animation-delay: -9s;
-    }
-
-    @keyframes floatOrb {
+    @keyframes floatMesh {
       0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(25px, 35px) scale(1.12); }
+      100% { transform: translate(30px, 40px) scale(1.15); }
     }
 
-    /* Primary Glass Container */
     .app-container {
       background: var(--card-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
       width: 100%;
-      max-width: 500px;
+      max-width: 480px;
       padding: 22px 18px;
-      border-radius: 24px;
-      border: var(--card-border);
+      border-radius: 26px;
+      border: 1px solid var(--card-border);
       box-shadow: var(--card-highlight);
       height: fit-content;
       position: relative;
@@ -151,10 +121,22 @@
       gap: 8px;
     }
 
-    .header-actions {
+    .brand-wrap {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px var(--accent-glow);
     }
 
     header h1 {
@@ -162,9 +144,15 @@
       font-weight: 800;
       letter-spacing: -0.5px;
       line-height: 1.2;
-      background: linear-gradient(135deg, var(--text-main) 60%, var(--accent));
+      background: linear-gradient(135deg, var(--text-main) 50%, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .date-badge {
@@ -172,19 +160,16 @@
       color: var(--accent);
       background: var(--inner-bg);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       padding: 5px 12px;
       border-radius: 20px;
-      border: var(--inner-border);
+      border: 1px solid var(--inner-border);
       font-weight: 600;
       white-space: nowrap;
     }
 
     .icon-btn {
       background: var(--inner-bg);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: var(--inner-border);
+      border: 1px solid var(--inner-border);
       color: var(--text-sub);
       width: 34px;
       height: 34px;
@@ -209,7 +194,6 @@
       margin-bottom: 18px;
     }
 
-    /* Streak Dashboard Glass */
     .streak-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -220,14 +204,13 @@
     .streak-card {
       background: var(--streak-bg);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(249, 115, 22, 0.3);
+      border: 1px solid var(--streak-border);
       padding: 12px 14px;
-      border-radius: 16px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       gap: 12px;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 8px 16px -4px rgba(249, 115, 22, 0.1);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 8px 20px -6px rgba(251, 146, 60, 0.15);
     }
 
     .streak-icon {
@@ -251,13 +234,11 @@
       font-weight: 600;
     }
 
-    /* 7-Day History Bubbles */
     .week-history {
       background: var(--inner-bg);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: var(--inner-border);
-      border-radius: 16px;
+      border: 1px solid var(--inner-border);
+      border-radius: 18px;
       padding: 12px 14px;
       margin-bottom: 16px;
       box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
@@ -299,7 +280,7 @@
       height: 32px;
       border-radius: 50%;
       background: var(--item-bg);
-      border: var(--item-border);
+      border: 1.5px solid var(--item-border);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -318,18 +299,16 @@
       background: var(--completed-bg);
       border-color: var(--completed);
       color: var(--completed);
-      transform: scale(1.05);
-      box-shadow: 0 0 10px var(--completed-glow);
+      transform: scale(1.06);
+      box-shadow: 0 0 12px var(--completed-glow);
     }
 
-    /* Progress Section with Shimmer */
     .progress-section {
       background: var(--inner-bg);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
       padding: 16px;
-      border-radius: 16px;
-      border: var(--inner-border);
+      border-radius: 18px;
+      border: 1px solid var(--inner-border);
       margin-bottom: 20px;
       box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
     }
@@ -381,7 +360,7 @@
       left: 0;
       bottom: 0;
       right: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
       animation: shimmer 2s infinite;
     }
 
@@ -396,7 +375,6 @@
       font-weight: 500;
     }
 
-    /* Input Section */
     .input-form {
       display: flex;
       flex-direction: column;
@@ -408,15 +386,14 @@
       width: 100%;
       background: var(--input-bg);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: var(--inner-border);
+      border: 1px solid var(--inner-border);
       color: var(--text-main);
       padding: 12px 16px;
-      border-radius: 12px;
+      border-radius: 14px;
       font-size: 0.95rem;
       outline: none;
       transition: all 0.2s ease;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     .input-form input:focus, .category-select:focus, .edit-input:focus, .edit-select:focus {
@@ -434,39 +411,33 @@
       flex: 1;
       background: var(--input-bg);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: var(--inner-border);
+      border: 1px solid var(--inner-border);
       color: var(--text-main);
       padding: 11px 12px;
-      border-radius: 12px;
+      border-radius: 14px;
       font-size: 0.88rem;
       outline: none;
       cursor: pointer;
     }
 
     .add-btn {
-      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      background: linear-gradient(135deg, var(--accent), #2563eb);
       color: #ffffff;
       border: none;
       font-weight: 700;
       padding: 0 20px;
-      border-radius: 12px;
+      border-radius: 14px;
       cursor: pointer;
       font-size: 0.92rem;
       transition: all 0.2s ease;
       flex-shrink: 0;
-      box-shadow: 0 4px 15px var(--accent-glow);
-    }
-
-    body:not(.light-theme) .add-btn {
-      color: #090d16;
+      box-shadow: 0 4px 16px var(--accent-glow);
     }
 
     .add-btn:active {
       transform: scale(0.96);
     }
 
-    /* Filter Tabs Bar */
     .filter-bar {
       display: flex;
       gap: 6px;
@@ -484,8 +455,7 @@
     .filter-btn {
       background: var(--inner-bg);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: var(--inner-border);
+      border: 1px solid var(--inner-border);
       color: var(--text-sub);
       padding: 6px 13px;
       border-radius: 20px;
@@ -504,38 +474,33 @@
 
     .filter-btn.active {
       background: var(--accent);
-      color: #ffffff;
+      color: #030712;
       border-color: var(--accent);
       box-shadow: 0 2px 10px var(--accent-glow);
+      font-weight: 700;
     }
 
-    body:not(.light-theme) .filter-btn.active {
-      color: #090d16;
-    }
-
-    /* Category Badges */
     .cat-badge {
       font-size: 0.68rem;
       font-weight: 700;
       padding: 3px 8px;
-      border-radius: 6px;
+      border-radius: 8px;
       letter-spacing: 0.3px;
       white-space: nowrap;
     }
 
-    .cat-coding { background: rgba(56, 189, 248, 0.18); color: #0284c7; border: 1px solid rgba(56, 189, 248, 0.35); }
-    .cat-fitness { background: rgba(249, 115, 22, 0.18); color: #ea580c; border: 1px solid rgba(249, 115, 22, 0.35); }
-    .cat-study { background: rgba(168, 85, 247, 0.18); color: #9333ea; border: 1px solid rgba(168, 85, 247, 0.35); }
-    .cat-mindset { background: rgba(52, 211, 153, 0.18); color: #16a34a; border: 1px solid rgba(52, 211, 153, 0.35); }
-    .cat-general { background: rgba(148, 163, 184, 0.18); color: #64748b; border: 1px solid rgba(148, 163, 184, 0.35); }
+    .cat-coding { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .cat-fitness { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); }
+    .cat-study { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+    .cat-mindset { background: rgba(52, 211, 153, 0.2); color: #4ade80; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .cat-general { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); }
 
-    body:not(.light-theme) .cat-coding { color: #38bdf8; }
-    body:not(.light-theme) .cat-fitness { color: #fb923c; }
-    body:not(.light-theme) .cat-study { color: #c084fc; }
-    body:not(.light-theme) .cat-mindset { color: #4ade80; }
-    body:not(.light-theme) .cat-general { color: #cbd5e1; }
+    body.light-theme .cat-coding { color: #0284c7; }
+    body.light-theme .cat-fitness { color: #ea580c; }
+    body.light-theme .cat-study { color: #9333ea; }
+    body.light-theme .cat-mindset { color: #16a34a; }
+    body.light-theme .cat-general { color: #64748b; }
 
-    /* Habit Items with True Glass Shading */
     .habit-list {
       list-style: none;
       display: flex;
@@ -549,14 +514,13 @@
       justify-content: space-between;
       background: var(--item-bg);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
       padding: 12px 14px;
-      border-radius: 14px;
-      border: var(--item-border);
+      border-radius: 16px;
+      border: 1px solid var(--item-border);
       gap: 10px;
       transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1);
       position: relative;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 4px 15px rgba(0, 0, 0, 0.15);
     }
 
     .habit-item:active {
@@ -564,9 +528,9 @@
     }
 
     .habit-item.done {
-      border-color: rgba(52, 211, 153, 0.45);
+      border-color: rgba(16, 185, 129, 0.45);
       background: var(--completed-bg);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 0 15px var(--completed-glow);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 0 16px var(--completed-glow);
     }
 
     .habit-left {
@@ -579,11 +543,10 @@
       min-width: 0;
     }
 
-    /* Pop Checkbox */
     .custom-checkbox {
       width: 22px;
       height: 22px;
-      border-radius: 7px;
+      border-radius: 8px;
       border: 2px solid rgba(148, 163, 184, 0.5);
       display: flex;
       align-items: center;
@@ -596,7 +559,7 @@
     .habit-item.done .custom-checkbox {
       background-color: var(--completed);
       border-color: var(--completed);
-      box-shadow: 0 0 10px var(--completed-glow);
+      box-shadow: 0 0 12px var(--completed-glow);
       animation: checkBounce 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
@@ -615,10 +578,6 @@
       stroke-linecap: round;
       stroke-linejoin: round;
       fill: none;
-    }
-
-    body:not(.light-theme) .custom-checkbox svg {
-      stroke: #090d16;
     }
 
     .habit-item.done .custom-checkbox svg {
@@ -673,10 +632,9 @@
 
     .action-btn.delete-btn:hover {
       color: var(--danger);
-      background: rgba(248, 113, 113, 0.15);
+      background: rgba(244, 63, 94, 0.15);
     }
 
-    /* Inline Edit */
     .edit-mode-container {
       display: flex;
       flex-direction: column;
@@ -693,10 +651,10 @@
     .edit-input {
       width: 100%;
       background: var(--input-bg);
-      border: var(--inner-border);
+      border: 1px solid var(--inner-border);
       color: var(--text-main);
       padding: 9px 12px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.9rem;
       outline: none;
     }
@@ -704,10 +662,10 @@
     .edit-select {
       flex: 1;
       background: var(--input-bg);
-      border: var(--inner-border);
+      border: 1px solid var(--inner-border);
       color: var(--text-main);
       padding: 7px 10px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.82rem;
       outline: none;
     }
@@ -717,27 +675,22 @@
       border: none;
       color: #ffffff;
       padding: 7px 14px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-weight: 700;
       font-size: 0.85rem;
       cursor: pointer;
     }
 
-    body:not(.light-theme) .edit-btn-save {
-      color: #090d16;
-    }
-
     .edit-btn-cancel {
       background: transparent;
-      border: var(--inner-border);
+      border: 1px solid var(--inner-border);
       color: var(--text-sub);
       padding: 7px 12px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.85rem;
       cursor: pointer;
     }
 
-    /* Frosted Settings Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -745,8 +698,7 @@
       width: 100vw;
       height: 100vh;
       background: var(--modal-overlay);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -760,10 +712,9 @@
 
     .modal-card {
       background: var(--card-bg);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: var(--card-border);
-      border-radius: 22px;
+      backdrop-filter: blur(30px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
       width: 100%;
       max-width: 400px;
       padding: 22px;
@@ -782,7 +733,7 @@
       align-items: center;
       margin-bottom: 16px;
       padding-bottom: 12px;
-      border-bottom: var(--inner-border);
+      border-bottom: 1px solid var(--inner-border);
     }
 
     .modal-header h2 {
@@ -804,7 +755,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 13px 0;
-      border-bottom: var(--inner-border);
+      border-bottom: 1px solid var(--inner-border);
     }
 
     .setting-info h4 {
@@ -822,7 +773,7 @@
       display: flex;
       background: var(--inner-bg);
       backdrop-filter: blur(10px);
-      border: var(--inner-border);
+      border: 1px solid var(--inner-border);
       border-radius: 30px;
       padding: 3px;
       gap: 2px;
@@ -844,14 +795,10 @@
 
     .theme-btn.active {
       background: var(--accent);
-      color: #ffffff;
+      color: #030712;
+      font-weight: 700;
     }
 
-    body:not(.light-theme) .theme-btn.active {
-      color: #090d16;
-    }
-
-    /* iOS-Style Toggle Switch */
     .switch {
       position: relative;
       display: inline-block;
@@ -920,7 +867,6 @@
 </head>
 <body>
 
-  <!-- Ambient Glowing Orbs behind the frosted glass -->
   <div class="ambient-orb orb-1"></div>
   <div class="ambient-orb orb-2"></div>
   <div class="ambient-orb orb-3"></div>
@@ -928,7 +874,10 @@
   <div class="app-container">
     <header>
       <div class="header-top">
-        <h1>Habit Tracker</h1>
+        <div class="brand-wrap">
+          <div class="brand-icon">⚡</div>
+          <h1>WinStreak</h1>
+        </div>
         <div class="header-actions">
           <div class="date-badge" id="dateBadge">Today</div>
           <button class="icon-btn" id="openSettingsBtn" title="Open Settings">
@@ -939,28 +888,26 @@
           </button>
         </div>
       </div>
-      <p>Keep your daily momentum alive.</p>
+      <p>Stack your daily victories. Build momentum.</p>
     </header>
 
-    <!-- Streak Dashboard -->
     <div class="streak-container">
       <div class="streak-card">
         <div class="streak-icon">🔥</div>
         <div class="streak-info">
           <div class="streak-count" id="currentStreak">0</div>
-          <div class="streak-label">Day Streak</div>
+          <div class="streak-label">Win Streak</div>
         </div>
       </div>
       <div class="streak-card">
         <div class="streak-icon">🏆</div>
         <div class="streak-info">
           <div class="streak-count" id="bestStreak">0</div>
-          <div class="streak-label">Best Record</div>
+          <div class="streak-label">Peak Streak</div>
         </div>
       </div>
     </div>
 
-    <!-- 7-Day History Bubbles -->
     <div class="week-history">
       <div class="week-header">
         <span>Last 7 Days</span>
@@ -969,7 +916,6 @@
       <div class="week-bubbles" id="weekBubbles"></div>
     </div>
 
-    <!-- Progress Section -->
     <div class="progress-section">
       <div class="progress-header">
         <span id="counterText">0 of 0 completed</span>
@@ -981,9 +927,8 @@
       <div class="progress-status" id="statusMessage">No habits added yet.</div>
     </div>
 
-    <!-- Habit Input -->
     <form class="input-form" id="habitForm">
-      <input type="text" id="habitInput" placeholder="Add a new habit..." required autocomplete="off" />
+      <input type="text" id="habitInput" placeholder="What will you conquer today?" required autocomplete="off" />
       <div class="input-actions-row">
         <select id="habitCategory" class="category-select">
           <option value="coding">💻 Coding</option>
@@ -992,11 +937,10 @@
           <option value="mindset">🧘 Mindset</option>
           <option value="general" selected>⚡ General</option>
         </select>
-        <button type="submit" class="add-btn">Add Habit</button>
+        <button type="submit" class="add-btn">+ Add Habit</button>
       </div>
     </form>
 
-    <!-- Filter Tabs -->
     <div class="filter-bar" id="filterBar">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="active">Active</button>
@@ -1008,15 +952,13 @@
       <button class="filter-btn" data-filter="general">⚡ General</button>
     </div>
 
-    <!-- Habit List -->
     <ul class="habit-list" id="habitList"></ul>
   </div>
 
-  <!-- Frosted Settings Modal -->
   <div class="modal-overlay" id="settingsModal">
     <div class="modal-card">
       <div class="modal-header">
-        <h2>App Settings</h2>
+        <h2>WinStreak Settings</h2>
         <button class="close-modal-btn" id="closeSettingsBtn" title="Close">✕</button>
       </div>
 
@@ -1082,17 +1024,12 @@
     let soundEnabled = localStorage.getItem(STORAGE_KEY_SOUND) !== 'false';
     let hapticEnabled = localStorage.getItem(STORAGE_KEY_HAPTIC) !== 'false';
 
-    // --- Web Audio Synthesizer ---
     let audioCtx = null;
     function playChime(isDone) {
       if (!soundEnabled) return;
       try {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
 
         const now = audioCtx.currentTime;
         const osc = audioCtx.createOscillator();
@@ -1100,8 +1037,8 @@
 
         osc.type = 'sine';
         if (isDone) {
-          osc.frequency.setValueAtTime(587.33, now); // D5
-          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
+          osc.frequency.setValueAtTime(587.33, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
           gain.gain.setValueAtTime(0.2, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
           osc.start(now);
@@ -1232,8 +1169,8 @@
 
     function fireConfetti() {
       if (typeof confetti !== 'function') return;
-      confetti({ particleCount: 65, spread: 60, origin: { x: 0.2, y: 0.85 }, colors: ['#38bdf8', '#34d399', '#f97316', '#a855f7'] });
-      confetti({ particleCount: 65, spread: 60, origin: { x: 0.8, y: 0.85 }, colors: ['#38bdf8', '#34d399', '#f97316', '#a855f7'] });
+      confetti({ particleCount: 65, spread: 60, origin: { x: 0.2, y: 0.85 }, colors: ['#38bdf8', '#10b981', '#fb923c', '#a855f7'] });
+      confetti({ particleCount: 65, spread: 60, origin: { x: 0.8, y: 0.85 }, colors: ['#38bdf8', '#10b981', '#fb923c', '#a855f7'] });
     }
 
     function saveHabits() { localStorage.setItem(STORAGE_KEY_HABITS, JSON.stringify(habits)); }
@@ -1351,11 +1288,11 @@
       wasAllCompleted = allDone;
 
       if (total === 0) {
-        statusMessage.textContent = 'Add a habit above to begin tracking.';
+        statusMessage.textContent = 'Add a habit above to begin your WinStreak.';
       } else if (allDone) {
-        statusMessage.textContent = '🎉 All habits completed for today!';
+        statusMessage.textContent = '🎉 All habits crushed! WinStreak maintained!';
       } else if (percent >= 50) {
-        statusMessage.textContent = '💪 Halfway there, keep going!';
+        statusMessage.textContent = '💪 Halfway there, keep the streak going!';
       } else {
         statusMessage.textContent = '🌱 Check off your first habit!';
       }
@@ -1542,2045 +1479,6 @@
     applyTheme(activeTheme);
     checkDailyReset();
     renderWeekBubbles();
-    renderHabits(true);
-  </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Momentum — Habit Tracker</title>
-  <!-- Confetti Library for full celebration -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <style>
-    /* ==========================================================================
-       Design System & Theme Tokens (VisionOS / Hyper-Glassmorphism)
-       ========================================================================== */
-    :root {
-      /* Dark Cyberpunk / Luxury VisionOS Glass (Default) */
-      --bg-canvas: #030712;
-      --glass-panel: rgba(15, 23, 42, 0.48);
-      --glass-border: rgba(255, 255, 255, 0.16);
-      --glass-border-b: rgba(255, 255, 255, 0.04);
-      --glass-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.02) 60%, transparent 100%);
-      --glass-inner: rgba(2, 6, 23, 0.45);
-      --glass-item: rgba(15, 23, 42, 0.42);
-      --glass-item-hover: rgba(30, 41, 59, 0.55);
-      --glass-item-done: rgba(16, 185, 129, 0.12);
-      --glass-item-done-border: rgba(52, 211, 153, 0.45);
-      --glass-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(255, 255, 255, 0.15);
-
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
-      --text-muted: #64748b;
-
-      --neon-cyan: #38bdf8;
-      --neon-blue: #0284c7;
-      --neon-violet: #a855f7;
-      --neon-emerald: #10b981;
-      --neon-fire: #f97316;
-      --neon-rose: #f43f5e;
-
-      --glow-cyan: 0 0 20px rgba(56, 189, 248, 0.55);
-      --glow-emerald: 0 0 24px rgba(16, 185, 129, 0.6);
-      --glow-fire: 0 0 20px rgba(249, 115, 22, 0.5);
-
-      --orb-1: #0284c7;
-      --orb-2: #8b5cf6;
-      --orb-3: #ec4899;
-      --orb-4: #059669;
-
-      --modal-scrim: rgba(2, 6, 23, 0.75);
-    }
-
-    body.light-glass {
-      /* Apple VisionOS Crystal Light Glass */
-      --bg-canvas: #dbe4f0;
-      --glass-panel: rgba(255, 255, 255, 0.55);
-      --glass-border: rgba(255, 255, 255, 0.9);
-      --glass-border-b: rgba(255, 255, 255, 0.3);
-      --glass-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 70%, transparent 100%);
-      --glass-inner: rgba(255, 255, 255, 0.4);
-      --glass-item: rgba(255, 255, 255, 0.5);
-      --glass-item-hover: rgba(255, 255, 255, 0.85);
-      --glass-item-done: rgba(16, 185, 129, 0.14);
-      --glass-item-done-border: rgba(16, 185, 129, 0.6);
-      --glass-shadow: 0 25px 50px -12px rgba(71, 85, 105, 0.25), 0 0 1px 1px rgba(255, 255, 255, 0.9);
-
-      --text-main: #0f172a;
-      --text-sub: #475569;
-      --text-muted: #64748b;
-
-      --neon-cyan: #0284c7;
-      --neon-blue: #0369a1;
-      --neon-violet: #7c3aed;
-      --neon-emerald: #059669;
-      --neon-fire: #ea580c;
-      --neon-rose: #e11d48;
-
-      --glow-cyan: 0 0 15px rgba(2, 132, 199, 0.35);
-      --glow-emerald: 0 0 18px rgba(16, 185, 129, 0.4);
-      --glow-fire: 0 0 15px rgba(234, 88, 12, 0.35);
-
-      --orb-1: #38bdf8;
-      --orb-2: #c084fc;
-      --orb-3: #f472b6;
-      --orb-4: #34d399;
-
-      --modal-scrim: rgba(148, 163, 184, 0.45);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", Roboto, sans-serif;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-
-    input, select, textarea {
-      user-select: text;
-    }
-
-    body {
-      background-color: var(--bg-canvas);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 24px 14px 60px 14px;
-      overflow-x: hidden;
-      position: relative;
-      transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* ==========================================================================
-       Liquid Mesh Background (The Secret to True Optical Glassmorphism)
-       ========================================================================== */
-    .mesh-stage {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .mesh-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(75px);
-      opacity: 0.75;
-      mix-blend-mode: screen;
-      will-change: transform;
-      animation: drift 18s ease-in-out infinite alternate;
-    }
-
-    body.light-glass .mesh-orb {
-      mix-blend-mode: multiply;
-      opacity: 0.45;
-      filter: blur(85px);
-    }
-
-    .orb-a {
-      width: 380px;
-      height: 380px;
-      top: -80px;
-      left: -60px;
-      background: radial-gradient(circle, var(--orb-1) 0%, transparent 70%);
-      animation-duration: 16s;
-    }
-
-    .orb-b {
-      width: 440px;
-      height: 440px;
-      bottom: -60px;
-      right: -100px;
-      background: radial-gradient(circle, var(--orb-2) 0%, transparent 70%);
-      animation-duration: 22s;
-      animation-delay: -4s;
-    }
-
-    .orb-c {
-      width: 320px;
-      height: 320px;
-      top: 40%;
-      left: 60%;
-      background: radial-gradient(circle, var(--orb-3) 0%, transparent 70%);
-      animation-duration: 19s;
-      animation-delay: -8s;
-    }
-
-    .orb-d {
-      width: 300px;
-      height: 300px;
-      top: 60%;
-      left: -50px;
-      background: radial-gradient(circle, var(--orb-4) 0%, transparent 70%);
-      animation-duration: 25s;
-      animation-delay: -12s;
-    }
-
-    @keyframes drift {
-      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate3d(40px, 60px, 0) scale(1.18) rotate(90deg); }
-      100% { transform: translate3d(-30px, 40px, 0) scale(0.92) rotate(180deg); }
-    }
-
-    /* Subtle grid overlay to emphasize sci-fi optics */
-    .grid-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-size: 32px 32px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* Particle Sparks Canvas Overlay */
-    #fxCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    /* ==========================================================================
-       VisionOS Main Shell Container
-       ========================================================================== */
-    .app-shell {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 480px;
-      background: var(--glass-panel);
-      backdrop-filter: blur(40px) saturate(190%);
-      -webkit-backdrop-filter: blur(40px) saturate(190%);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      border-radius: 32px;
-      padding: 24px 20px;
-      box-shadow: var(--glass-shadow);
-      perspective: 1000px;
-      transform-style: preserve-3d;
-      transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    }
-
-    .app-shell::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60%;
-      border-radius: 32px 32px 0 0;
-      background: var(--glass-sheen);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .shell-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Header */
-    header {
-      margin-bottom: 20px;
-    }
-
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-    }
-
-    .brand-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-symbol {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-violet));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--glow-cyan);
-      font-size: 1.15rem;
-    }
-
-    .brand-title {
-      font-size: 1.65rem;
-      font-weight: 900;
-      letter-spacing: -0.7px;
-      line-height: 1.1;
-      background: linear-gradient(135deg, var(--text-main) 30%, var(--neon-cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .glass-pill {
-      background: var(--glass-inner);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      color: var(--neon-cyan);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
-      white-space: nowrap;
-    }
-
-    .glass-btn-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--glass-inner);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      color: var(--text-sub);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
-    }
-
-    .glass-btn-icon:hover {
-      color: var(--neon-cyan);
-      border-color: var(--neon-cyan);
-      transform: scale(1.08) rotate(25deg);
-      box-shadow: var(--glow-cyan);
-    }
-
-    .glass-btn-icon:active {
-      transform: scale(0.92);
-    }
-
-    .sub-tagline {
-      font-size: 0.88rem;
-      color: var(--text-sub);
-      font-weight: 500;
-      letter-spacing: -0.2px;
-    }
-
-    /* ==========================================================================
-       Streak & Best Record Floating Glass Cards
-       ========================================================================== */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .metric-card {
-      background: var(--glass-inner);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      border-radius: 20px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 10px 25px -10px rgba(0, 0, 0, 0.3);
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-
-    .metric-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.35);
-    }
-
-    .metric-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.1), transparent 70%);
-      pointer-events: none;
-    }
-
-    .metric-icon-wrap {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: rgba(249, 115, 22, 0.16);
-      border: 1px solid rgba(249, 115, 22, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: var(--glow-fire);
-      flex-shrink: 0;
-    }
-
-    .metric-icon-wrap.trophy {
-      background: rgba(250, 204, 21, 0.14);
-      border-color: rgba(250, 204, 21, 0.45);
-      box-shadow: 0 0 18px rgba(250, 204, 21, 0.4);
-    }
-
-    .metric-digits {
-      font-size: 1.55rem;
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.5px;
-      color: var(--neon-fire);
-    }
-
-    .metric-digits.trophy-color {
-      color: #facc15;
-    }
-
-    .metric-label {
-      font-size: 0.68rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: var(--text-sub);
-      margin-top: 3px;
-    }
-
-    /* ==========================================================================
-       Circular 7-Day Consistency Track (Apple Activity Ring Inspired)
-       ========================================================================== */
-    .week-card {
-      background: var(--glass-inner);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      border-radius: 22px;
-      padding: 16px 18px;
-      margin-bottom: 18px;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 12px 28px -12px rgba(0, 0, 0, 0.35);
-    }
-
-    .week-card-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .week-card-title {
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.7px;
-      text-transform: uppercase;
-      color: var(--text-sub);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .week-card-score {
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: var(--neon-cyan);
-      background: rgba(56, 189, 248, 0.12);
-      padding: 3px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-    }
-
-    .week-days-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 6px;
-    }
-
-    .day-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 7px;
-      flex: 1;
-    }
-
-    .day-name {
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 0.2px;
-    }
-
-    .day-col.is-today .day-name {
-      color: var(--neon-cyan);
-      font-weight: 900;
-    }
-
-    .day-ring-orb {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--glass-panel);
-      border: 1.5px solid var(--glass-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: var(--text-muted);
-      position: relative;
-      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
-    }
-
-    .day-ring-orb.is-today {
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 16px var(--neon-cyan), inset 0 1px 2px rgba(255, 255, 255, 0.3);
-      color: var(--text-main);
-    }
-
-    .day-ring-orb.completed {
-      background: linear-gradient(135deg, var(--neon-emerald), #059669);
-      border-color: #6ee7b7;
-      color: #022c22;
-      box-shadow: var(--glow-emerald);
-      transform: scale(1.08);
-    }
-
-    /* ==========================================================================
-       Liquid Hologram Progress Bar
-       ========================================================================== */
-    .progress-box {
-      background: var(--glass-inner);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      border-radius: 22px;
-      padding: 16px 18px;
-      margin-bottom: 22px;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 12px 28px -12px rgba(0, 0, 0, 0.35);
-    }
-
-    .progress-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 10px;
-    }
-
-    .progress-label {
-      font-size: 0.9rem;
-      font-weight: 800;
-      color: var(--text-main);
-      letter-spacing: -0.2px;
-    }
-
-    .progress-percentage {
-      font-size: 1.35rem;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .progress-track {
-      width: 100%;
-      height: 12px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-      position: relative;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
-      margin-bottom: 10px;
-    }
-
-    body.light-glass .progress-track {
-      background: rgba(0, 0, 0, 0.08);
-      border-color: rgba(0, 0, 0, 0.06);
-    }
-
-    .progress-beam {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-violet) 50%, var(--neon-emerald) 100%);
-      border-radius: 999px;
-      transition: width 0.5s cubic-bezier(0.34, 1.25, 0.64, 1);
-      position: relative;
-      box-shadow: var(--glow-cyan);
-    }
-
-    .progress-beam::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.75) 50%, transparent 100%);
-      animation: sweepLight 2.2s infinite cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    @keyframes sweepLight {
-      0% { transform: translateX(-150%); }
-      100% { transform: translateX(250%); }
-    }
-
-    .progress-status {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text-sub);
-    }
-
-    /* ==========================================================================
-       Habit Input Glass Command Center
-       ========================================================================== */
-    .creator-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .creator-input {
-      width: 100%;
-      background: var(--glass-inner);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      color: var(--text-main);
-      font-size: 0.95rem;
-      font-weight: 500;
-      padding: 14px 18px;
-      border-radius: 16px;
-      outline: none;
-      transition: all 0.25s ease;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    .creator-input::placeholder {
-      color: var(--text-muted);
-    }
-
-    .creator-input:focus {
-      border-color: var(--neon-cyan);
-      box-shadow: var(--glow-cyan), inset 0 1px 2px rgba(0, 0, 0, 0.2);
-      background: rgba(15, 23, 42, 0.7);
-    }
-
-    body.light-glass .creator-input:focus {
-      background: #ffffff;
-    }
-
-    .creator-controls {
-      display: flex;
-      gap: 10px;
-    }
-
-    .glass-select {
-      flex: 1;
-      background: var(--glass-inner);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      color: var(--text-main);
-      font-size: 0.88rem;
-      font-weight: 700;
-      padding: 12px 14px;
-      border-radius: 14px;
-      outline: none;
-      cursor: pointer;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
-    }
-
-    .glass-select option {
-      background: #0f172a;
-      color: #f8fafc;
-    }
-
-    body.light-glass .glass-select option {
-      background: #ffffff;
-      color: #0f172a;
-    }
-
-    .glass-add-btn {
-      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
-      color: #ffffff;
-      font-size: 0.95rem;
-      font-weight: 800;
-      letter-spacing: 0.2px;
-      border: none;
-      padding: 0 22px;
-      border-radius: 14px;
-      cursor: pointer;
-      box-shadow: var(--glow-cyan), 0 8px 18px -4px rgba(2, 132, 199, 0.5);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
-    body:not(.light-glass) .glass-add-btn {
-      color: #030712;
-    }
-
-    .glass-add-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 25px rgba(56, 189, 248, 0.8);
-    }
-
-    .glass-add-btn:active {
-      transform: scale(0.95);
-    }
-
-    /* ==========================================================================
-       Pill Filter Tabs
-       ========================================================================== */
-    .filter-scroller {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 16px;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .filter-scroller::-webkit-scrollbar {
-      display: none;
-    }
-
-    .filter-tab {
-      background: var(--glass-inner);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      color: var(--text-sub);
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-      flex-shrink: 0;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
-    }
-
-    .filter-tab:hover {
-      color: var(--text-main);
-      border-color: rgba(255, 255, 255, 0.35);
-    }
-
-    .filter-tab.active {
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
-      color: #030712;
-      border-color: var(--neon-cyan);
-      box-shadow: var(--glow-cyan);
-      font-weight: 900;
-    }
-
-    body.light-glass .filter-tab.active {
-      color: #ffffff;
-    }
-
-    /* ==========================================================================
-       Habit Items — 3D Glass Tiles & Satisfying Micro-Interactions
-       ========================================================================== */
-    .habits-container {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .habit-tile {
-      background: var(--glass-item);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      border-radius: 20px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.25s ease,
-                  background 0.25s ease;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 8px 20px -8px rgba(0, 0, 0, 0.4);
-    }
-
-    .habit-tile:hover {
-      background: var(--glass-item-hover);
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.35);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 16px 30px -10px rgba(0, 0, 0, 0.5);
-    }
-
-    .habit-tile:active {
-      transform: scale(0.98);
-    }
-
-    /* Completed state */
-    .habit-tile.is-done {
-      background: var(--glass-item-done);
-      border-color: var(--glass-item-done-border);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 0 25px rgba(16, 185, 129, 0.2);
-    }
-
-    .habit-clickable-zone {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex: 1;
-      cursor: pointer;
-      min-width: 0;
-    }
-
-    /* Cyberpunk Pop Checkbox */
-    .glow-checkbox {
-      width: 26px;
-      height: 26px;
-      border-radius: 9px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 2px solid var(--glass-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      position: relative;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
-    }
-
-    .habit-tile.is-done .glow-checkbox {
-      background: linear-gradient(135deg, var(--neon-emerald), #059669);
-      border-color: #6ee7b7;
-      box-shadow: var(--glow-emerald);
-      animation: popBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    @keyframes popBounce {
-      0% { transform: scale(0.7); }
-      50% { transform: scale(1.35); }
-      100% { transform: scale(1); }
-    }
-
-    .glow-checkbox svg {
-      width: 15px;
-      height: 15px;
-      stroke: #022c22;
-      stroke-width: 3.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-      display: none;
-    }
-
-    .habit-tile.is-done .glow-checkbox svg {
-      display: block;
-    }
-
-    .habit-detail-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      min-width: 0;
-    }
-
-    .habit-name {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-main);
-      word-break: break-word;
-      letter-spacing: -0.2px;
-      transition: all 0.25s ease;
-    }
-
-    .habit-tile.is-done .habit-name {
-      text-decoration: line-through;
-      color: var(--text-muted);
-      filter: blur(0.2px);
-    }
-
-    /* Category Badges with Neon Tinting */
-    .cat-chip {
-      font-size: 0.68rem;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 8px;
-      letter-spacing: 0.4px;
-      white-space: nowrap;
-      text-transform: uppercase;
-    }
-
-    .cat-coding { background: rgba(56, 189, 248, 0.18); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); box-shadow: 0 0 10px rgba(56, 189, 248, 0.15); }
-    .cat-fitness { background: rgba(249, 115, 22, 0.18); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); box-shadow: 0 0 10px rgba(249, 115, 22, 0.15); }
-    .cat-study { background: rgba(168, 85, 247, 0.18); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); box-shadow: 0 0 10px rgba(168, 85, 247, 0.15); }
-    .cat-mindset { background: rgba(52, 211, 153, 0.18); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.4); box-shadow: 0 0 10px rgba(52, 211, 153, 0.15); }
-    .cat-general { background: rgba(148, 163, 184, 0.18); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); }
-
-    body.light-glass .cat-coding { color: #0284c7; }
-    body.light-glass .cat-fitness { color: #c2410c; }
-    body.light-glass .cat-study { color: #7e22ce; }
-    body.light-glass .cat-mindset { color: #047857; }
-    body.light-glass .cat-general { color: #475569; }
-
-    /* Actions */
-    .habit-ops {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-
-    .op-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      padding: 6px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-
-    .op-btn:hover {
-      color: var(--neon-cyan);
-      background: rgba(56, 189, 248, 0.15);
-      transform: scale(1.15);
-    }
-
-    .op-btn.del:hover {
-      color: var(--neon-rose);
-      background: rgba(244, 63, 94, 0.15);
-    }
-
-    /* Inline Editor */
-    .tile-editor {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-    }
-
-    .tile-edit-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .tile-edit-input {
-      width: 100%;
-      background: var(--glass-inner);
-      border: 1px solid var(--neon-cyan);
-      color: var(--text-main);
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      outline: none;
-      box-shadow: var(--glow-cyan);
-    }
-
-    .tile-edit-select {
-      flex: 1;
-      background: var(--glass-inner);
-      border: 1px solid var(--glass-border);
-      color: var(--text-main);
-      padding: 8px 10px;
-      border-radius: 10px;
-      font-size: 0.85rem;
-      outline: none;
-    }
-
-    .tile-btn-save {
-      background: var(--neon-emerald);
-      color: #022c22;
-      border: none;
-      font-weight: 800;
-      padding: 8px 16px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .tile-btn-cancel {
-      background: transparent;
-      border: 1px solid var(--glass-border);
-      color: var(--text-sub);
-      padding: 8px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    /* ==========================================================================
-       Ultra-Frosted Settings Modal (VisionOS Depth Layer)
-       ========================================================================== */
-    .glass-modal-backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: var(--modal-scrim);
-      backdrop-filter: blur(28px) saturate(160%);
-      -webkit-backdrop-filter: blur(28px) saturate(160%);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-      padding: 18px;
-    }
-
-    .glass-modal-backdrop.is-visible {
-      display: flex;
-    }
-
-    .glass-modal-window {
-      width: 100%;
-      max-width: 420px;
-      background: var(--glass-panel);
-      backdrop-filter: blur(48px) saturate(200%);
-      -webkit-backdrop-filter: blur(48px) saturate(200%);
-      border: 1px solid var(--glass-border);
-      border-bottom-color: var(--glass-border-b);
-      border-radius: 30px;
-      padding: 24px;
-      box-shadow: var(--glass-shadow);
-      animation: modalSpring 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    @keyframes modalSpring {
-      from { transform: translateY(40px) scale(0.92); opacity: 0; }
-      to { transform: translateY(0) scale(1); opacity: 1; }
-    }
-
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--glass-border);
-    }
-
-    .modal-head h3 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      letter-spacing: -0.4px;
-    }
-
-    .modal-close-icon {
-      background: var(--glass-inner);
-      border: 1px solid var(--glass-border);
-      color: var(--text-sub);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1.1rem;
-    }
-
-    .setting-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    body.light-glass .setting-row {
-      border-bottom-color: rgba(0, 0, 0, 0.06);
-    }
-
-    .setting-meta h5 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .setting-meta p {
-      font-size: 0.78rem;
-      color: var(--text-sub);
-    }
-
-    .theme-segmented {
-      display: flex;
-      background: var(--glass-inner);
-      border: 1px solid var(--glass-border);
-      border-radius: 999px;
-      padding: 3px;
-      gap: 2px;
-    }
-
-    .segment-btn {
-      background: transparent;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-sub);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .segment-btn.active {
-      background: var(--neon-cyan);
-      color: #030712;
-      box-shadow: var(--glow-cyan);
-    }
-
-    /* iOS-Style Liquid Glass Toggle */
-    .ios-switch {
-      position: relative;
-      display: inline-block;
-      width: 48px;
-      height: 28px;
-    }
-
-    .ios-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .ios-slider {
-      position: absolute;
-      inset: 0;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid var(--glass-border);
-      transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      border-radius: 34px;
-    }
-
-    .ios-slider:before {
-      position: absolute;
-      content: "";
-      height: 20px;
-      width: 20px;
-      left: 3px;
-      bottom: 3px;
-      background: #ffffff;
-      transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      border-radius: 50%;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
-    }
-
-    input:checked + .ios-slider {
-      background: var(--neon-emerald);
-      border-color: #6ee7b7;
-      box-shadow: var(--glow-emerald);
-    }
-
-    input:checked + .ios-slider:before {
-      transform: translateX(20px);
-    }
-
-    .modal-actions {
-      margin-top: 22px;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .modal-confirm-btn {
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
-      color: #030712;
-      font-size: 0.95rem;
-      font-weight: 800;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 14px;
-      cursor: pointer;
-      box-shadow: var(--glow-cyan);
-    }
-
-    /* Empty state */
-    .empty-prompt {
-      text-align: center;
-      padding: 34px 20px;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      font-weight: 500;
-      background: var(--glass-inner);
-      border: 1px dashed var(--glass-border);
-      border-radius: 20px;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Ambient Liquid Glowing Mesh (Creates the refractive depth behind the glass) -->
-  <div class="mesh-stage">
-    <div class="mesh-orb orb-a"></div>
-    <div class="mesh-orb orb-b"></div>
-    <div class="mesh-orb orb-c"></div>
-    <div class="mesh-orb orb-d"></div>
-  </div>
-  <div class="grid-overlay"></div>
-
-  <!-- Real-time Spark Canvas Overlay -->
-  <canvas id="fxCanvas"></canvas>
-
-  <!-- VisionOS Main Glass App Shell -->
-  <main class="app-shell" id="appShell">
-    <div class="shell-content">
-      <header>
-        <div class="header-top">
-          <div class="brand-wrap">
-            <div class="brand-symbol">⚡</div>
-            <div>
-              <h1 class="brand-title">Momentum</h1>
-            </div>
-          </div>
-          <div class="header-actions">
-            <span class="glass-pill" id="dateBadge">Today</span>
-            <button class="glass-btn-icon" id="openSettingsBtn" title="Settings" aria-label="Settings">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <p class="sub-tagline">Craft daily discipline. Compound results.</p>
-      </header>
-
-      <!-- Streak & Record Metrics -->
-      <section class="metrics-grid">
-        <div class="metric-card">
-          <div class="metric-icon-wrap">🔥</div>
-          <div>
-            <div class="metric-digits" id="currentStreak">0</div>
-            <div class="metric-label">Current Streak</div>
-          </div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon-wrap trophy">🏆</div>
-          <div>
-            <div class="metric-digits trophy-color" id="bestStreak">0</div>
-            <div class="metric-label">All-Time Peak</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7-Day Circular Consistency Track -->
-      <section class="week-card">
-        <div class="week-card-head">
-          <span class="week-card-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-            7-Day History Track
-          </span>
-          <span class="week-card-score" id="weekScoreText">0/7 (0%)</span>
-        </div>
-        <div class="week-days-row" id="weekRingsContainer"></div>
-      </section>
-
-      <!-- Liquid Hologram Progress Section -->
-      <section class="progress-box">
-        <div class="progress-info">
-          <div>
-            <div class="progress-label" id="progressSummary">0 of 0 Completed</div>
-            <div class="progress-status" id="progressStatus">Set your goals and ignite your day.</div>
-          </div>
-          <div class="progress-percentage" id="progressPercent">0%</div>
-        </div>
-        <div class="progress-track">
-          <div class="progress-beam" id="progressBeam"></div>
-        </div>
-      </section>
-
-      <!-- Add New Habit Form -->
-      <form class="creator-form" id="creatorForm">
-        <input type="text" id="habitInput" class="creator-input" placeholder="What will you conquer today?" required autocomplete="off" />
-        <div class="creator-controls">
-          <select id="categorySelect" class="glass-select">
-            <option value="coding">💻 Coding</option>
-            <option value="fitness">🏋️ Fitness</option>
-            <option value="study">📚 Deep Work</option>
-            <option value="mindset">🧘 Mindset</option>
-            <option value="general" selected>⚡ General</option>
-          </select>
-          <button type="submit" class="glass-add-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            Add Habit
-          </button>
-        </div>
-      </form>
-
-      <!-- Filter Tabs -->
-      <div class="filter-scroller" id="filterScroller">
-        <button class="filter-tab active" data-filter="all">All</button>
-        <button class="filter-tab" data-filter="active">Active</button>
-        <button class="filter-tab" data-filter="done">Done</button>
-        <button class="filter-tab" data-filter="coding">💻 Coding</button>
-        <button class="filter-tab" data-filter="fitness">🏋️ Fitness</button>
-        <button class="filter-tab" data-filter="study">📚 Deep Work</button>
-        <button class="filter-tab" data-filter="mindset">🧘 Mindset</button>
-        <button class="filter-tab" data-filter="general">⚡ General</button>
-      </div>
-
-      <!-- Habit Tiles Stream -->
-      <ul class="habits-container" id="habitsList"></ul>
-    </div>
-  </main>
-
-  <!-- VisionOS Glass Settings Modal -->
-  <div class="glass-modal-backdrop" id="settingsModal">
-    <div class="glass-modal-window">
-      <div class="modal-head">
-        <h3>Preferences</h3>
-        <button class="modal-close-icon" id="closeSettingsBtn">✕</button>
-      </div>
-
-      <div class="setting-row">
-        <div class="setting-meta">
-          <h5>Optic Glass Theme</h5>
-          <p>Cyberpunk Dark vs Crystal Light</p>
-        </div>
-        <div class="theme-segmented">
-          <button class="segment-btn active" id="btnThemeDark">🌙 Dark</button>
-          <button class="segment-btn" id="btnThemeLight">☀️ Light</button>
-        </div>
-      </div>
-
-      <div class="setting-row">
-        <div class="setting-meta">
-          <h5>Sound Synthesis</h5>
-          <p>Crisp harmonic chimes on task complete</p>
-        </div>
-        <label class="ios-switch">
-          <input type="checkbox" id="soundToggle" checked>
-          <span class="ios-slider"></span>
-        </label>
-      </div>
-
-      <div class="setting-row">
-        <div class="setting-meta">
-          <h5>Haptic Micro-Pulses</h5>
-          <p>Tactile vibration feedback on tap</p>
-        </div>
-        <label class="ios-switch">
-          <input type="checkbox" id="hapticToggle" checked>
-          <span class="ios-slider"></span>
-        </label>
-      </div>
-
-      <div class="setting-row">
-        <div class="setting-meta">
-          <h5>Particle Spark Emitter</h5>
-          <p>Electric sparks on habit completion</p>
-        </div>
-        <label class="ios-switch">
-          <input type="checkbox" id="sparksToggle" checked>
-          <span class="ios-slider"></span>
-        </label>
-      </div>
-
-      <div class="modal-actions">
-        <button class="modal-confirm-btn" id="confirmSettingsBtn">Apply & Close</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    /* ==========================================================================
-       Persistent Storage State & Schema
-       ========================================================================== */
-    const KEY_HABITS = 'momentum_habits_v2';
-    const KEY_META = 'momentum_meta_v2';
-    const KEY_HISTORY = 'momentum_history_v2';
-    const KEY_CONFIG = 'momentum_config_v2';
-
-    let habits = JSON.parse(localStorage.getItem(KEY_HABITS)) || [];
-    let meta = JSON.parse(localStorage.getItem(KEY_META)) || {
-      lastActiveDate: '',
-      currentStreak: 0,
-      bestStreak: 0,
-      lastCompletedDate: ''
-    };
-    let completedHistory = JSON.parse(localStorage.getItem(KEY_HISTORY)) || [];
-    let config = JSON.parse(localStorage.getItem(KEY_CONFIG)) || {
-      theme: 'dark',
-      sound: true,
-      haptic: true,
-      sparks: true
-    };
-
-    let activeFilter = 'all';
-    let editingId = null;
-    let wasAllDone = false;
-
-    const categoryMap = {
-      coding: { label: 'Coding', class: 'cat-coding' },
-      fitness: { label: 'Fitness', class: 'cat-fitness' },
-      study: { label: 'Deep Work', class: 'cat-study' },
-      mindset: { label: 'Mindset', class: 'cat-mindset' },
-      general: { label: 'General', class: 'cat-general' }
-    };
-
-    /* ==========================================================================
-       DOM Element Handles
-       ========================================================================== */
-    const appShell = document.getElementById('appShell');
-    const dateBadge = document.getElementById('dateBadge');
-    const currentStreakEl = document.getElementById('currentStreak');
-    const bestStreakEl = document.getElementById('bestStreak');
-    const weekScoreText = document.getElementById('weekScoreText');
-    const weekRingsContainer = document.getElementById('weekRingsContainer');
-    const progressSummary = document.getElementById('progressSummary');
-    const progressPercent = document.getElementById('progressPercent');
-    const progressBeam = document.getElementById('progressBeam');
-    const progressStatus = document.getElementById('progressStatus');
-    const creatorForm = document.getElementById('creatorForm');
-    const habitInput = document.getElementById('habitInput');
-    const categorySelect = document.getElementById('categorySelect');
-    const filterScroller = document.getElementById('filterScroller');
-    const habitsList = document.getElementById('habitsList');
-
-    // Settings Modal DOM
-    const settingsModal = document.getElementById('settingsModal');
-    const openSettingsBtn = document.getElementById('openSettingsBtn');
-    const closeSettingsBtn = document.getElementById('closeSettingsBtn');
-    const confirmSettingsBtn = document.getElementById('confirmSettingsBtn');
-    const btnThemeDark = document.getElementById('btnThemeDark');
-    const btnThemeLight = document.getElementById('btnThemeLight');
-    const soundToggle = document.getElementById('soundToggle');
-    const hapticToggle = document.getElementById('hapticToggle');
-    const sparksToggle = document.getElementById('sparksToggle');
-
-    /* ==========================================================================
-       Harmonic Audio Synthesizer (Web Audio API)
-       Produces rich crystalline chimes with exponential release curves
-       ========================================================================== */
-    let audioContext = null;
-
-    function playSynthesizedChime(success) {
-      if (!config.sound) return;
-      try {
-        if (!audioContext) {
-          audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioContext.state === 'suspended') {
-          audioContext.resume();
-        }
-
-        const now = audioContext.currentTime;
-
-        if (success) {
-          // Double-harmonic ascending chime chord (E5 -> B5 -> G#6)
-          const notes = [659.25, 987.77, 1661.22];
-          notes.forEach((freq, idx) => {
-            const osc = audioContext.createOscillator();
-            const gain = audioContext.createGain();
-
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, now + idx * 0.05);
-
-            gain.gain.setValueAtTime(0, now + idx * 0.05);
-            gain.gain.linearRampToValueAtTime(0.16 / (idx + 1), now + idx * 0.05 + 0.02);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.05 + 0.45);
-
-            osc.connect(gain);
-            gain.connect(audioContext.destination);
-
-            osc.start(now + idx * 0.05);
-            osc.stop(now + idx * 0.05 + 0.45);
-          });
-        } else {
-          // Muted descending teardown tone
-          const osc = audioContext.createOscillator();
-          const gain = audioContext.createGain();
-
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(440, now);
-          osc.frequency.exponentialRampToValueAtTime(220, now + 0.12);
-
-          gain.gain.setValueAtTime(0.12, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
-
-          osc.connect(gain);
-          gain.connect(audioContext.destination);
-
-          osc.start(now);
-          osc.stop(now + 0.14);
-        }
-      } catch (e) {
-        // Safe fallback for strict audio policies
-      }
-    }
-
-    function emitHaptic() {
-      if (!config.haptic) return;
-      if (window.navigator && window.navigator.vibrate) {
-        // Dual haptic tap signature
-        window.navigator.vibrate([14, 30, 18]);
-      }
-    }
-
-    /* ==========================================================================
-       Particle Spark Generator on Canvas
-       ========================================================================== */
-    const fxCanvas = document.getElementById('fxCanvas');
-    const ctx = fxCanvas.getContext('2d');
-    let particles = [];
-
-    function resizeFxCanvas() {
-      fxCanvas.width = window.innerWidth;
-      fxCanvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeFxCanvas);
-    resizeFxCanvas();
-
-    function triggerSparkBurst(originX, originY) {
-      if (!config.sparks) return;
-      const count = 32;
-      const palette = ['#38bdf8', '#34d399', '#a855f7', '#fb923c', '#f8fafc'];
-
-      for (let i = 0; i < count; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const velocity = Math.random() * 7 + 2;
-        particles.push({
-          x: originX,
-          y: originY,
-          vx: Math.cos(angle) * velocity,
-          vy: Math.sin(angle) * velocity - 1.5,
-          color: palette[Math.floor(Math.random() * palette.length)],
-          size: Math.random() * 3.5 + 1.5,
-          life: 1,
-          decay: Math.random() * 0.035 + 0.02
-        });
-      }
-    }
-
-    function animateSparks() {
-      ctx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.18; // Gravity
-        p.life -= p.decay;
-
-        if (p.life <= 0) {
-          particles.splice(i, 1);
-          continue;
-        }
-
-        ctx.save();
-        ctx.globalAlpha = p.life;
-        ctx.fillStyle = p.color;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-      requestAnimationFrame(animateSparks);
-    }
-    requestAnimationFrame(animateSparks);
-
-    /* ==========================================================================
-       Confetti Firework Grand Finale
-       ========================================================================== */
-    function triggerGrandFireworks() {
-      if (typeof confetti !== 'function') return;
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { x: 0.2, y: 0.8 },
-        colors: ['#38bdf8', '#34d399', '#a855f7', '#fb923c']
-      });
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { x: 0.8, y: 0.8 },
-        colors: ['#38bdf8', '#34d399', '#a855f7', '#fb923c']
-      });
-    }
-
-    /* ==========================================================================
-       Date & State Calculations
-       ========================================================================== */
-    function dateToYMD(d) {
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    }
-
-    function getTodayString() {
-      return dateToYMD(new Date());
-    }
-
-    function getFormattedDateBadge() {
-      return new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
-    }
-
-    function calcDayDiff(d1, d2) {
-      if (!d1 || !d2) return null;
-      const diffTime = Math.abs(new Date(d2) - new Date(d1));
-      return Math.round(diffTime / (1000 * 60 * 60 * 24));
-    }
-
-    function persist() {
-      localStorage.setItem(KEY_HABITS, JSON.stringify(habits));
-      localStorage.setItem(KEY_META, JSON.stringify(meta));
-      localStorage.setItem(KEY_HISTORY, JSON.stringify(completedHistory));
-      localStorage.setItem(KEY_CONFIG, JSON.stringify(config));
-    }
-
-    /* ==========================================================================
-       Daily Midnight Reset & Streak Calculations
-       ========================================================================== */
-    function evaluateDailyReset() {
-      const today = getTodayString();
-      dateBadge.textContent = getFormattedDateBadge();
-
-      if (meta.lastActiveDate && meta.lastActiveDate !== today) {
-        // Midnight crossed: uncheck all habits for the fresh day
-        habits = habits.map(h => ({ ...h, completed: false }));
-        persist();
-
-        if (meta.lastCompletedDate) {
-          const gap = calcDayDiff(meta.lastCompletedDate, today);
-          if (gap > 1) {
-            meta.currentStreak = 0; // Streak lapsed
-          }
-        }
-      }
-
-      meta.lastActiveDate = today;
-      persist();
-      renderStats();
-    }
-
-    function evaluateStreakState(allDone) {
-      const today = getTodayString();
-
-      if (allDone && habits.length > 0) {
-        if (!completedHistory.includes(today)) {
-          completedHistory.push(today);
-        }
-
-        if (meta.lastCompletedDate !== today) {
-          if (!meta.lastCompletedDate) {
-            meta.currentStreak = 1;
-          } else {
-            const gap = calcDayDiff(meta.lastCompletedDate, today);
-            if (gap === 1) {
-              meta.currentStreak += 1;
-            } else if (gap > 1) {
-              meta.currentStreak = 1;
-            }
-          }
-          meta.lastCompletedDate = today;
-          meta.bestStreak = Math.max(meta.bestStreak, meta.currentStreak);
-        }
-      } else {
-        // Habit unchecked: remove from completed history for today
-        completedHistory = completedHistory.filter(d => d !== today);
-      }
-
-      persist();
-      renderStats();
-      render7DayRings();
-    }
-
-    function renderStats() {
-      currentStreakEl.textContent = meta.currentStreak;
-      bestStreakEl.textContent = meta.bestStreak;
-    }
-
-    /* ==========================================================================
-       Render 7-Day Circular Activity Rings
-       ========================================================================== */
-    function render7DayRings() {
-      weekRingsContainer.innerHTML = '';
-      const today = getTodayString();
-      const dayLetters = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      let completedInWeek = 0;
-
-      for (let i = 6; i >= 0; i--) {
-        const d = new Date();
-        d.setDate(d.getDate() - i);
-        const ymd = dateToYMD(d);
-        const dayLabel = dayLetters[d.getDay()];
-        const isToday = ymd === today;
-        const isDone = completedHistory.includes(ymd);
-
-        if (isDone) completedInWeek++;
-
-        const col = document.createElement('div');
-        col.className = `day-col ${isToday ? 'is-today' : ''}`;
-        col.innerHTML = `
-          <span class="day-name">${isToday ? 'Today' : dayLabel}</span>
-          <div class="day-ring-orb ${isToday ? 'is-today' : ''} ${isDone ? 'completed' : ''}" title="${ymd}">
-            ${isDone ? '✓' : '•'}
-          </div>
-        `;
-        weekRingsContainer.appendChild(col);
-      }
-
-      const percent = Math.round((completedInWeek / 7) * 100);
-      weekScoreText.textContent = `${completedInWeek}/7 (${percent}%)`;
-    }
-
-    /* ==========================================================================
-       Render Dynamic Holographic Progress
-       ========================================================================== */
-    function renderProgress(isInitial = false) {
-      const total = habits.length;
-      const completedCount = habits.filter(h => h.completed).length;
-      const percent = total === 0 ? 0 : Math.round((completedCount / total) * 100);
-
-      progressSummary.textContent = `${completedCount} of ${total} Completed`;
-      progressPercent.textContent = `${percent}%`;
-      progressBeam.style.width = `${percent}%`;
-
-      const allDone = total > 0 && completedCount === total;
-      evaluateStreakState(allDone);
-
-      if (allDone && !wasAllDone && !isInitial) {
-        triggerGrandFireworks();
-      }
-      wasAllDone = allDone;
-
-      if (total === 0) {
-        progressStatus.textContent = 'Set your goals and ignite your day.';
-      } else if (allDone) {
-        progressStatus.textContent = '⚡ Supreme momentum! All tasks conquered.';
-      } else if (percent >= 50) {
-        progressStatus.textContent = '🔥 Past halfway. Maintain relentless drive.';
-      } else {
-        progressStatus.textContent = '🌱 Small daily actions unlock huge compound wins.';
-      }
-    }
-
-    /* ==========================================================================
-       Render Habits Stream & Inline Editor
-       ========================================================================== */
-    function getFilteredHabits() {
-      return habits.filter(h => {
-        if (activeFilter === 'all') return true;
-        if (activeFilter === 'active') return !h.completed;
-        if (activeFilter === 'done') return h.completed;
-        return (h.category || 'general') === activeFilter;
-      });
-    }
-
-    function escapeHTML(str) {
-      const p = document.createElement('p');
-      p.textContent = str;
-      return p.innerHTML;
-    }
-
-    function renderHabits(isInitial = false) {
-      habitsList.innerHTML = '';
-      const visible = getFilteredHabits();
-
-      if (visible.length === 0) {
-        let msg = 'No habits logged. Click "Add Habit" above to initiate.';
-        if (habits.length > 0) msg = `No habits found under "${activeFilter}".`;
-        habitsList.innerHTML = `<li class="empty-prompt">${msg}</li>`;
-      } else {
-        visible.forEach(habit => {
-          const isEditing = editingId === habit.id;
-          const li = document.createElement('li');
-          li.className = `habit-tile ${habit.completed ? 'is-done' : ''}`;
-          li.id = `habit_${habit.id}`;
-
-          if (isEditing) {
-            li.innerHTML = `
-              <div class="tile-editor">
-                <input type="text" class="tile-edit-input" id="editName_${habit.id}" value="${escapeHTML(habit.name)}" />
-                <div class="tile-edit-actions">
-                  <select class="tile-edit-select" id="editCat_${habit.id}">
-                    <option value="coding" ${habit.category === 'coding' ? 'selected' : ''}>💻 Coding</option>
-                    <option value="fitness" ${habit.category === 'fitness' ? 'selected' : ''}>🏋️ Fitness</option>
-                    <option value="study" ${habit.category === 'study' ? 'selected' : ''}>📚 Deep Work</option>
-                    <option value="mindset" ${habit.category === 'mindset' ? 'selected' : ''}>🧘 Mindset</option>
-                    <option value="general" ${(!habit.category || habit.category === 'general') ? 'selected' : ''}>⚡ General</option>
-                  </select>
-                  <button class="tile-btn-save" onclick="saveEdit('${habit.id}')">Save</button>
-                  <button class="tile-btn-cancel" onclick="cancelEdit()">Cancel</button>
-                </div>
-              </div>
-            `;
-            setTimeout(() => {
-              const input = document.getElementById(`editName_${habit.id}`);
-              if (input) {
-                input.focus();
-                input.addEventListener('keydown', (e) => {
-                  if (e.key === 'Enter') saveEdit(habit.id);
-                  if (e.key === 'Escape') cancelEdit();
-                });
-              }
-            }, 0);
-          } else {
-            const cat = categoryMap[habit.category] || categoryMap.general;
-            li.innerHTML = `
-              <div class="habit-clickable-zone" onclick="toggleHabit('${habit.id}', event)">
-                <div class="glow-checkbox">
-                  <svg viewBox="0 0 24 24">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </div>
-                <div class="habit-detail-wrap">
-                  <span class="cat-chip ${cat.class}">${cat.label}</span>
-                  <span class="habit-name">${escapeHTML(habit.name)}</span>
-                </div>
-              </div>
-              <div class="habit-ops">
-                <button class="op-btn" onclick="openEdit('${habit.id}')" title="Edit" aria-label="Edit">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 20h9"></path>
-                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                  </svg>
-                </button>
-                <button class="op-btn del" onclick="deleteHabit('${habit.id}')" title="Delete" aria-label="Delete">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
-                  </svg>
-                </button>
-              </div>
-            `;
-          }
-
-          habitsList.appendChild(li);
-        });
-      }
-
-      renderProgress(isInitial);
-    }
-
-    /* ==========================================================================
-       Interactive Actions & Micro-Explosions
-       ========================================================================== */
-    window.toggleHabit = function(id, evt) {
-      if (editingId) return;
-
-      let willBeDone = false;
-      habits = habits.map(h => {
-        if (h.id === id) {
-          willBeDone = !h.completed;
-          return { ...h, completed: willBeDone };
-        }
-        return h;
-      });
-
-      emitHaptic();
-      playSynthesizedChime(willBeDone);
-
-      if (willBeDone && evt) {
-        const rect = evt.currentTarget.getBoundingClientRect();
-        triggerSparkBurst(rect.left + 24, rect.top + rect.height / 2);
-      }
-
-      persist();
-      renderHabits();
-    };
-
-    window.deleteHabit = function(id) {
-      habits = habits.filter(h => h.id !== id);
-      if (editingId === id) editingId = null;
-      persist();
-      renderHabits();
-    };
-
-    window.openEdit = function(id) {
-      editingId = id;
-      renderHabits();
-    };
-
-    window.cancelEdit = function() {
-      editingId = null;
-      renderHabits();
-    };
-
-    window.saveEdit = function(id) {
-      const nameInp = document.getElementById(`editName_${id}`);
-      const catInp = document.getElementById(`editCat_${id}`);
-      if (!nameInp || !catInp) return;
-
-      const newTitle = nameInp.value.trim();
-      const newCategory = catInp.value;
-      if (!newTitle) return;
-
-      habits = habits.map(h => {
-        if (h.id === id) {
-          return { ...h, name: newTitle, category: newCategory };
-        }
-        return h;
-      });
-
-      editingId = null;
-      persist();
-      renderHabits();
-    };
-
-    /* Form Add */
-    creatorForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = habitInput.value.trim();
-      const cat = categorySelect.value;
-      if (!name) return;
-
-      const newHabit = {
-        id: Date.now().toString(),
-        name: name,
-        category: cat,
-        completed: false
-      };
-
-      habits.unshift(newHabit);
-      persist();
-      renderHabits();
-      habitInput.value = '';
-
-      // Spark burst at the add button
-      const rect = creatorForm.querySelector('.glass-add-btn').getBoundingClientRect();
-      triggerSparkBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
-    });
-
-    /* Filter Tabs Click */
-    filterScroller.addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-tab');
-      if (!btn) return;
-      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeFilter = btn.dataset.filter;
-      renderHabits();
-    });
-
-    /* ==========================================================================
-       Preferences & VisionOS Theme Switcher
-       ========================================================================== */
-    function setSystemTheme(theme) {
-      config.theme = theme;
-      persist();
-
-      if (theme === 'light') {
-        document.body.classList.add('light-glass');
-        btnThemeLight.classList.add('active');
-        btnThemeDark.classList.remove('active');
-      } else {
-        document.body.classList.remove('light-glass');
-        btnThemeDark.classList.add('active');
-        btnThemeLight.classList.remove('active');
-      }
-    }
-
-    function openModal() { settingsModal.classList.add('is-visible'); }
-    function closeModal() { settingsModal.classList.remove('is-visible'); }
-
-    openSettingsBtn.addEventListener('click', openModal);
-    closeSettingsBtn.addEventListener('click', closeModal);
-    confirmSettingsBtn.addEventListener('click', closeModal);
-
-    settingsModal.addEventListener('click', (e) => {
-      if (e.target === settingsModal) closeModal();
-    });
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && settingsModal.classList.contains('is-visible')) closeModal();
-    });
-
-    btnThemeDark.addEventListener('click', () => setSystemTheme('dark'));
-    btnThemeLight.addEventListener('click', () => setSystemTheme('light'));
-
-    soundToggle.checked = config.sound;
-    soundToggle.addEventListener('change', (e) => {
-      config.sound = e.target.checked;
-      persist();
-      if (config.sound) playSynthesizedChime(true);
-    });
-
-    hapticToggle.checked = config.haptic;
-    hapticToggle.addEventListener('change', (e) => {
-      config.haptic = e.target.checked;
-      persist();
-      if (config.haptic) emitHaptic();
-    });
-
-    sparksToggle.checked = config.sparks;
-    sparksToggle.addEventListener('change', (e) => {
-      config.sparks = e.target.checked;
-      persist();
-      if (config.sparks) triggerSparkBurst(window.innerWidth / 2, window.innerHeight / 2);
-    });
-
-    /* ==========================================================================
-       Interactive 3D Card Tilt Effect (Desktop & Mobile Pointer)
-       ========================================================================== */
-    if (window.matchMedia('(hover: hover)').matches) {
-      document.addEventListener('mousemove', (e) => {
-        const { clientX, clientY } = e;
-        const rect = appShell.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-
-        const deltaX = (clientX - centerX) / (window.innerWidth / 2);
-        const deltaY = (clientY - centerY) / (window.innerHeight / 2);
-
-        const rotateX = -deltaY * 3.5;
-        const rotateY = deltaX * 3.5;
-
-        appShell.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      });
-    }
-
-    /* Initialize Application */
-    setSystemTheme(config.theme);
-    evaluateDailyReset();
-    render7DayRings();
     renderHabits(true);
   </script>
 </body>
