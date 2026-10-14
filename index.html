@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>WinStreak — Habit Tracker</title>
 
   <!-- PWA & Mobile App Metas -->
@@ -87,25 +87,64 @@
       -webkit-user-select: none;
     }
 
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      padding: 24px 12px;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
+body {
+  background-color: var(--bg);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: env(safe-area-inset-top, 16px) 12px env(safe-area-inset-bottom, 24px) 12px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  position: relative;
+}
 
-    .ambient-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(85px);
-      z-index: 0;
-      pointer-events: none;
-      animation: floatMesh 16s ease-in-out infinite alternate;
-    }
+.app-container {
+  background: var(--card-bg);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  width: 100%;
+  max-width: 500px;
+  padding: 20px 16px;
+  border-radius: 24px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-highlight);
+  height: fit-content;
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+}
+
+/* Native scaling polish for phone screens */
+@media (max-width: 480px) {
+  body {
+    padding: 12px 10px 24px 10px;
+  }
+
+  .app-container {
+    padding: 18px 14px;
+    border-radius: 20px;
+  }
+
+  header h1 {
+    font-size: 1.65rem;
+  }
+
+  .streak-info .streak-count {
+    font-size: 1.35rem;
+  }
+
+  .habit-title {
+    font-size: 0.96rem;
+  }
+
+  .day-bubble {
+    width: 35px;
+    height: 35px;
+    font-size: 0.8rem;
+  }
+}
 
     .orb-1 { width: 320px; height: 320px; top: -60px; left: -60px; background: var(--orb-1); }
     .orb-2 { width: 340px; height: 340px; bottom: 5%; right: -80px; background: var(--orb-2); animation-delay: -6s; }
