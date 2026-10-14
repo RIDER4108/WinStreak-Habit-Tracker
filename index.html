@@ -93,7 +93,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: env(safe-area-inset-top, 16px) 12px env(safe-area-inset-bottom, 24px) 12px;
+  padding: env(safe-area-inset-top, 14px) 10px env(safe-area-inset-bottom, 24px) 10px;
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
@@ -105,8 +105,8 @@ body {
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   width: 100%;
-  max-width: 500px;
-  padding: 20px 16px;
+  max-width: 600px; /* Expands wider so it won't pinch inward */
+  padding: 22px 18px;
   border-radius: 24px;
   border: 1px solid var(--card-border);
   box-shadow: var(--card-highlight);
@@ -116,36 +116,56 @@ body {
   margin: 0 auto;
 }
 
-/* Native scaling polish for phone screens */
-@media (max-width: 480px) {
+/* Big, bold native scale on mobile */
+@media (max-width: 600px) {
   body {
-    padding: 12px 10px 24px 10px;
+    padding: 8px 6px 20px 6px; /* Edge-to-edge fit */
   }
 
   .app-container {
-    padding: 18px 14px;
+    padding: 20px 16px;
     border-radius: 20px;
   }
 
   header h1 {
-    font-size: 1.65rem;
+    font-size: 1.8rem; /* Bigger title */
+  }
+
+  .streak-card {
+    padding: 16px 14px; /* Taller, prominent cards */
+  }
+
+  .streak-icon {
+    font-size: 2rem;
   }
 
   .streak-info .streak-count {
-    font-size: 1.35rem;
+    font-size: 1.6rem; /* Punchy numbers */
   }
 
-  .habit-title {
-    font-size: 0.96rem;
+  .streak-info .streak-label {
+    font-size: 0.78rem;
   }
 
   .day-bubble {
-    width: 35px;
-    height: 35px;
-    font-size: 0.8rem;
+    width: 40px; /* Larger tap targets */
+    height: 40px;
+    font-size: 0.95rem;
+  }
+
+  .habit-item {
+    padding: 16px 16px; /* Roomier habit tiles */
+  }
+
+  .habit-title {
+    font-size: 1.05rem; /* Easy-to-read text */
+  }
+
+  .custom-checkbox {
+    width: 26px;
+    height: 26px;
   }
 }
-
     .orb-1 { width: 320px; height: 320px; top: -60px; left: -60px; background: var(--orb-1); }
     .orb-2 { width: 340px; height: 340px; bottom: 5%; right: -80px; background: var(--orb-2); animation-delay: -6s; }
     .orb-3 { width: 260px; height: 260px; top: 40%; left: 5%; background: var(--orb-3); animation-delay: -11s; }
