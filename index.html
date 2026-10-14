@@ -10,44 +10,50 @@
     /* Theme Color Variables */
     :root {
       /* Dark Theme (Default) */
-      --bg: #0f172a;
-      --card-bg: #1e293b;
+      --bg: #090d16;
+      --card-bg: rgba(22, 30, 49, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
       --inner-bg: rgba(15, 23, 42, 0.6);
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
       --accent: #38bdf8;
       --accent-hover: #0284c7;
-      --accent-glow: rgba(56, 189, 248, 0.25);
+      --accent-glow: rgba(56, 189, 248, 0.35);
       --completed: #34d399;
-      --completed-bg: rgba(52, 211, 153, 0.15);
+      --completed-glow: rgba(52, 211, 153, 0.25);
+      --completed-bg: rgba(52, 211, 153, 0.08);
       --danger: #f87171;
-      --border: #334155;
-      --streak-fire: #f97316;
+      --border: #243049;
+      --streak-fire: #fb923c;
       --streak-bg: rgba(249, 115, 22, 0.12);
-      --item-bg: #0f172a;
-      --input-bg: #0f172a;
-      --modal-overlay: rgba(0, 0, 0, 0.65);
+      --item-bg: rgba(15, 23, 42, 0.7);
+      --input-bg: rgba(15, 23, 42, 0.85);
+      --modal-overlay: rgba(0, 0, 0, 0.75);
+      --shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
     }
 
     /* Light Theme */
     body.light-theme {
-      --bg: #f1f5f9;
-      --card-bg: #ffffff;
-      --inner-bg: #f8fafc;
+      --bg: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --inner-bg: #f1f5f9;
       --text-main: #0f172a;
       --text-sub: #64748b;
       --accent: #0284c7;
       --accent-hover: #0369a1;
-      --accent-glow: rgba(2, 132, 199, 0.2);
+      --accent-glow: rgba(2, 132, 199, 0.25);
       --completed: #10b981;
-      --completed-bg: rgba(16, 185, 129, 0.12);
+      --completed-glow: rgba(16, 185, 129, 0.2);
+      --completed-bg: rgba(16, 185, 129, 0.08);
       --danger: #ef4444;
       --border: #e2e8f0;
       --streak-fire: #ea580c;
       --streak-bg: rgba(234, 88, 12, 0.1);
-      --item-bg: #f8fafc;
+      --item-bg: #ffffff;
       --input-bg: #ffffff;
-      --modal-overlay: rgba(15, 23, 42, 0.4);
+      --modal-overlay: rgba(15, 23, 42, 0.45);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
     }
 
     * {
@@ -55,7 +61,8 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -66,16 +73,23 @@
       padding: 24px 12px;
       min-height: 100vh;
       overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08), transparent 40%);
+    }
+
+    body.light-theme {
+      background-image: radial-gradient(circle at 50% 0%, rgba(2, 132, 199, 0.06), transparent 40%);
     }
 
     .app-container {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       width: 100%;
       max-width: 500px;
-      padding: 20px 16px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      border: 1px solid var(--border);
+      padding: 22px 18px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--card-border);
       height: fit-content;
       position: relative;
     }
@@ -95,47 +109,51 @@
     }
 
     header h1 {
-      font-size: 1.45rem;
-      font-weight: 700;
+      font-size: 1.55rem;
+      font-weight: 800;
       letter-spacing: -0.5px;
       line-height: 1.2;
+      background: linear-gradient(135deg, var(--text-main) 60%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .date-badge {
       font-size: 0.75rem;
       color: var(--accent);
       background: var(--inner-bg);
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 20px;
       border: 1px solid var(--border);
-      font-weight: 500;
+      font-weight: 600;
       white-space: nowrap;
     }
 
     .icon-btn {
-      background: transparent;
+      background: var(--inner-bg);
       border: 1px solid var(--border);
       color: var(--text-sub);
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       flex-shrink: 0;
     }
 
     .icon-btn:hover {
       color: var(--accent);
       border-color: var(--accent);
+      transform: rotate(30deg);
     }
 
     header p {
       color: var(--text-sub);
       font-size: 0.88rem;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     /* Streak Dashboard */
@@ -143,27 +161,28 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .streak-card {
       background: var(--streak-bg);
       border: 1px solid rgba(249, 115, 22, 0.25);
-      padding: 12px;
-      border-radius: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.05);
     }
 
     .streak-icon {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       line-height: 1;
     }
 
     .streak-info .streak-count {
-      font-size: 1.2rem;
-      font-weight: 700;
+      font-size: 1.25rem;
+      font-weight: 800;
       color: var(--streak-fire);
       line-height: 1.1;
     }
@@ -172,22 +191,23 @@
       font-size: 0.7rem;
       color: var(--text-sub);
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.5px;
       margin-top: 2px;
+      font-weight: 600;
     }
 
-    /* 7-Day History Bubbles (Mobile Optimized) */
+    /* 7-Day History Bubbles */
     .week-history {
       background: var(--inner-bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 14px;
+      padding: 12px 14px;
       margin-bottom: 16px;
     }
 
     .week-header {
       font-size: 0.72rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: var(--text-sub);
@@ -206,14 +226,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       flex: 1;
     }
 
     .day-name {
       font-size: 0.68rem;
       color: var(--text-sub);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .day-bubble {
@@ -225,53 +245,56 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.78rem;
+      font-weight: 700;
       color: var(--text-sub);
-      transition: all 0.25s ease;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .day-bubble.today {
       border-color: var(--accent);
-      box-shadow: 0 0 6px var(--accent-glow);
+      box-shadow: 0 0 10px var(--accent-glow);
     }
 
     .day-bubble.done {
       background: var(--completed-bg);
       border-color: var(--completed);
       color: var(--completed);
+      transform: scale(1.05);
     }
 
-    /* Progress Section */
+    /* Progress Section with Shimmer */
     .progress-section {
       background: var(--inner-bg);
-      padding: 14px;
-      border-radius: 12px;
+      padding: 16px;
+      border-radius: 14px;
       border: 1px solid var(--border);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .progress-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
+      margin-bottom: 9px;
+      font-size: 0.88rem;
+      font-weight: 700;
     }
 
     .progress-header .percentage {
       color: var(--accent);
-      font-size: 0.95rem;
+      font-size: 1rem;
+      font-weight: 800;
     }
 
     .progress-bar-bg {
       width: 100%;
-      height: 8px;
+      height: 10px;
       background-color: var(--border);
       border-radius: 999px;
       overflow: hidden;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
+      position: relative;
     }
 
     .progress-bar-fill {
@@ -279,21 +302,40 @@
       width: 0%;
       background: linear-gradient(90deg, var(--accent), var(--completed));
       border-radius: 999px;
-      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 0 10px var(--accent-glow);
+      transition: width 0.45s cubic-bezier(0.34, 1.25, 0.64, 1);
+      box-shadow: 0 0 12px var(--accent-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
     .progress-status {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-sub);
+      font-weight: 500;
     }
 
-    /* Input Section (Fixed for Mobile) */
+    /* Input Section */
     .input-form {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 9px;
+      margin-bottom: 18px;
     }
 
     .input-form input {
@@ -301,11 +343,11 @@
       background: var(--input-bg);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 12px 14px;
-      border-radius: 8px;
+      padding: 12px 16px;
+      border-radius: 12px;
       font-size: 0.95rem;
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: all 0.2s ease;
     }
 
     .input-form input:focus, .category-select:focus, .edit-input:focus, .edit-select:focus {
@@ -324,32 +366,33 @@
       background: var(--input-bg);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 10px 12px;
-      border-radius: 8px;
+      padding: 11px 12px;
+      border-radius: 10px;
       font-size: 0.88rem;
       outline: none;
       cursor: pointer;
     }
 
     .add-btn {
-      background-color: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
       color: #ffffff;
       border: none;
-      font-weight: 600;
+      font-weight: 700;
       padding: 0 20px;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       font-size: 0.92rem;
-      transition: background-color 0.2s;
+      transition: all 0.2s ease;
       flex-shrink: 0;
+      box-shadow: 0 4px 12px var(--accent-glow);
     }
 
     body:not(.light-theme) .add-btn {
-      color: #0f172a;
+      color: #090d16;
     }
 
-    .add-btn:hover {
-      background-color: var(--accent-hover);
+    .add-btn:active {
+      transform: scale(0.96);
     }
 
     /* Filter Tabs Bar */
@@ -371,10 +414,10 @@
       background: var(--inner-bg);
       border: 1px solid var(--border);
       color: var(--text-sub);
-      padding: 5px 11px;
+      padding: 6px 13px;
       border-radius: 20px;
       font-size: 0.78rem;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
@@ -390,18 +433,18 @@
       background: var(--accent);
       color: #ffffff;
       border-color: var(--accent);
-      font-weight: 600;
+      box-shadow: 0 2px 8px var(--accent-glow);
     }
 
     body:not(.light-theme) .filter-btn.active {
-      color: #0f172a;
+      color: #090d16;
     }
 
     /* Category Badges */
     .cat-badge {
       font-size: 0.68rem;
-      font-weight: 600;
-      padding: 2px 7px;
+      font-weight: 700;
+      padding: 3px 8px;
       border-radius: 6px;
       letter-spacing: 0.3px;
       white-space: nowrap;
@@ -419,12 +462,12 @@
     body:not(.light-theme) .cat-mindset { color: #4ade80; }
     body:not(.light-theme) .cat-general { color: #cbd5e1; }
 
-    /* Habits List */
+    /* Habit Items & Micro-Interactions */
     .habit-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .habit-item {
@@ -432,51 +475,72 @@
       align-items: center;
       justify-content: space-between;
       background: var(--item-bg);
-      padding: 10px 14px;
-      border-radius: 8px;
+      padding: 12px 14px;
+      border-radius: 12px;
       border: 1px solid var(--border);
       gap: 10px;
+      transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1);
+      position: relative;
+    }
+
+    .habit-item:active {
+      transform: scale(0.985);
+    }
+
+    .habit-item.done {
+      border-color: rgba(52, 211, 153, 0.35);
+      background: var(--completed-bg);
     }
 
     .habit-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       flex: 1;
       cursor: pointer;
       user-select: none;
       min-width: 0;
     }
 
+    /* Pop Checkbox */
     .custom-checkbox {
-      width: 19px;
-      height: 19px;
-      border-radius: 6px;
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
       border: 2px solid #64748b;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .habit-item.done .custom-checkbox {
       background-color: var(--completed);
       border-color: var(--completed);
+      box-shadow: 0 0 10px var(--completed-glow);
+      animation: checkBounce 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes checkBounce {
+      0% { transform: scale(0.8); }
+      50% { transform: scale(1.25); }
+      100% { transform: scale(1); }
     }
 
     .custom-checkbox svg {
       display: none;
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       stroke: #ffffff;
-      stroke-width: 3;
+      stroke-width: 3.2;
       stroke-linecap: round;
       stroke-linejoin: round;
       fill: none;
     }
 
     body:not(.light-theme) .custom-checkbox svg {
-      stroke: #0f172a;
+      stroke: #090d16;
     }
 
     .habit-item.done .custom-checkbox svg {
@@ -486,15 +550,17 @@
     .habit-text-wrap {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
       min-width: 0;
     }
 
     .habit-title {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
+      font-weight: 500;
       color: var(--text-main);
       word-break: break-word;
+      transition: all 0.2s ease;
     }
 
     .habit-item.done .habit-title {
@@ -505,7 +571,7 @@
     .habit-actions {
       display: flex;
       align-items: center;
-      gap: 2px;
+      gap: 4px;
       flex-shrink: 0;
     }
 
@@ -514,19 +580,22 @@
       border: none;
       color: var(--text-sub);
       cursor: pointer;
-      padding: 5px;
+      padding: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 6px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
     }
 
     .action-btn:hover {
       color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
     }
 
     .action-btn.delete-btn:hover {
       color: var(--danger);
+      background: rgba(248, 113, 113, 0.1);
     }
 
     /* Edit Mode */
@@ -548,9 +617,9 @@
       background: var(--card-bg);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 8px 10px;
-      border-radius: 6px;
-      font-size: 0.88rem;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
       outline: none;
     }
 
@@ -559,8 +628,8 @@
       background: var(--card-bg);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 6px 8px;
-      border-radius: 6px;
+      padding: 7px 10px;
+      border-radius: 8px;
       font-size: 0.82rem;
       outline: none;
     }
@@ -569,28 +638,28 @@
       background: var(--completed);
       border: none;
       color: #ffffff;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.82rem;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
       cursor: pointer;
     }
 
     body:not(.light-theme) .edit-btn-save {
-      color: #0f172a;
+      color: #090d16;
     }
 
     .edit-btn-cancel {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--text-sub);
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 0.82rem;
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
       cursor: pointer;
     }
 
-    /* Modal */
+    /* Settings Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -598,7 +667,8 @@
       width: 100vw;
       height: 100vh;
       background: var(--modal-overlay);
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -612,12 +682,19 @@
 
     .modal-card {
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
       width: 100%;
-      max-width: 380px;
-      padding: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      max-width: 400px;
+      padding: 22px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      animation: modalSlideUp 0.25s ease-out;
+    }
+
+    @keyframes modalSlideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .modal-header {
@@ -625,13 +702,13 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 16px;
-      padding-bottom: 10px;
+      padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
     }
 
     .modal-header h2 {
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 800;
     }
 
     .close-modal-btn {
@@ -647,13 +724,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 0;
+      padding: 13px 0;
       border-bottom: 1px solid var(--border);
     }
 
     .setting-info h4 {
       font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 2px;
     }
 
@@ -674,7 +751,7 @@
     .theme-btn {
       background: transparent;
       border: none;
-      padding: 5px 10px;
+      padding: 5px 12px;
       border-radius: 20px;
       font-size: 0.78rem;
       cursor: pointer;
@@ -682,28 +759,74 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      font-weight: 600;
     }
 
     .theme-btn.active {
       background: var(--accent);
       color: #ffffff;
-      font-weight: 600;
     }
 
     body:not(.light-theme) .theme-btn.active {
-      color: #0f172a;
+      color: #090d16;
+    }
+
+    /* iOS-Style Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--border);
+      transition: .25s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .25s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--completed);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
     }
 
     .modal-footer {
-      margin-top: 16px;
+      margin-top: 18px;
       text-align: right;
     }
 
     .empty-state {
       text-align: center;
-      padding: 24px;
+      padding: 28px 16px;
       color: var(--text-sub);
-      font-size: 0.88rem;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -765,7 +888,7 @@
       <div class="progress-status" id="statusMessage">No habits added yet.</div>
     </div>
 
-    <!-- Habit Input (Stacked for Mobile) -->
+    <!-- Habit Input -->
     <form class="input-form" id="habitForm">
       <input type="text" id="habitInput" placeholder="Add a new habit..." required autocomplete="off" />
       <div class="input-actions-row">
@@ -817,10 +940,24 @@
 
       <div class="setting-group">
         <div class="setting-info">
-          <h4>Data Storage</h4>
-          <p>Saved locally in browser storage</p>
+          <h4>Sound Effects</h4>
+          <p>Crisp audio chimes on completion</p>
         </div>
-        <span style="font-size: 0.8rem; color: var(--accent); font-weight: 600;">Active</span>
+        <label class="switch">
+          <input type="checkbox" id="soundToggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-group">
+        <div class="setting-info">
+          <h4>Haptic Feedback</h4>
+          <p>Subtle vibration buzz on tap</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="hapticToggle" checked>
+          <span class="slider"></span>
+        </label>
       </div>
 
       <div class="modal-footer">
@@ -834,6 +971,8 @@
     const STORAGE_KEY_META = 'habits_meta';
     const STORAGE_KEY_HISTORY = 'habits_history';
     const STORAGE_KEY_THEME = 'habits_theme';
+    const STORAGE_KEY_SOUND = 'habits_sound';
+    const STORAGE_KEY_HAPTIC = 'habits_haptic';
 
     let habits = JSON.parse(localStorage.getItem(STORAGE_KEY_HABITS)) || [];
     let meta = JSON.parse(localStorage.getItem(STORAGE_KEY_META)) || {
@@ -847,6 +986,57 @@
     let editingHabitId = null;
     let wasAllCompleted = false;
     let activeTheme = localStorage.getItem(STORAGE_KEY_THEME) || 'dark';
+    let soundEnabled = localStorage.getItem(STORAGE_KEY_SOUND) !== 'false';
+    let hapticEnabled = localStorage.getItem(STORAGE_KEY_HAPTIC) !== 'false';
+
+    // --- Web Audio Synthesizer (Zero Audio Files Needed) ---
+    let audioCtx = null;
+    function playChime(isDone) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        if (isDone) {
+          // Ascending crisp chime
+          osc.frequency.setValueAtTime(587.33, now); // D5
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else {
+          // Subtle descending pop
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(260, now + 0.1);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+          osc.start(now);
+          osc.stop(now + 0.15);
+        }
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+      } catch (err) {
+        // Fallback for strict browser autoplay permissions
+      }
+    }
+
+    function triggerHaptic() {
+      if (!hapticEnabled) return;
+      if (window.navigator && window.navigator.vibrate) {
+        window.navigator.vibrate(18); // 18ms gentle micro-buzz
+      }
+    }
 
     const categoryLabels = {
       coding: { label: 'Coding', class: 'cat-coding' },
@@ -877,6 +1067,8 @@
     const settingsModal = document.getElementById('settingsModal');
     const darkThemeBtn = document.getElementById('darkThemeBtn');
     const lightThemeBtn = document.getElementById('lightThemeBtn');
+    const soundToggle = document.getElementById('soundToggle');
+    const hapticToggle = document.getElementById('hapticToggle');
 
     function applyTheme(theme) {
       activeTheme = theme;
@@ -911,6 +1103,20 @@
     darkThemeBtn.addEventListener('click', () => applyTheme('dark'));
     lightThemeBtn.addEventListener('click', () => applyTheme('light'));
 
+    soundToggle.checked = soundEnabled;
+    soundToggle.addEventListener('change', (e) => {
+      soundEnabled = e.target.checked;
+      localStorage.setItem(STORAGE_KEY_SOUND, soundEnabled);
+      if (soundEnabled) playChime(true);
+    });
+
+    hapticToggle.checked = hapticEnabled;
+    hapticToggle.addEventListener('change', (e) => {
+      hapticEnabled = e.target.checked;
+      localStorage.setItem(STORAGE_KEY_HAPTIC, hapticEnabled);
+      if (hapticEnabled) triggerHaptic();
+    });
+
     function formatDateToString(d) {
       const year = d.getFullYear();
       const month = String(d.getMonth() + 1).padStart(2, '0');
@@ -937,8 +1143,8 @@
 
     function fireConfetti() {
       if (typeof confetti !== 'function') return;
-      confetti({ particleCount: 50, spread: 60, origin: { x: 0.2, y: 0.85 }, colors: ['#38bdf8', '#34d399', '#f97316', '#f43f5e'] });
-      confetti({ particleCount: 50, spread: 60, origin: { x: 0.8, y: 0.85 }, colors: ['#38bdf8', '#34d399', '#f97316', '#f43f5e'] });
+      confetti({ particleCount: 65, spread: 60, origin: { x: 0.2, y: 0.85 }, colors: ['#38bdf8', '#34d399', '#f97316', '#a855f7'] });
+      confetti({ particleCount: 65, spread: 60, origin: { x: 0.8, y: 0.85 }, colors: ['#38bdf8', '#34d399', '#f97316', '#a855f7'] });
     }
 
     function saveHabits() { localStorage.setItem(STORAGE_KEY_HABITS, JSON.stringify(habits)); }
@@ -1192,10 +1398,19 @@
 
     window.toggleHabit = function(id) {
       if (editingHabitId) return;
+
+      let newState = false;
       habits = habits.map(habit => {
-        if (habit.id === id) return { ...habit, completed: !habit.completed };
+        if (habit.id === id) {
+          newState = !habit.completed;
+          return { ...habit, completed: newState };
+        }
         return habit;
       });
+
+      triggerHaptic();
+      playChime(newState);
+
       saveHabits();
       renderHabits();
     };
