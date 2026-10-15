@@ -39,9 +39,10 @@
       --item-border: rgba(255, 255, 255, 0.08);
       --input-bg: rgba(2, 6, 23, 0.75);
       --modal-overlay: rgba(0, 0, 0, 0.8);
-      --orb-1: rgba(56, 189, 248, 0.28);
-      --orb-2: rgba(168, 85, 247, 0.24);
-      --orb-3: rgba(16, 185, 129, 0.18);
+      
+      /* New Deep Saturation Colors */
+      --c-coding: #22d3ee; --c-study: #c084fc; --c-activity: #fb923c; --c-health: #34d399;
+      --c-skills: #facc15; --c-rest: #818cf8; --c-selfcare: #f472b6; --c-general: #cbd5e1;
     }
 
     body.light-theme {
@@ -53,86 +54,23 @@
       --inner-border: rgba(255, 255, 255, 0.7);
       --text-main: #0f172a;
       --text-sub: #64748b;
-      --accent: #0284c7;
-      --accent-glow: rgba(2, 132, 199, 0.3);
-      --completed: #059669;
-      --completed-glow: rgba(5, 150, 105, 0.3);
-      --completed-bg: rgba(16, 185, 129, 0.14);
-      --danger: #e11d48;
-      --streak-fire: #ea580c;
-      --streak-bg: rgba(234, 88, 12, 0.12);
-      --streak-border: rgba(234, 88, 12, 0.25);
-      --item-bg: rgba(255, 255, 255, 0.7);
-      --item-border: rgba(255, 255, 255, 0.9);
-      --input-bg: rgba(255, 255, 255, 0.85);
-      --modal-overlay: rgba(15, 23, 42, 0.5);
-      --orb-1: rgba(56, 189, 248, 0.4);
-      --orb-2: rgba(192, 132, 252, 0.35);
-      --orb-3: rgba(110, 231, 183, 0.35);
+      
+      /* Light Theme Saturation */
+      --c-coding: #0891b2; --c-study: #9333ea; --c-activity: #ea580c; --c-health: #16a34a;
+      --c-skills: #ca8a04; --c-rest: #4f46e5; --c-selfcare: #db2777; --c-general: #64748b;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease; -webkit-tap-highlight-color: transparent; }
+    html, body { overscroll-behavior-y: none; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    body { background-color: var(--bg); color: var(--text-main); display: flex; justify-content: center; align-items: flex-start; padding: env(safe-area-inset-top, 14px) 10px env(safe-area-inset-bottom, 24px) 10px; min-height: 100vh; min-height: 100dvh; overflow-x: hidden; position: relative; }
+    .app-container { background: var(--card-bg); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); width: 100%; max-width: 600px; padding: 22px 18px; border-radius: 24px; border: 1px solid var(--card-border); box-shadow: var(--card-highlight); height: fit-content; position: relative; z-index: 1; margin: 0 auto; }
+    
+    @media (max-width: 600px) { body { padding: 8px 6px 20px 6px; } .app-container { padding: 20px 16px; border-radius: 20px; } header h1 { font-size: 1.8rem; } .streak-card { padding: 16px 14px; } .streak-icon { font-size: 2rem; } .streak-info .streak-count { font-size: 1.6rem; } .streak-info .streak-label { font-size: 0.78rem; } .day-bubble { width: 40px; height: 40px; font-size: 0.95rem; } .habit-item { padding: 16px 16px; } .habit-title { font-size: 1.05rem; } .custom-checkbox { width: 26px; height: 26px; } }
 
-    html, body {
-      overscroll-behavior-y: none;
-      touch-action: pan-y;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: env(safe-area-inset-top, 14px) 10px env(safe-area-inset-bottom, 24px) 10px;
-      min-height: 100vh;
-      min-height: 100dvh;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    .app-container {
-      background: var(--card-bg);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      width: 100%;
-      max-width: 600px;
-      padding: 22px 18px;
-      border-radius: 24px;
-      border: 1px solid var(--card-border);
-      box-shadow: var(--card-highlight);
-      height: fit-content;
-      position: relative;
-      z-index: 1;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 600px) {
-      body { padding: 8px 6px 20px 6px; }
-      .app-container { padding: 20px 16px; border-radius: 20px; }
-      header h1 { font-size: 1.8rem; }
-      .streak-card { padding: 16px 14px; }
-      .streak-icon { font-size: 2rem; }
-      .streak-info .streak-count { font-size: 1.6rem; }
-      .streak-info .streak-label { font-size: 0.78rem; }
-      .day-bubble { width: 40px; height: 40px; font-size: 0.95rem; }
-      .habit-item { padding: 16px 16px; }
-      .habit-title { font-size: 1.05rem; }
-      .custom-checkbox { width: 26px; height: 26px; }
-    }
-
-    .orb-1 { position: absolute; width: 320px; height: 320px; top: -60px; left: -60px; background: var(--orb-1); filter: blur(60px); border-radius: 50%; z-index: 0; }
-    .orb-2 { position: absolute; width: 340px; height: 340px; bottom: 5%; right: -80px; background: var(--orb-2); animation-delay: -6s; filter: blur(60px); border-radius: 50%; z-index: 0; }
-    .orb-3 { position: absolute; width: 260px; height: 260px; top: 40%; left: 5%; background: var(--orb-3); animation-delay: -11s; filter: blur(60px); border-radius: 50%; z-index: 0; }
+    /* HIGHER SATURATION ORBS */
+    .orb-1 { position: absolute; width: 380px; height: 380px; top: -10%; left: -10%; background: rgba(56, 189, 248, 0.45); filter: blur(55px); border-radius: 50%; z-index: 0; }
+    .orb-2 { position: absolute; width: 420px; height: 420px; bottom: 0%; right: -10%; background: rgba(168, 85, 247, 0.45); animation-delay: -6s; filter: blur(55px); border-radius: 50%; z-index: 0; }
+    .orb-3 { position: absolute; width: 300px; height: 300px; top: 35%; left: 10%; background: rgba(16, 185, 129, 0.40); animation-delay: -11s; filter: blur(55px); border-radius: 50%; z-index: 0; }
 
     .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 8px; }
     .brand-wrap { display: flex; align-items: center; gap: 10px; }
@@ -158,7 +96,6 @@
     .day-bubble { width: 32px; height: 32px; border-radius: 50%; background: var(--item-bg); border: 1.5px solid var(--item-border); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; color: var(--text-sub); transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
     .day-bubble.today { border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
     .day-bubble.done { background: var(--completed-bg); border-color: var(--completed); color: var(--completed); transform: scale(1.06); box-shadow: 0 0 12px var(--completed-glow); }
-    .day-bubble.paused { background: rgba(148, 163, 184, 0.15); border-color: rgba(148, 163, 184, 0.5); color: #cbd5e1; border-style: dashed; }
 
     .progress-section { background: var(--inner-bg); backdrop-filter: blur(16px); padding: 16px; border-radius: 18px; border: 1px solid var(--inner-border); margin-bottom: 20px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08); }
     .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; font-size: 0.88rem; font-weight: 700; }
@@ -184,50 +121,24 @@
     .filter-btn:hover { border-color: rgba(255, 255, 255, 0.3); color: var(--text-main); }
     .filter-btn.active { background: var(--accent); color: #030712; border-color: var(--accent); box-shadow: 0 2px 10px var(--accent-glow); font-weight: 700; }
 
-    /* V2.0 NEON CATEGORIES */
-    .cat-badge { font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 8px; letter-spacing: 0.3px; white-space: nowrap; }
-    
-    .cat-coding { background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.4); }
-    .cat-study { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.4); }
-    .cat-activity { background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.4); }
-    .cat-health { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.4); }
-    .cat-skills { background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.4); }
-    .cat-rest { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.4); }
-    .cat-selfcare { background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
-    .cat-general { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); }
-
-    body.light-theme .cat-coding { color: #0891b2; }
-    body.light-theme .cat-study { color: #9333ea; }
-    body.light-theme .cat-activity { color: #ea580c; }
-    body.light-theme .cat-health { color: #16a34a; }
-    body.light-theme .cat-skills { color: #ca8a04; }
-    body.light-theme .cat-rest { color: #4f46e5; }
-    body.light-theme .cat-selfcare { color: #db2777; }
-    body.light-theme .cat-general { color: #64748b; }
-
     .habit-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .habit-item { display: flex; align-items: center; justify-content: space-between; background: var(--item-bg); backdrop-filter: blur(14px); padding: 12px 14px; border-radius: 16px; border: 1px solid var(--item-border); gap: 10px; transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1); position: relative; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 4px 15px rgba(0, 0, 0, 0.15); }
     .habit-item:active { transform: scale(0.985); }
-    .habit-item.done { border-color: rgba(16, 185, 129, 0.45); background: var(--completed-bg); box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 0 16px var(--completed-glow); }
     
-    /* Paused Visual State */
     .habit-item.paused { opacity: 0.65; border-color: rgba(148, 163, 184, 0.4); border-style: dashed; }
     .habit-item.paused .habit-title { color: var(--text-sub); }
-    .habit-item.paused .custom-checkbox { background: rgba(148, 163, 184, 0.1); border-color: rgba(148, 163, 184, 0.3); }
+    .habit-item.paused .custom-checkbox { background: rgba(148, 163, 184, 0.1) !important; border-color: rgba(148, 163, 184, 0.3) !important; box-shadow: none !important; }
 
     .habit-left { display: flex; align-items: center; gap: 12px; flex: 1; cursor: pointer; user-select: none; min-width: 0; }
     .custom-checkbox { width: 22px; height: 22px; border-radius: 8px; border: 2px solid rgba(148, 163, 184, 0.5); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); background: rgba(255, 255, 255, 0.05); }
-    .habit-item.done .custom-checkbox { background-color: var(--completed); border-color: var(--completed); box-shadow: 0 0 12px var(--completed-glow); animation: checkBounce 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    
+    .custom-checkbox svg { display: none; width: 14px; height: 14px; stroke: #000000; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    body.light-theme .custom-checkbox svg { stroke: #ffffff; }
+    .habit-item.done .custom-checkbox svg { display: block; animation: checkBounce 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
     @keyframes checkBounce { 0% { transform: scale(0.8); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
-    .custom-checkbox svg { display: none; width: 14px; height: 14px; stroke: #ffffff; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
-    .habit-item.done .custom-checkbox svg { display: block; }
 
     .habit-text-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
     .habit-title { font-size: 0.92rem; font-weight: 500; color: var(--text-main); word-break: break-word; transition: all 0.2s ease; }
     .habit-item.done .habit-title { text-decoration: line-through; color: #94a3b8; }
-    
-    /* V2.0 MINI STREAK UI */
     .mini-streak { font-size: 0.72rem; font-weight: 700; color: var(--streak-fire); display: flex; align-items: center; gap: 3px; background: var(--streak-bg); padding: 2px 6px; border-radius: 6px; border: 1px solid var(--streak-border); }
 
     .habit-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
@@ -238,11 +149,12 @@
 
     .edit-mode-container { display: flex; flex-direction: column; gap: 8px; width: 100%; }
     .edit-controls-row { display: flex; gap: 6px; width: 100%; }
-    .edit-input { width: 100%; background: var(--input-bg); border: 1px solid var(--inner-border); color: var(--text-main); padding: 9px 12px; border-radius: 10px; font-size: 0.9rem; outline: none; user-select: text; -webkit-user-select: text; }
+    .edit-input { width: 100%; background: var(--input-bg); border: 1px solid var(--inner-border); color: var(--text-main); padding: 9px 12px; border-radius: 10px; font-size: 0.9rem; outline: none; }
     .edit-select { flex: 1; background: var(--input-bg); border: 1px solid var(--inner-border); color: var(--text-main); padding: 7px 10px; border-radius: 10px; font-size: 0.82rem; outline: none; }
     .edit-btn-save { background: var(--completed); border: none; color: #ffffff; padding: 7px 14px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
     .edit-btn-cancel { background: transparent; border: 1px solid var(--inner-border); color: var(--text-sub); padding: 7px 12px; border-radius: 10px; font-size: 0.85rem; cursor: pointer; }
 
+    /* Modals & Settings */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--modal-overlay); backdrop-filter: blur(14px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
     .modal-overlay.active { display: flex; }
     .modal-card { background: var(--card-bg); backdrop-filter: blur(30px); border: 1px solid var(--card-border); border-radius: 24px; width: 100%; max-width: 400px; padding: 22px; box-shadow: var(--card-highlight); animation: modalSlideUp 0.25s ease-out; }
@@ -256,7 +168,6 @@
     .theme-toggle-wrap { display: flex; background: var(--inner-bg); backdrop-filter: blur(10px); border: 1px solid var(--inner-border); border-radius: 30px; padding: 3px; gap: 2px; }
     .theme-btn { background: transparent; border: none; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; cursor: pointer; color: var(--text-sub); display: flex; align-items: center; gap: 4px; font-weight: 600; }
     .theme-btn.active { background: var(--accent); color: #030712; font-weight: 700; }
-    
     .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
     .switch input { opacity: 0; width: 0; height: 0; }
     .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255, 255, 255, 0.15); transition: .25s; border-radius: 34px; border: 1px solid rgba(255, 255, 255, 0.1); }
@@ -264,14 +175,74 @@
     .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 2px; bottom: 2px; background-color: white; transition: .25s; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.25); }
     input:checked + .slider { background-color: var(--completed); border-color: var(--completed); }
     input:checked + .slider:before { transform: translateX(20px); }
-
-    /* V2.0 BACKUP BUTTONS */
     .data-actions { display: flex; gap: 8px; margin-top: 8px; width: 100%; }
     .data-btn { flex: 1; background: var(--inner-bg); border: 1px solid var(--inner-border); color: var(--text-main); padding: 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s ease; }
     .data-btn:hover { border-color: var(--accent); color: var(--accent); }
-
     .modal-footer { margin-top: 18px; text-align: right; }
     .empty-state { text-align: center; padding: 28px 16px; color: var(--text-sub); font-size: 0.9rem; }
+
+    /* ========================================= */
+    /* V2.5: THE CATEGORY COLOR INJECTION ENGINE */
+    /* ========================================= */
+    
+    .cat-badge { font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 8px; letter-spacing: 0.3px; white-space: nowrap; }
+    
+    /* CODING */
+    .cat-coding { background: rgba(34, 211, 238, 0.15); color: var(--c-coding); border: 1px solid rgba(34, 211, 238, 0.4); }
+    .habit-item[data-cat="coding"] { border-left: 4px solid var(--c-coding); }
+    .habit-item[data-cat="coding"] .custom-checkbox { border-color: var(--c-coding); }
+    .habit-item[data-cat="coding"].done .custom-checkbox { background-color: var(--c-coding); box-shadow: 0 0 14px var(--c-coding); }
+
+    /* STUDY */
+    .cat-study { background: rgba(192, 132, 252, 0.15); color: var(--c-study); border: 1px solid rgba(192, 132, 252, 0.4); }
+    .habit-item[data-cat="study"] { border-left: 4px solid var(--c-study); }
+    .habit-item[data-cat="study"] .custom-checkbox { border-color: var(--c-study); }
+    .habit-item[data-cat="study"].done .custom-checkbox { background-color: var(--c-study); box-shadow: 0 0 14px var(--c-study); }
+
+    /* ACTIVITY */
+    .cat-activity { background: rgba(251, 146, 60, 0.15); color: var(--c-activity); border: 1px solid rgba(251, 146, 60, 0.4); }
+    .habit-item[data-cat="activity"] { border-left: 4px solid var(--c-activity); }
+    .habit-item[data-cat="activity"] .custom-checkbox { border-color: var(--c-activity); }
+    .habit-item[data-cat="activity"].done .custom-checkbox { background-color: var(--c-activity); box-shadow: 0 0 14px var(--c-activity); }
+
+    /* HEALTH */
+    .cat-health { background: rgba(52, 211, 153, 0.15); color: var(--c-health); border: 1px solid rgba(52, 211, 153, 0.4); }
+    .habit-item[data-cat="health"] { border-left: 4px solid var(--c-health); }
+    .habit-item[data-cat="health"] .custom-checkbox { border-color: var(--c-health); }
+    .habit-item[data-cat="health"].done .custom-checkbox { background-color: var(--c-health); box-shadow: 0 0 14px var(--c-health); }
+
+    /* SKILLS */
+    .cat-skills { background: rgba(250, 204, 21, 0.15); color: var(--c-skills); border: 1px solid rgba(250, 204, 21, 0.4); }
+    .habit-item[data-cat="skills"] { border-left: 4px solid var(--c-skills); }
+    .habit-item[data-cat="skills"] .custom-checkbox { border-color: var(--c-skills); }
+    .habit-item[data-cat="skills"].done .custom-checkbox { background-color: var(--c-skills); box-shadow: 0 0 14px var(--c-skills); }
+
+    /* REST */
+    .cat-rest { background: rgba(129, 140, 248, 0.15); color: var(--c-rest); border: 1px solid rgba(129, 140, 248, 0.4); }
+    .habit-item[data-cat="rest"] { border-left: 4px solid var(--c-rest); }
+    .habit-item[data-cat="rest"] .custom-checkbox { border-color: var(--c-rest); }
+    .habit-item[data-cat="rest"].done .custom-checkbox { background-color: var(--c-rest); box-shadow: 0 0 14px var(--c-rest); }
+
+    /* SELF CARE */
+    .cat-selfcare { background: rgba(244, 114, 182, 0.15); color: var(--c-selfcare); border: 1px solid rgba(244, 114, 182, 0.4); }
+    .habit-item[data-cat="selfcare"] { border-left: 4px solid var(--c-selfcare); }
+    .habit-item[data-cat="selfcare"] .custom-checkbox { border-color: var(--c-selfcare); }
+    .habit-item[data-cat="selfcare"].done .custom-checkbox { background-color: var(--c-selfcare); box-shadow: 0 0 14px var(--c-selfcare); }
+
+    /* GENERAL */
+    .cat-general { background: rgba(148, 163, 184, 0.15); color: var(--c-general); border: 1px solid rgba(148, 163, 184, 0.4); }
+    .habit-item[data-cat="general"] { border-left: 4px solid var(--c-general); }
+    .habit-item[data-cat="general"] .custom-checkbox { border-color: var(--c-general); }
+    .habit-item[data-cat="general"].done .custom-checkbox { background-color: var(--c-general); box-shadow: 0 0 14px var(--c-general); }
+
+    /* ========================================= */
+    /* V2.5: REORDER MODE UI                     */
+    /* ========================================= */
+    .reorder-active-btn { color: var(--streak-fire) !important; border-color: var(--streak-fire) !important; box-shadow: 0 0 12px var(--streak-bg); transform: rotate(180deg); }
+    .reorder-actions { display: flex; gap: 8px; }
+    .reorder-move-btn { background: var(--inner-bg); border: 1px solid var(--inner-border); color: var(--text-main); font-size: 1.2rem; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; }
+    .reorder-move-btn:active { background: rgba(255,255,255,0.2); transform: scale(0.95); }
+    .drag-handle { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; color: var(--text-sub); flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -419,15 +390,11 @@
     const STORAGE_KEY_HAPTIC = 'habits_haptic';
 
     let habits = JSON.parse(localStorage.getItem(STORAGE_KEY_HABITS)) || [];
-    let meta = JSON.parse(localStorage.getItem(STORAGE_KEY_META)) || {
-      lastActiveDate: '',
-      currentStreak: 0,
-      bestStreak: 0,
-      lastCompletedDate: ''
-    };
+    let meta = JSON.parse(localStorage.getItem(STORAGE_KEY_META)) || { lastActiveDate: '', currentStreak: 0, bestStreak: 0, lastCompletedDate: '' };
     let completedHistory = JSON.parse(localStorage.getItem(STORAGE_KEY_HISTORY)) || [];
     let currentFilter = 'all';
     let editingHabitId = null;
+    let isReorderMode = false;
     let wasAllCompleted = false;
     let activeTheme = localStorage.getItem(STORAGE_KEY_THEME) || 'dark';
     let soundEnabled = localStorage.getItem(STORAGE_KEY_SOUND) !== 'false';
@@ -444,16 +411,12 @@
         const gain = audioCtx.createGain();
         osc.type = 'sine';
         if (isDone) {
-          osc.frequency.setValueAtTime(587.33, now);
-          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
-          gain.gain.setValueAtTime(0.2, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.frequency.setValueAtTime(587.33, now); osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+          gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
           osc.start(now); osc.stop(now + 0.35);
         } else {
-          osc.frequency.setValueAtTime(440, now);
-          osc.frequency.exponentialRampToValueAtTime(260, now + 0.1);
-          gain.gain.setValueAtTime(0.12, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+          osc.frequency.setValueAtTime(440, now); osc.frequency.exponentialRampToValueAtTime(260, now + 0.1);
+          gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
           osc.start(now); osc.stop(now + 0.15);
         }
         osc.connect(gain); gain.connect(audioCtx.destination);
@@ -465,16 +428,11 @@
       if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(18);
     }
 
-    // V2.0: NEW NEON CATEGORIES
     const categoryLabels = {
-      coding: { label: 'Coding', class: 'cat-coding' },
-      study: { label: 'Study', class: 'cat-study' },
-      activity: { label: 'Activity', class: 'cat-activity' },
-      health: { label: 'Health', class: 'cat-health' },
-      skills: { label: 'Skills', class: 'cat-skills' },
-      rest: { label: 'Rest', class: 'cat-rest' },
-      selfcare: { label: 'Self Care', class: 'cat-selfcare' },
-      general: { label: 'General', class: 'cat-general' }
+      coding: { label: 'Coding', class: 'cat-coding' }, study: { label: 'Study', class: 'cat-study' },
+      activity: { label: 'Activity', class: 'cat-activity' }, health: { label: 'Health', class: 'cat-health' },
+      skills: { label: 'Skills', class: 'cat-skills' }, rest: { label: 'Rest', class: 'cat-rest' },
+      selfcare: { label: 'Self Care', class: 'cat-selfcare' }, general: { label: 'General', class: 'cat-general' }
     };
 
     const habitForm = document.getElementById('habitForm');
@@ -491,55 +449,30 @@
     const bestStreakEl = document.getElementById('bestStreak');
     const weekBubblesEl = document.getElementById('weekBubbles');
     const weekSuccessRateEl = document.getElementById('weekSuccessRate');
-    
-    // UI Auto-Injector for V2.0
+
     function autoInjectV2UI() {
       if (habitCategory) {
-        habitCategory.innerHTML = `
-          <option value="coding">💻 Coding</option>
-          <option value="study">📚 Study</option>
-          <option value="activity">🏃 Activity</option>
-          <option value="health">🍎 Health</option>
-          <option value="skills">🛠️ Skills</option>
-          <option value="rest">🔋 Rest</option>
-          <option value="selfcare">🧘 Self Care</option>
-          <option value="general" selected>⚡ General</option>
-        `;
+        habitCategory.innerHTML = `<option value="coding">💻 Coding</option><option value="study">📚 Study</option><option value="activity">🏃 Activity</option><option value="health">🍎 Health</option><option value="skills">🛠️ Skills</option><option value="rest">🔋 Rest</option><option value="selfcare">🧘 Self Care</option><option value="general" selected>⚡ General</option>`;
       }
       if (filterBar) {
-        filterBar.innerHTML = `
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="active">Active</button>
-          <button class="filter-btn" data-filter="done">Done</button>
-          <button class="filter-btn" data-filter="coding">Coding</button>
-          <button class="filter-btn" data-filter="study">Study</button>
-          <button class="filter-btn" data-filter="activity">Activity</button>
-          <button class="filter-btn" data-filter="health">Health</button>
-          <button class="filter-btn" data-filter="skills">Skills</button>
-          <button class="filter-btn" data-filter="rest">Rest</button>
-          <button class="filter-btn" data-filter="selfcare">Self Care</button>
-          <button class="filter-btn" data-filter="general">General</button>
-        `;
+        filterBar.innerHTML = `<button class="filter-btn active" data-filter="all">All</button><button class="filter-btn" data-filter="active">Active</button><button class="filter-btn" data-filter="done">Done</button><button class="filter-btn" data-filter="coding">Coding</button><button class="filter-btn" data-filter="study">Study</button><button class="filter-btn" data-filter="activity">Activity</button><button class="filter-btn" data-filter="health">Health</button><button class="filter-btn" data-filter="skills">Skills</button><button class="filter-btn" data-filter="rest">Rest</button><button class="filter-btn" data-filter="selfcare">Self Care</button><button class="filter-btn" data-filter="general">General</button>`;
       }
-      // Inject Backup Buttons into Settings Modal
       const modalFooter = document.querySelector('.modal-footer');
       if (modalFooter && !document.getElementById('backupContainer')) {
         const backupDiv = document.createElement('div');
-        backupDiv.id = 'backupContainer';
-        backupDiv.className = 'setting-group';
-        backupDiv.style.flexDirection = 'column';
-        backupDiv.style.alignItems = 'flex-start';
-        backupDiv.innerHTML = `
-          <div class="setting-info" style="margin-bottom: 8px;">
-            <h4>Data Backup</h4><p>Export or import your streaks</p>
-          </div>
-          <div class="data-actions">
-            <button class="data-btn" onclick="exportData()">Export Data</button>
-            <button class="data-btn" onclick="document.getElementById('importFile').click()">Import Data</button>
-            <input type="file" id="importFile" style="display:none" accept=".json" onchange="importData(event)">
-          </div>
-        `;
+        backupDiv.id = 'backupContainer'; backupDiv.className = 'setting-group'; backupDiv.style.flexDirection = 'column'; backupDiv.style.alignItems = 'flex-start';
+        backupDiv.innerHTML = `<div class="setting-info" style="margin-bottom: 8px;"><h4>Data Backup</h4><p>Export or import your streaks</p></div><div class="data-actions"><button class="data-btn" onclick="exportData()">Export Data</button><button class="data-btn" onclick="document.getElementById('importFile').click()">Import Data</button><input type="file" id="importFile" style="display:none" accept=".json" onchange="importData(event)"></div>`;
         modalFooter.parentNode.insertBefore(backupDiv, modalFooter);
+      }
+      
+      // Inject Reorder Button
+      const headerActions = document.querySelector('.header-actions');
+      if (headerActions && !document.getElementById('reorderBtn')) {
+        const reorderBtn = document.createElement('button');
+        reorderBtn.id = 'reorderBtn'; reorderBtn.className = 'icon-btn'; reorderBtn.title = 'Reorder Habits';
+        reorderBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 10 12 5 17 10"></polyline><polyline points="7 14 12 19 17 14"></polyline></svg>`;
+        reorderBtn.onclick = toggleReorderMode;
+        headerActions.insertBefore(reorderBtn, headerActions.firstChild);
       }
     }
 
@@ -549,50 +482,30 @@
     document.getElementById('doneSettingsBtn').addEventListener('click', () => settingsModal.classList.remove('active'));
 
     function applyTheme(theme) {
-      activeTheme = theme;
-      localStorage.setItem(STORAGE_KEY_THEME, theme);
-      if (theme === 'light') {
-        document.body.classList.add('light-theme');
-        document.getElementById('lightThemeBtn').classList.add('active');
-        document.getElementById('darkThemeBtn').classList.remove('active');
-      } else {
-        document.body.classList.remove('light-theme');
-        document.getElementById('darkThemeBtn').classList.add('active');
-        document.getElementById('lightThemeBtn').classList.remove('active');
-      }
+      activeTheme = theme; localStorage.setItem(STORAGE_KEY_THEME, theme);
+      if (theme === 'light') { document.body.classList.add('light-theme'); document.getElementById('lightThemeBtn').classList.add('active'); document.getElementById('darkThemeBtn').classList.remove('active'); } 
+      else { document.body.classList.remove('light-theme'); document.getElementById('darkThemeBtn').classList.add('active'); document.getElementById('lightThemeBtn').classList.remove('active'); }
     }
     document.getElementById('darkThemeBtn').addEventListener('click', () => applyTheme('dark'));
     document.getElementById('lightThemeBtn').addEventListener('click', () => applyTheme('light'));
 
     const soundToggle = document.getElementById('soundToggle');
     soundToggle.checked = soundEnabled;
-    soundToggle.addEventListener('change', (e) => {
-      soundEnabled = e.target.checked;
-      localStorage.setItem(STORAGE_KEY_SOUND, soundEnabled);
-      if (soundEnabled) playChime(true);
-    });
+    soundToggle.addEventListener('change', (e) => { soundEnabled = e.target.checked; localStorage.setItem(STORAGE_KEY_SOUND, soundEnabled); if (soundEnabled) playChime(true); });
 
     const hapticToggle = document.getElementById('hapticToggle');
     hapticToggle.checked = hapticEnabled;
-    hapticToggle.addEventListener('change', (e) => {
-      hapticEnabled = e.target.checked;
-      localStorage.setItem(STORAGE_KEY_HAPTIC, hapticEnabled);
-      if (hapticEnabled) triggerHaptic();
-    });
+    hapticToggle.addEventListener('change', (e) => { hapticEnabled = e.target.checked; localStorage.setItem(STORAGE_KEY_HAPTIC, hapticEnabled); if (hapticEnabled) triggerHaptic(); });
 
     function getTodayDateString() {
-      const d = new Date();
-      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
     }
 
-    function formatDisplayDate() {
-      return new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
-    }
+    function formatDisplayDate() { return new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' }); }
 
     function getDayDifference(d1Str, d2Str) {
       if (!d1Str || !d2Str) return null;
-      const diffTime = Math.abs(new Date(d2Str) - new Date(d1Str));
-      return Math.round(diffTime / (1000 * 60 * 60 * 24));
+      return Math.round(Math.abs(new Date(d2Str) - new Date(d1Str)) / (1000 * 60 * 60 * 24));
     }
 
     function fireConfetti() {
@@ -607,54 +520,36 @@
     function saveHistory() { localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(completedHistory)); }
 
     function checkDailyReset() {
-      const today = getTodayDateString();
-      dateBadge.textContent = formatDisplayDate();
-
+      const today = getTodayDateString(); dateBadge.textContent = formatDisplayDate();
       if (meta.lastActiveDate && meta.lastActiveDate !== today) {
         const daysMissed = getDayDifference(meta.lastActiveDate, today);
-
         habits = habits.map(h => {
           let newStreak = h.streak || 0;
-          // Break individual streak if it wasn't completed and wasn't paused
           if (!h.completed && !h.paused) newStreak = 0;
-          // Break if multiple days were skipped entirely without app usage
           if (daysMissed > 1 && !h.paused) newStreak = 0;
           return { ...h, completed: false, paused: false, streak: newStreak };
         });
         saveHabits();
-
-        if (meta.lastCompletedDate) {
-          if (getDayDifference(meta.lastCompletedDate, today) > 1) meta.currentStreak = 0;
-        }
+        if (meta.lastCompletedDate) { if (getDayDifference(meta.lastCompletedDate, today) > 1) meta.currentStreak = 0; }
       }
-      meta.lastActiveDate = today;
-      saveMeta();
-      updateStreakUI();
+      meta.lastActiveDate = today; saveMeta(); updateStreakUI();
     }
 
     function updateStreakLogic(allCompleted) {
       const today = getTodayDateString();
       if (allCompleted && habits.filter(h => !h.paused).length > 0) {
-        if (!completedHistory.includes(today)) {
-          completedHistory.push(today);
-          saveHistory();
-        }
+        if (!completedHistory.includes(today)) { completedHistory.push(today); saveHistory(); }
         if (meta.lastCompletedDate !== today) {
-          if (!meta.lastCompletedDate) {
-            meta.currentStreak = 1;
-          } else {
+          if (!meta.lastCompletedDate) meta.currentStreak = 1;
+          else {
             const diff = getDayDifference(meta.lastCompletedDate, today);
-            if (diff === 1) meta.currentStreak += 1;
-            else if (diff > 1) meta.currentStreak = 1;
+            if (diff === 1) meta.currentStreak += 1; else if (diff > 1) meta.currentStreak = 1;
           }
-          meta.lastCompletedDate = today;
-          meta.bestStreak = Math.max(meta.bestStreak, meta.currentStreak);
-          saveMeta();
+          meta.lastCompletedDate = today; meta.bestStreak = Math.max(meta.bestStreak, meta.currentStreak); saveMeta();
         }
       } else {
         if (completedHistory.includes(today)) {
-          completedHistory = completedHistory.filter(d => d !== today);
-          saveHistory();
+          completedHistory = completedHistory.filter(d => d !== today); saveHistory();
           if (meta.lastCompletedDate === today) {
             meta.currentStreak = Math.max(0, meta.currentStreak - 1);
             meta.lastCompletedDate = completedHistory.length > 0 ? completedHistory[completedHistory.length - 1] : '';
@@ -662,51 +557,32 @@
           }
         }
       }
-      updateStreakUI();
-      renderWeekBubbles();
+      updateStreakUI(); renderWeekBubbles();
     }
 
     function renderWeekBubbles() {
-      weekBubblesEl.innerHTML = '';
-      const todayStr = getTodayDateString();
-      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      weekBubblesEl.innerHTML = ''; const todayStr = getTodayDateString(); const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       let completedInWeek = 0;
       for (let i = 6; i >= 0; i--) {
         const d = new Date(); d.setDate(d.getDate() - i);
         const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
         const isDone = completedHistory.includes(dateStr);
         if (isDone) completedInWeek++;
-        weekBubblesEl.innerHTML += `
-          <div class="day-column">
-            <span class="day-name">${dateStr === todayStr ? 'Today' : days[d.getDay()]}</span>
-            <div class="day-bubble ${dateStr === todayStr ? 'today' : ''} ${isDone ? 'done' : ''}">${isDone ? '✓' : '•'}</div>
-          </div>`;
+        weekBubblesEl.innerHTML += `<div class="day-column"><span class="day-name">${dateStr === todayStr ? 'Today' : days[d.getDay()]}</span><div class="day-bubble ${dateStr === todayStr ? 'today' : ''} ${isDone ? 'done' : ''}">${isDone ? '✓' : '•'}</div></div>`;
       }
       weekSuccessRateEl.textContent = `${completedInWeek}/7 (${Math.round((completedInWeek / 7) * 100)}%)`;
     }
 
-    function updateStreakUI() {
-      currentStreakEl.textContent = meta.currentStreak;
-      bestStreakEl.textContent = meta.bestStreak;
-    }
+    function updateStreakUI() { currentStreakEl.textContent = meta.currentStreak; bestStreakEl.textContent = meta.bestStreak; }
 
     function updateProgress(isInitial = false) {
-      // V2.0 Logic: Paused habits do not count toward daily total!
       const activeHabits = habits.filter(h => !h.paused);
-      const total = activeHabits.length;
-      const completed = activeHabits.filter(h => h.completed).length;
+      const total = activeHabits.length; const completed = activeHabits.filter(h => h.completed).length;
       const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
-
-      counterText.textContent = `${completed} of ${total} active completed`;
-      percentageText.textContent = `${percent}%`;
-      progressBar.style.width = `${percent}%`;
-
-      const allDone = total > 0 && completed === total;
-      updateStreakLogic(allDone);
-
+      counterText.textContent = `${completed} of ${total} active completed`; percentageText.textContent = `${percent}%`; progressBar.style.width = `${percent}%`;
+      const allDone = total > 0 && completed === total; updateStreakLogic(allDone);
       if (allDone && !wasAllCompleted && !isInitial) fireConfetti();
       wasAllCompleted = allDone;
-
       if (habits.length === 0) statusMessage.textContent = 'Add a habit above to begin your WinStreak.';
       else if (total === 0) statusMessage.textContent = 'All habits paused for today. Rest up!';
       else if (allDone) statusMessage.textContent = '🎉 All habits crushed! WinStreak maintained!';
@@ -731,6 +607,9 @@
           const li = document.createElement('li');
           const isPaused = habit.paused ? 'paused' : '';
           li.className = `habit-item ${habit.completed ? 'done' : ''} ${isPaused}`;
+          
+          // IMPORTANT: This injects the dynamic CSS color mapping!
+          li.setAttribute('data-cat', habit.category || 'general');
 
           if (isEditing) {
             li.innerHTML = `
@@ -753,13 +632,7 @@
               </div>`;
             setTimeout(() => {
               const input = document.getElementById(`editInput_${habit.id}`);
-              if (input) {
-                input.focus();
-                input.addEventListener('keydown', (e) => {
-                  if (e.key === 'Enter') saveHabitEdit(habit.id);
-                  if (e.key === 'Escape') cancelHabitEdit();
-                });
-              }
+              if (input) { input.focus(); input.addEventListener('keydown', (e) => { if (e.key === 'Enter') saveHabitEdit(habit.id); if (e.key === 'Escape') cancelHabitEdit(); }); }
             }, 0);
           } else {
             const cat = categoryLabels[habit.category] || categoryLabels.general;
@@ -767,34 +640,28 @@
             const streakHTML = streakCount > 0 ? `<div class="mini-streak">🔥${streakCount}</div>` : '';
             const titleLabel = habit.paused ? `${escapeHtml(habit.name)} (Paused)` : escapeHtml(habit.name);
 
-            li.innerHTML = `
-              <div class="habit-left" onclick="toggleHabit('${habit.id}')">
-                <div class="custom-checkbox">
-                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            if (isReorderMode) {
+              li.innerHTML = `
+                <div class="habit-left">
+                  <div class="drag-handle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+                  <div class="habit-text-wrap"><span class="cat-badge ${cat.class}">${cat.label}</span>${streakHTML}<span class="habit-title">${titleLabel}</span></div>
                 </div>
-                <div class="habit-text-wrap">
-                  <span class="cat-badge ${cat.class}">${cat.label}</span>
-                  ${streakHTML}
-                  <span class="habit-title">${titleLabel}</span>
+                <div class="reorder-actions">
+                  <button class="reorder-move-btn" onclick="moveHabitUp('${habit.id}')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
+                  <button class="reorder-move-btn" onclick="moveHabitDown('${habit.id}')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                </div>`;
+            } else {
+              li.innerHTML = `
+                <div class="habit-left" onclick="toggleHabit('${habit.id}')">
+                  <div class="custom-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                  <div class="habit-text-wrap"><span class="cat-badge ${cat.class}">${cat.label}</span>${streakHTML}<span class="habit-title">${titleLabel}</span></div>
                 </div>
-              </div>
-              <div class="habit-actions">
-                <button class="action-btn pause-btn" onclick="togglePause('${habit.id}')" title="Pause for today">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>
-                  </svg>
-                </button>
-                <button class="action-btn" onclick="startHabitEdit('${habit.id}')" title="Edit Habit">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                  </svg>
-                </button>
-                <button class="action-btn delete-btn" onclick="deleteHabit('${habit.id}')" title="Delete Habit">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path>
-                  </svg>
-                </button>
-              </div>`;
+                <div class="habit-actions">
+                  <button class="action-btn pause-btn" onclick="togglePause('${habit.id}')" title="Pause for today"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg></button>
+                  <button class="action-btn" onclick="startHabitEdit('${habit.id}')" title="Edit Habit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
+                  <button class="action-btn delete-btn" onclick="deleteHabit('${habit.id}')" title="Delete Habit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></button>
+                </div>`;
+            }
           }
           habitList.appendChild(li);
         });
@@ -802,25 +669,17 @@
       updateProgress(isInitial);
     }
 
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
+    function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 
     filterBar.addEventListener('click', (e) => {
       const btn = e.target.closest('.filter-btn');
       if (!btn) return;
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentFilter = btn.dataset.filter;
-      renderHabits();
+      btn.classList.add('active'); currentFilter = btn.dataset.filter; renderHabits();
     });
 
     habitForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = habitInput.value.trim();
-      const category = habitCategory.value;
+      e.preventDefault(); const name = habitInput.value.trim(); const category = habitCategory.value;
       if (!name) return;
       habits.push({ id: Date.now().toString(), name: name, category: category, completed: false, paused: false, streak: 0 });
       saveHabits(); renderHabits(); habitInput.value = '';
@@ -831,82 +690,83 @@
       let newState = false;
       habits = habits.map(habit => {
         if (habit.id === id) {
-          if (habit.paused) return habit; // Cannot check a paused habit
+          if (habit.paused) return habit;
           newState = !habit.completed;
           let newStreak = habit.streak || 0;
-          if (newState) newStreak += 1;
-          else newStreak = Math.max(0, newStreak - 1);
+          if (newState) newStreak += 1; else newStreak = Math.max(0, newStreak - 1);
           return { ...habit, completed: newState, streak: newStreak };
         }
         return habit;
       });
-      triggerHaptic(); playChime(newState);
-      saveHabits(); renderHabits();
+      triggerHaptic(); playChime(newState); saveHabits(); renderHabits();
     };
 
     window.togglePause = function(id) {
       if (editingHabitId) return;
-      habits = habits.map(habit => {
-        if (habit.id === id) return { ...habit, paused: !habit.paused, completed: false };
-        return habit;
-      });
+      habits = habits.map(habit => { if (habit.id === id) return { ...habit, paused: !habit.paused, completed: false }; return habit; });
       triggerHaptic(); saveHabits(); renderHabits();
     };
 
-    window.deleteHabit = function(id) {
-      habits = habits.filter(habit => habit.id !== id);
-      if (editingHabitId === id) editingHabitId = null;
-      saveHabits(); renderHabits();
-    };
-
+    window.deleteHabit = function(id) { habits = habits.filter(habit => habit.id !== id); if (editingHabitId === id) editingHabitId = null; saveHabits(); renderHabits(); };
     window.startHabitEdit = function(id) { editingHabitId = id; renderHabits(); };
     window.cancelHabitEdit = function() { editingHabitId = null; renderHabits(); };
 
     window.saveHabitEdit = function(id) {
-      const input = document.getElementById(`editInput_${id}`);
-      const select = document.getElementById(`editSelect_${id}`);
-      if (!input || !select) return;
-      const newName = input.value.trim();
-      if (!newName) return;
-      habits = habits.map(h => {
-        if (h.id === id) return { ...h, name: newName, category: select.value };
-        return h;
-      });
+      const input = document.getElementById(`editInput_${id}`); const select = document.getElementById(`editSelect_${id}`);
+      if (!input || !select) return; const newName = input.value.trim(); if (!newName) return;
+      habits = habits.map(h => { if (h.id === id) return { ...h, name: newName, category: select.value }; return h; });
       editingHabitId = null; saveHabits(); renderHabits();
     };
 
-    // V2.0: Backup & Restore Functions
+    // V2.5: Reorder Engine
+    window.toggleReorderMode = function() {
+      if (editingHabitId) cancelHabitEdit();
+      isReorderMode = !isReorderMode;
+      const btn = document.getElementById('reorderBtn');
+      if (btn) { if (isReorderMode) btn.classList.add('reorder-active-btn'); else btn.classList.remove('reorder-active-btn'); }
+      // Force filter back to "All" when reordering so indexing doesn't get messed up
+      if (isReorderMode && currentFilter !== 'all') {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+        currentFilter = 'all';
+      }
+      renderHabits();
+    };
+
+    window.moveHabitUp = function(id) {
+      const idx = habits.findIndex(h => h.id === id);
+      if (idx > 0) { [habits[idx - 1], habits[idx]] = [habits[idx], habits[idx - 1]]; triggerHaptic(); saveHabits(); renderHabits(); }
+    };
+
+    window.moveHabitDown = function(id) {
+      const idx = habits.findIndex(h => h.id === id);
+      if (idx > -1 && idx < habits.length - 1) { [habits[idx + 1], habits[idx]] = [habits[idx], habits[idx + 1]]; triggerHaptic(); saveHabits(); renderHabits(); }
+    };
+
+    // Backup & Restore
     window.exportData = function() {
       const data = { habits, meta, completedHistory, activeTheme, soundEnabled, hapticEnabled };
       const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = `WinStreak_Backup_${getTodayDateString()}.json`;
-      a.click(); URL.revokeObjectURL(url);
+      const a = document.createElement('a'); a.href = url; a.download = `WinStreak_Backup_${getTodayDateString()}.json`; a.click(); URL.revokeObjectURL(url);
     };
 
     window.importData = function(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+      const file = event.target.files[0]; if (!file) return;
       const reader = new FileReader();
       reader.onload = function(e) {
         try {
           const data = JSON.parse(e.target.result);
           if (data.habits && data.meta) {
-            localStorage.setItem(STORAGE_KEY_HABITS, JSON.stringify(data.habits));
-            localStorage.setItem(STORAGE_KEY_META, JSON.stringify(data.meta));
-            localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(data.completedHistory || []));
-            alert('WinStreak Data imported successfully! Reloading...');
-            location.reload();
+            localStorage.setItem(STORAGE_KEY_HABITS, JSON.stringify(data.habits)); localStorage.setItem(STORAGE_KEY_META, JSON.stringify(data.meta)); localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(data.completedHistory || []));
+            alert('WinStreak Data imported successfully! Reloading...'); location.reload();
           } else alert('Invalid backup file.');
         } catch(err) { alert('Error reading file.'); }
       };
       reader.readAsText(file);
     };
 
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
-    }
+    if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {})); }
 
     autoInjectV2UI();
     applyTheme(activeTheme);
