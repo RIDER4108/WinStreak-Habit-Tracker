@@ -8,21 +8,23 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" href="./icon-192.png">
+  
+  <!-- We will link your new SVG glowing icon here! -->
+  <link rel="apple-touch-icon" href="./icon.svg">
+  
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   
   <style>
     :root {
-      /* PURE OLED BLACK for maximum glass contrast */
       --bg: #000000; 
       
-      /* APPLE VIBRANCY GLASS */
-      --card-bg: rgba(15, 20, 30, 0.35); 
+      /* ULTRA-THICK IOS GLASS */
+      --card-bg: rgba(18, 24, 38, 0.50); 
       --card-border: rgba(255, 255, 255, 0.15);
-      --card-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.02), 0 20px 50px -10px rgba(0, 0, 0, 0.9);
+      --card-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.03), 0 20px 50px -10px rgba(0, 0, 0, 0.9);
       
-      --inner-bg: rgba(30, 41, 59, 0.35);
-      --inner-border: rgba(255, 255, 255, 0.1);
+      --inner-bg: rgba(30, 41, 59, 0.45);
+      --inner-border: rgba(255, 255, 255, 0.12);
       
       --text-main: #f8fafc; --text-sub: #94a3b8;
       
@@ -31,10 +33,10 @@
       --danger: #f43f5e;
       --streak-fire: #fb923c; --streak-bg: rgba(251, 146, 60, 0.12); --streak-border: rgba(251, 146, 60, 0.28);
       
-      --item-bg: rgba(255, 255, 255, 0.04);
-      --item-border: rgba(255, 255, 255, 0.1);
+      --item-bg: rgba(255, 255, 255, 0.07);
+      --item-border: rgba(255, 255, 255, 0.12);
       
-      --input-bg: rgba(2, 6, 23, 0.5);
+      --input-bg: rgba(2, 6, 23, 0.6);
       --modal-overlay: rgba(0, 0, 0, 0.85);
       
       --c-coding: #22d3ee; --c-study: #c084fc; --c-activity: #fb923c; --c-health: #34d399;
@@ -43,13 +45,13 @@
 
     body.light-theme {
       --bg: #f8fafc;
-      --card-bg: rgba(255, 255, 255, 0.6);
+      --card-bg: rgba(255, 255, 255, 0.75);
       --card-border: rgba(255, 255, 255, 0.9);
       --card-highlight: inset 0 1px 2px rgba(255, 255, 255, 1), 0 20px 40px -10px rgba(100, 116, 139, 0.15);
-      --inner-bg: rgba(241, 245, 249, 0.5);
+      --inner-bg: rgba(241, 245, 249, 0.65);
       --inner-border: rgba(255, 255, 255, 0.8);
       --text-main: #0f172a; --text-sub: #64748b;
-      --item-bg: rgba(255, 255, 255, 0.6);
+      --item-bg: rgba(255, 255, 255, 0.75);
       --item-border: rgba(255, 255, 255, 0.9);
       --c-coding: #0891b2; --c-study: #9333ea; --c-activity: #ea580c; --c-health: #16a34a;
       --c-skills: #ca8a04; --c-rest: #4f46e5; --c-selfcare: #db2777; --c-general: #64748b;
@@ -59,35 +61,40 @@
     html, body { overscroll-behavior-y: none; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
     body { background-color: var(--bg); color: var(--text-main); display: flex; justify-content: center; align-items: flex-start; padding: env(safe-area-inset-top, 14px) 10px env(safe-area-inset-bottom, 24px) 10px; min-height: 100vh; min-height: 100dvh; overflow-x: hidden; position: relative; }
     
-    /* APPLE THICK BLUR */
-    .app-container { background: var(--card-bg); backdrop-filter: blur(45px); -webkit-backdrop-filter: blur(45px); width: 100%; max-width: 600px; padding: 22px 18px; border-radius: 28px; border: 1px solid var(--card-border); box-shadow: var(--card-highlight); height: fit-content; position: relative; z-index: 1; margin: 0 auto; }
+    /* 65px BLUR FOR THICK IOS GLASS */
+    .app-container { background: var(--card-bg); backdrop-filter: blur(65px); -webkit-backdrop-filter: blur(65px); width: 100%; max-width: 600px; padding: 22px 18px; border-radius: 28px; border: 1px solid var(--card-border); box-shadow: var(--card-highlight); height: fit-content; position: relative; z-index: 1; margin: 0 auto; }
     
     @media (max-width: 600px) { body { padding: 8px 6px 20px 6px; } .app-container { padding: 20px 16px; border-radius: 24px; } header h1 { font-size: 1.8rem; } .streak-card { padding: 16px 14px; } .streak-icon { font-size: 2rem; } .streak-info .streak-count { font-size: 1.6rem; } .streak-info .streak-label { font-size: 0.78rem; } .day-bubble { width: 40px; height: 40px; font-size: 0.95rem; } .habit-item { padding: 16px 16px; } .habit-title { font-size: 1.05rem; } .custom-checkbox { width: 26px; height: 26px; } }
 
-    /* PUNCHY TIGHT ORBS (Reduced Blur, Higher Opacity) */
     .orb-1 { position: absolute; width: 340px; height: 340px; top: -5%; left: -5%; background: rgba(56, 189, 248, 0.7); filter: blur(30px); border-radius: 50%; z-index: 0; }
     .orb-2 { position: absolute; width: 380px; height: 380px; bottom: 5%; right: -10%; background: rgba(168, 85, 247, 0.65); animation-delay: -6s; filter: blur(30px); border-radius: 50%; z-index: 0; }
     .orb-3 { position: absolute; width: 260px; height: 260px; top: 35%; left: 5%; background: rgba(16, 185, 129, 0.55); animation-delay: -11s; filter: blur(30px); border-radius: 50%; z-index: 0; }
 
-    /* HYBRID LIST HEADER */
     .list-section-header { font-size: 0.8rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; margin-top: 24px; padding-left: 4px; display: flex; justify-content: space-between; align-items: center; }
 
-    /* FLOATING APPLE REORDER FAB */
     .fab-reorder {
       position: fixed; bottom: max(24px, env(safe-area-inset-bottom, 24px)); left: 50%; transform: translateX(-50%);
-      background: rgba(30, 41, 59, 0.75); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+      background: rgba(30, 41, 59, 0.85); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
       border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 12px 35px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.3);
       color: #fff; font-weight: 600; font-size: 0.95rem; padding: 12px 28px; border-radius: 99px;
       display: flex; align-items: center; gap: 8px; z-index: 100; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .fab-reorder:active { transform: translateX(-50%) scale(0.95); }
     .fab-reorder.active { background: #fff; color: #000; border-color: #fff; box-shadow: 0 12px 35px rgba(255, 255, 255, 0.2); }
-    body.light-theme .fab-reorder { background: rgba(255,255,255,0.9); color: #000; border-color: rgba(0,0,0,0.1); }
+    body.light-theme .fab-reorder { background: rgba(255,255,255,0.95); color: #000; border-color: rgba(0,0,0,0.1); }
     body.light-theme .fab-reorder.active { background: #000; color: #fff; }
 
     .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 8px; }
     .brand-wrap { display: flex; align-items: center; gap: 10px; }
-    .brand-icon { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), #6366f1); display: flex; align-items: center; justify-content: center; font-size: 1rem; box-shadow: 0 4px 12px var(--accent-glow), inset 0 1px 1px rgba(255,255,255,0.5); }
+    
+    /* THE GLOWING LOGO CSS */
+    .app-logo { 
+      width: 34px; height: 34px; border-radius: 10px; object-fit: cover; 
+      box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent-glow); 
+      filter: drop-shadow(0 0 5px var(--accent)); 
+      border: 1px solid rgba(255,255,255,0.4); 
+    }
+    
     header h1 { font-size: 1.55rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; background: linear-gradient(135deg, var(--text-main) 50%, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .header-actions { display: flex; align-items: center; gap: 8px; }
     .date-badge { font-size: 0.75rem; color: var(--accent); background: var(--inner-bg); backdrop-filter: blur(12px); padding: 5px 12px; border-radius: 20px; border: 1px solid var(--inner-border); font-weight: 600; white-space: nowrap; box-shadow: inset 0 1px 1px rgba(255,255,255,0.15); }
@@ -96,12 +103,12 @@
     header p { color: var(--text-sub); font-size: 0.88rem; margin-bottom: 18px; }
 
     .streak-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-    .streak-card { background: var(--streak-bg); backdrop-filter: blur(20px); border: 1px solid var(--streak-border); padding: 12px 14px; border-radius: 20px; display: flex; align-items: center; gap: 12px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 8px 20px -6px rgba(251, 146, 60, 0.15); }
+    .streak-card { background: var(--streak-bg); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 1px solid var(--streak-border); padding: 12px 14px; border-radius: 20px; display: flex; align-items: center; gap: 12px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 8px 20px -6px rgba(251, 146, 60, 0.15); }
     .streak-icon { font-size: 1.6rem; line-height: 1; filter: drop-shadow(0 2px 4px rgba(251,146,60,0.4)); }
     .streak-info .streak-count { font-size: 1.25rem; font-weight: 800; color: var(--streak-fire); line-height: 1.1; }
     .streak-info .streak-label { font-size: 0.7rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; font-weight: 600; }
 
-    .week-history { background: var(--inner-bg); backdrop-filter: blur(25px); border: 1px solid var(--inner-border); border-radius: 20px; padding: 12px 14px; margin-bottom: 16px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2); }
+    .week-history { background: var(--inner-bg); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 1px solid var(--inner-border); border-radius: 20px; padding: 12px 14px; margin-bottom: 16px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2); }
     .week-header { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-sub); margin-bottom: 10px; display: flex; justify-content: space-between; }
     .week-bubbles { display: flex; justify-content: space-between; gap: 4px; }
     .day-column { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
@@ -110,7 +117,7 @@
     .day-bubble.today { border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
     .day-bubble.done { background: var(--completed-bg); border-color: var(--completed); color: var(--completed); transform: scale(1.06); box-shadow: 0 0 12px var(--completed-glow); }
 
-    .progress-section { background: var(--inner-bg); backdrop-filter: blur(25px); padding: 16px; border-radius: 20px; border: 1px solid var(--inner-border); margin-bottom: 20px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2); }
+    .progress-section { background: var(--inner-bg); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); padding: 16px; border-radius: 20px; border: 1px solid var(--inner-border); margin-bottom: 20px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2); }
     .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; font-size: 0.88rem; font-weight: 700; }
     .progress-header .percentage { color: var(--accent); font-size: 1rem; font-weight: 800; }
     .progress-bar-bg { width: 100%; height: 10px; background-color: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden; margin-bottom: 9px; position: relative; inset 0 1px 2px rgba(0,0,0,0.5); }
@@ -134,10 +141,9 @@
     .filter-btn:hover { border-color: rgba(255, 255, 255, 0.3); color: var(--text-main); }
     .filter-btn.active { background: var(--accent); color: #030712; border-color: var(--accent); box-shadow: 0 4px 12px var(--accent-glow); font-weight: 700; }
 
-    /* Extra padding at bottom so floating FAB doesn't cover last habit */
     .habit-list { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-bottom: 80px; }
     
-    .habit-item { display: flex; align-items: center; justify-content: space-between; background: var(--item-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding: 12px 14px; border-radius: 18px; border: 1px solid var(--item-border); gap: 10px; transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1); position: relative; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 4px 20px rgba(0, 0, 0, 0.2); }
+    .habit-item { display: flex; align-items: center; justify-content: space-between; background: var(--item-bg); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); padding: 12px 14px; border-radius: 18px; border: 1px solid var(--item-border); gap: 10px; transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1); position: relative; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 4px 20px rgba(0, 0, 0, 0.2); }
     .habit-item:active { transform: scale(0.985); }
     .habit-item.paused { opacity: 0.55; border-color: rgba(148, 163, 184, 0.3); border-style: dashed; }
     .habit-item.paused .habit-title { color: var(--text-sub); }
@@ -171,7 +177,7 @@
     /* Modals & Settings */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--modal-overlay); backdrop-filter: blur(14px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
     .modal-overlay.active { display: flex; }
-    .modal-card { background: var(--card-bg); backdrop-filter: blur(40px); border: 1px solid var(--card-border); border-radius: 28px; width: 100%; max-width: 400px; padding: 22px; box-shadow: var(--card-highlight); animation: modalSlideUp 0.25s ease-out; }
+    .modal-card { background: var(--card-bg); backdrop-filter: blur(50px); -webkit-backdrop-filter: blur(50px); border: 1px solid var(--card-border); border-radius: 28px; width: 100%; max-width: 400px; padding: 22px; box-shadow: var(--card-highlight); animation: modalSlideUp 0.25s ease-out; }
     @keyframes modalSlideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--inner-border); }
     .modal-header h2 { font-size: 1.2rem; font-weight: 800; }
@@ -248,7 +254,8 @@
     <header>
       <div class="header-top">
         <div class="brand-wrap">
-          <div class="brand-icon">W</div>
+          <!-- We link to the new SVG file we are about to create! -->
+          <img src="./icon.svg" alt="WinStreak" class="app-logo">
           <h1>WinStreak</h1>
         </div>
         <div class="header-actions">
@@ -464,7 +471,6 @@
         modalFooter.parentNode.insertBefore(backupDiv, modalFooter);
       }
       
-      // Inject "Your Habits" List Header
       if (habitList && !document.getElementById('listSectionHeader')) {
         const listHeader = document.createElement('div');
         listHeader.id = 'listSectionHeader'; listHeader.className = 'list-section-header';
@@ -472,7 +478,6 @@
         habitList.parentNode.insertBefore(listHeader, habitList);
       }
 
-      // Inject Floating Apple FAB for Reorder
       if (!document.getElementById('floatingReorderFab')) {
         const fab = document.createElement('div');
         fab.id = 'floatingReorderFab'; fab.className = 'fab-reorder';
@@ -716,7 +721,6 @@
       editingHabitId = null; saveHabits(); renderHabits();
     };
 
-    // V2.5: Reorder Engine (Floating Button Toggle)
     window.toggleReorderMode = function() {
       if (editingHabitId) cancelHabitEdit();
       isReorderMode = !isReorderMode;

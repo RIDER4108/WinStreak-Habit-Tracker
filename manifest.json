@@ -7,7 +7,7 @@
   "background_color": "#030712",
   "theme_color": "#030712",
   "orientation": "portrait-primary",
-  "icons": [
+"icons": [
     {
       "src": "icon.svg",
       "sizes": "192x192 512x512",
