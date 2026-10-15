@@ -1,4 +1,4 @@
-const CACHE_NAME = 'winstreak-v3';
+const CACHE_NAME = 'winstreak-v4';
 const ASSETS = [
   './',
   './index.html',

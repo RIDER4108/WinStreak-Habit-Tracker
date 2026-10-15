@@ -1082,7 +1082,7 @@ body {
     </div>
   </div>
 
-  <script>
+<script>
     const STORAGE_KEY_HABITS = 'habits_data';
     const STORAGE_KEY_META = 'habits_meta';
     const STORAGE_KEY_HISTORY = 'habits_history';
@@ -1339,6 +1339,14 @@ body {
         if (completedHistory.includes(today)) {
           completedHistory = completedHistory.filter(d => d !== today);
           saveHistory();
+          
+          if (meta.lastCompletedDate === today) {
+            meta.currentStreak = Math.max(0, meta.currentStreak - 1);
+            meta.lastCompletedDate = completedHistory.length > 0 
+              ? completedHistory[completedHistory.length - 1] 
+              : '';
+            saveMeta();
+          }
         }
       }
 
