@@ -2,60 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>WinStreak — Habit Tracker</title>
-
-  <!-- PWA & Mobile App Metas -->
-  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>WinStreak</title>
+  <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#030712">
-
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/svg+xml" href="icon.svg">
-  <link rel="apple-touch-icon" href="icon.svg">
-
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-<style>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <style>
     :root {
-      --bg: #030712;
-      --card-bg: rgba(15, 23, 42, 0.65);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --card-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 20px 50px -10px rgba(0, 0, 0, 0.8);
-      --inner-bg: rgba(30, 41, 59, 0.45);
-      --inner-border: rgba(255, 255, 255, 0.08);
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.4);
-      --completed: #10b981;
-      --completed-glow: rgba(16, 185, 129, 0.35);
-      --completed-bg: rgba(16, 185, 129, 0.12);
-      --danger: #f43f5e;
-      --streak-fire: #fb923c;
-      --streak-bg: rgba(251, 146, 60, 0.12);
-      --streak-border: rgba(251, 146, 60, 0.28);
-      --item-bg: rgba(15, 23, 42, 0.55);
-      --item-border: rgba(255, 255, 255, 0.08);
-      --input-bg: rgba(2, 6, 23, 0.75);
-      --modal-overlay: rgba(0, 0, 0, 0.8);
+      /* PURE OLED BLACK for maximum glass contrast */
+      --bg: #000000; 
       
-      /* New Deep Saturation Colors */
+      /* APPLE VIBRANCY GLASS */
+      --card-bg: rgba(15, 20, 30, 0.35); 
+      --card-border: rgba(255, 255, 255, 0.15);
+      --card-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.02), 0 20px 50px -10px rgba(0, 0, 0, 0.9);
+      
+      --inner-bg: rgba(30, 41, 59, 0.35);
+      --inner-border: rgba(255, 255, 255, 0.1);
+      
+      --text-main: #f8fafc; --text-sub: #94a3b8;
+      
+      --accent: #38bdf8; --accent-glow: rgba(56, 189, 248, 0.4);
+      --completed: #10b981; --completed-glow: rgba(16, 185, 129, 0.35); --completed-bg: rgba(16, 185, 129, 0.12);
+      --danger: #f43f5e;
+      --streak-fire: #fb923c; --streak-bg: rgba(251, 146, 60, 0.12); --streak-border: rgba(251, 146, 60, 0.28);
+      
+      --item-bg: rgba(255, 255, 255, 0.04);
+      --item-border: rgba(255, 255, 255, 0.1);
+      
+      --input-bg: rgba(2, 6, 23, 0.5);
+      --modal-overlay: rgba(0, 0, 0, 0.85);
+      
       --c-coding: #22d3ee; --c-study: #c084fc; --c-activity: #fb923c; --c-health: #34d399;
       --c-skills: #facc15; --c-rest: #818cf8; --c-selfcare: #f472b6; --c-general: #cbd5e1;
     }
 
     body.light-theme {
-      --bg: #e2e8f0;
-      --card-bg: rgba(255, 255, 255, 0.75);
+      --bg: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.6);
       --card-border: rgba(255, 255, 255, 0.9);
-      --card-highlight: inset 0 1px 2px rgba(255, 255, 255, 1), 0 20px 40px -10px rgba(100, 116, 139, 0.25);
-      --inner-bg: rgba(241, 245, 249, 0.65);
-      --inner-border: rgba(255, 255, 255, 0.7);
-      --text-main: #0f172a;
-      --text-sub: #64748b;
-      
-      /* Light Theme Saturation */
+      --card-highlight: inset 0 1px 2px rgba(255, 255, 255, 1), 0 20px 40px -10px rgba(100, 116, 139, 0.15);
+      --inner-bg: rgba(241, 245, 249, 0.5);
+      --inner-border: rgba(255, 255, 255, 0.8);
+      --text-main: #0f172a; --text-sub: #64748b;
+      --item-bg: rgba(255, 255, 255, 0.6);
+      --item-border: rgba(255, 255, 255, 0.9);
       --c-coding: #0891b2; --c-study: #9333ea; --c-activity: #ea580c; --c-health: #16a34a;
       --c-skills: #ca8a04; --c-rest: #4f46e5; --c-selfcare: #db2777; --c-general: #64748b;
     }
@@ -63,32 +58,50 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease; -webkit-tap-highlight-color: transparent; }
     html, body { overscroll-behavior-y: none; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
     body { background-color: var(--bg); color: var(--text-main); display: flex; justify-content: center; align-items: flex-start; padding: env(safe-area-inset-top, 14px) 10px env(safe-area-inset-bottom, 24px) 10px; min-height: 100vh; min-height: 100dvh; overflow-x: hidden; position: relative; }
-    .app-container { background: var(--card-bg); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); width: 100%; max-width: 600px; padding: 22px 18px; border-radius: 24px; border: 1px solid var(--card-border); box-shadow: var(--card-highlight); height: fit-content; position: relative; z-index: 1; margin: 0 auto; }
     
-    @media (max-width: 600px) { body { padding: 8px 6px 20px 6px; } .app-container { padding: 20px 16px; border-radius: 20px; } header h1 { font-size: 1.8rem; } .streak-card { padding: 16px 14px; } .streak-icon { font-size: 2rem; } .streak-info .streak-count { font-size: 1.6rem; } .streak-info .streak-label { font-size: 0.78rem; } .day-bubble { width: 40px; height: 40px; font-size: 0.95rem; } .habit-item { padding: 16px 16px; } .habit-title { font-size: 1.05rem; } .custom-checkbox { width: 26px; height: 26px; } }
+    /* APPLE THICK BLUR */
+    .app-container { background: var(--card-bg); backdrop-filter: blur(45px); -webkit-backdrop-filter: blur(45px); width: 100%; max-width: 600px; padding: 22px 18px; border-radius: 28px; border: 1px solid var(--card-border); box-shadow: var(--card-highlight); height: fit-content; position: relative; z-index: 1; margin: 0 auto; }
+    
+    @media (max-width: 600px) { body { padding: 8px 6px 20px 6px; } .app-container { padding: 20px 16px; border-radius: 24px; } header h1 { font-size: 1.8rem; } .streak-card { padding: 16px 14px; } .streak-icon { font-size: 2rem; } .streak-info .streak-count { font-size: 1.6rem; } .streak-info .streak-label { font-size: 0.78rem; } .day-bubble { width: 40px; height: 40px; font-size: 0.95rem; } .habit-item { padding: 16px 16px; } .habit-title { font-size: 1.05rem; } .custom-checkbox { width: 26px; height: 26px; } }
 
-    /* HIGHER SATURATION ORBS */
-    .orb-1 { position: absolute; width: 380px; height: 380px; top: -10%; left: -10%; background: rgba(56, 189, 248, 0.45); filter: blur(55px); border-radius: 50%; z-index: 0; }
-    .orb-2 { position: absolute; width: 420px; height: 420px; bottom: 0%; right: -10%; background: rgba(168, 85, 247, 0.45); animation-delay: -6s; filter: blur(55px); border-radius: 50%; z-index: 0; }
-    .orb-3 { position: absolute; width: 300px; height: 300px; top: 35%; left: 10%; background: rgba(16, 185, 129, 0.40); animation-delay: -11s; filter: blur(55px); border-radius: 50%; z-index: 0; }
+    /* PUNCHY TIGHT ORBS (Reduced Blur, Higher Opacity) */
+    .orb-1 { position: absolute; width: 340px; height: 340px; top: -5%; left: -5%; background: rgba(56, 189, 248, 0.7); filter: blur(30px); border-radius: 50%; z-index: 0; }
+    .orb-2 { position: absolute; width: 380px; height: 380px; bottom: 5%; right: -10%; background: rgba(168, 85, 247, 0.65); animation-delay: -6s; filter: blur(30px); border-radius: 50%; z-index: 0; }
+    .orb-3 { position: absolute; width: 260px; height: 260px; top: 35%; left: 5%; background: rgba(16, 185, 129, 0.55); animation-delay: -11s; filter: blur(30px); border-radius: 50%; z-index: 0; }
+
+    /* HYBRID LIST HEADER */
+    .list-section-header { font-size: 0.8rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; margin-top: 24px; padding-left: 4px; display: flex; justify-content: space-between; align-items: center; }
+
+    /* FLOATING APPLE REORDER FAB */
+    .fab-reorder {
+      position: fixed; bottom: max(24px, env(safe-area-inset-bottom, 24px)); left: 50%; transform: translateX(-50%);
+      background: rgba(30, 41, 59, 0.75); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 12px 35px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.3);
+      color: #fff; font-weight: 600; font-size: 0.95rem; padding: 12px 28px; border-radius: 99px;
+      display: flex; align-items: center; gap: 8px; z-index: 100; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .fab-reorder:active { transform: translateX(-50%) scale(0.95); }
+    .fab-reorder.active { background: #fff; color: #000; border-color: #fff; box-shadow: 0 12px 35px rgba(255, 255, 255, 0.2); }
+    body.light-theme .fab-reorder { background: rgba(255,255,255,0.9); color: #000; border-color: rgba(0,0,0,0.1); }
+    body.light-theme .fab-reorder.active { background: #000; color: #fff; }
 
     .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 8px; }
     .brand-wrap { display: flex; align-items: center; gap: 10px; }
-    .brand-icon { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), #6366f1); display: flex; align-items: center; justify-content: center; font-size: 1rem; box-shadow: 0 4px 12px var(--accent-glow); }
+    .brand-icon { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), #6366f1); display: flex; align-items: center; justify-content: center; font-size: 1rem; box-shadow: 0 4px 12px var(--accent-glow), inset 0 1px 1px rgba(255,255,255,0.5); }
     header h1 { font-size: 1.55rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; background: linear-gradient(135deg, var(--text-main) 50%, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .header-actions { display: flex; align-items: center; gap: 8px; }
-    .date-badge { font-size: 0.75rem; color: var(--accent); background: var(--inner-bg); backdrop-filter: blur(8px); padding: 5px 12px; border-radius: 20px; border: 1px solid var(--inner-border); font-weight: 600; white-space: nowrap; }
-    .icon-btn { background: var(--inner-bg); border: 1px solid var(--inner-border); color: var(--text-sub); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s ease; flex-shrink: 0; }
+    .date-badge { font-size: 0.75rem; color: var(--accent); background: var(--inner-bg); backdrop-filter: blur(12px); padding: 5px 12px; border-radius: 20px; border: 1px solid var(--inner-border); font-weight: 600; white-space: nowrap; box-shadow: inset 0 1px 1px rgba(255,255,255,0.15); }
+    .icon-btn { background: var(--inner-bg); backdrop-filter: blur(12px); border: 1px solid var(--inner-border); color: var(--text-sub); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s ease; flex-shrink: 0; box-shadow: inset 0 1px 1px rgba(255,255,255,0.15); }
     .icon-btn:hover { color: var(--accent); border-color: var(--accent); transform: rotate(30deg); }
     header p { color: var(--text-sub); font-size: 0.88rem; margin-bottom: 18px; }
 
     .streak-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-    .streak-card { background: var(--streak-bg); backdrop-filter: blur(12px); border: 1px solid var(--streak-border); padding: 12px 14px; border-radius: 18px; display: flex; align-items: center; gap: 12px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 8px 20px -6px rgba(251, 146, 60, 0.15); }
-    .streak-icon { font-size: 1.6rem; line-height: 1; }
+    .streak-card { background: var(--streak-bg); backdrop-filter: blur(20px); border: 1px solid var(--streak-border); padding: 12px 14px; border-radius: 20px; display: flex; align-items: center; gap: 12px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 8px 20px -6px rgba(251, 146, 60, 0.15); }
+    .streak-icon { font-size: 1.6rem; line-height: 1; filter: drop-shadow(0 2px 4px rgba(251,146,60,0.4)); }
     .streak-info .streak-count { font-size: 1.25rem; font-weight: 800; color: var(--streak-fire); line-height: 1.1; }
     .streak-info .streak-label { font-size: 0.7rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; font-weight: 600; }
 
-    .week-history { background: var(--inner-bg); backdrop-filter: blur(16px); border: 1px solid var(--inner-border); border-radius: 18px; padding: 12px 14px; margin-bottom: 16px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08); }
+    .week-history { background: var(--inner-bg); backdrop-filter: blur(25px); border: 1px solid var(--inner-border); border-radius: 20px; padding: 12px 14px; margin-bottom: 16px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2); }
     .week-header { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-sub); margin-bottom: 10px; display: flex; justify-content: space-between; }
     .week-bubbles { display: flex; justify-content: space-between; gap: 4px; }
     .day-column { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
@@ -97,10 +110,10 @@
     .day-bubble.today { border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
     .day-bubble.done { background: var(--completed-bg); border-color: var(--completed); color: var(--completed); transform: scale(1.06); box-shadow: 0 0 12px var(--completed-glow); }
 
-    .progress-section { background: var(--inner-bg); backdrop-filter: blur(16px); padding: 16px; border-radius: 18px; border: 1px solid var(--inner-border); margin-bottom: 20px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08); }
+    .progress-section { background: var(--inner-bg); backdrop-filter: blur(25px); padding: 16px; border-radius: 20px; border: 1px solid var(--inner-border); margin-bottom: 20px; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2); }
     .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; font-size: 0.88rem; font-weight: 700; }
     .progress-header .percentage { color: var(--accent); font-size: 1rem; font-weight: 800; }
-    .progress-bar-bg { width: 100%; height: 10px; background-color: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden; margin-bottom: 9px; position: relative; }
+    .progress-bar-bg { width: 100%; height: 10px; background-color: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden; margin-bottom: 9px; position: relative; inset 0 1px 2px rgba(0,0,0,0.5); }
     body.light-theme .progress-bar-bg { background-color: rgba(0, 0, 0, 0.08); }
     .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--completed)); border-radius: 999px; transition: width 0.45s cubic-bezier(0.34, 1.25, 0.64, 1); box-shadow: 0 0 14px var(--accent-glow); position: relative; overflow: hidden; }
     .progress-bar-fill::after { content: ''; position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent); animation: shimmer 2s infinite; }
@@ -108,26 +121,27 @@
     .progress-status { font-size: 0.82rem; color: var(--text-sub); font-weight: 500; }
 
     .input-form { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
-    .input-form input { width: 100%; background: var(--input-bg); backdrop-filter: blur(12px); border: 1px solid var(--inner-border); color: var(--text-main); padding: 12px 16px; border-radius: 14px; font-size: 0.95rem; outline: none; transition: all 0.2s ease; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2); user-select: text; -webkit-user-select: text; }
+    .input-form input { width: 100%; background: var(--input-bg); backdrop-filter: blur(12px); border: 1px solid var(--inner-border); color: var(--text-main); padding: 12px 16px; border-radius: 14px; font-size: 0.95rem; outline: none; transition: all 0.2s ease; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255,255,255,0.1); user-select: text; -webkit-user-select: text; }
     .input-form input:focus, .category-select:focus, .edit-input:focus, .edit-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
     .input-actions-row { display: flex; gap: 8px; width: 100%; }
-    .category-select { flex: 1; background: var(--input-bg); backdrop-filter: blur(12px); border: 1px solid var(--inner-border); color: var(--text-main); padding: 11px 12px; border-radius: 14px; font-size: 0.88rem; outline: none; cursor: pointer; }
-    .add-btn { background: linear-gradient(135deg, var(--accent), #2563eb); color: #ffffff; border: none; font-weight: 700; padding: 0 20px; border-radius: 14px; cursor: pointer; font-size: 0.92rem; transition: all 0.2s ease; flex-shrink: 0; box-shadow: 0 4px 16px var(--accent-glow); }
+    .category-select { flex: 1; background: var(--input-bg); backdrop-filter: blur(12px); border: 1px solid var(--inner-border); color: var(--text-main); padding: 11px 12px; border-radius: 14px; font-size: 0.88rem; outline: none; cursor: pointer; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1); }
+    .add-btn { background: linear-gradient(135deg, var(--accent), #2563eb); color: #ffffff; border: none; font-weight: 700; padding: 0 20px; border-radius: 14px; cursor: pointer; font-size: 0.92rem; transition: all 0.2s ease; flex-shrink: 0; box-shadow: 0 4px 16px var(--accent-glow), inset 0 1px 1px rgba(255,255,255,0.4); }
     .add-btn:active { transform: scale(0.96); }
 
-    .filter-bar { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .filter-bar { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 10px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
     .filter-bar::-webkit-scrollbar { display: none; }
-    .filter-btn { background: var(--inner-bg); backdrop-filter: blur(10px); border: 1px solid var(--inner-border); color: var(--text-sub); padding: 6px 13px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s ease; }
+    .filter-btn { background: var(--inner-bg); backdrop-filter: blur(20px); border: 1px solid var(--inner-border); color: var(--text-sub); padding: 6px 13px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s ease; box-shadow: inset 0 1px 1px rgba(255,255,255,0.15); }
     .filter-btn:hover { border-color: rgba(255, 255, 255, 0.3); color: var(--text-main); }
-    .filter-btn.active { background: var(--accent); color: #030712; border-color: var(--accent); box-shadow: 0 2px 10px var(--accent-glow); font-weight: 700; }
+    .filter-btn.active { background: var(--accent); color: #030712; border-color: var(--accent); box-shadow: 0 4px 12px var(--accent-glow); font-weight: 700; }
 
-    .habit-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .habit-item { display: flex; align-items: center; justify-content: space-between; background: var(--item-bg); backdrop-filter: blur(14px); padding: 12px 14px; border-radius: 16px; border: 1px solid var(--item-border); gap: 10px; transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1); position: relative; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 4px 15px rgba(0, 0, 0, 0.15); }
-    .habit-item:active { transform: scale(0.985); }
+    /* Extra padding at bottom so floating FAB doesn't cover last habit */
+    .habit-list { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-bottom: 80px; }
     
-    .habit-item.paused { opacity: 0.65; border-color: rgba(148, 163, 184, 0.4); border-style: dashed; }
+    .habit-item { display: flex; align-items: center; justify-content: space-between; background: var(--item-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding: 12px 14px; border-radius: 18px; border: 1px solid var(--item-border); gap: 10px; transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1); position: relative; box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 4px 20px rgba(0, 0, 0, 0.2); }
+    .habit-item:active { transform: scale(0.985); }
+    .habit-item.paused { opacity: 0.55; border-color: rgba(148, 163, 184, 0.3); border-style: dashed; }
     .habit-item.paused .habit-title { color: var(--text-sub); }
-    .habit-item.paused .custom-checkbox { background: rgba(148, 163, 184, 0.1) !important; border-color: rgba(148, 163, 184, 0.3) !important; box-shadow: none !important; }
+    .habit-item.paused .custom-checkbox { background: rgba(148, 163, 184, 0.05) !important; border-color: rgba(148, 163, 184, 0.2) !important; box-shadow: none !important; }
 
     .habit-left { display: flex; align-items: center; gap: 12px; flex: 1; cursor: pointer; user-select: none; min-width: 0; }
     .custom-checkbox { width: 22px; height: 22px; border-radius: 8px; border: 2px solid rgba(148, 163, 184, 0.5); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); background: rgba(255, 255, 255, 0.05); }
@@ -137,8 +151,8 @@
     @keyframes checkBounce { 0% { transform: scale(0.8); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
 
     .habit-text-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
-    .habit-title { font-size: 0.92rem; font-weight: 500; color: var(--text-main); word-break: break-word; transition: all 0.2s ease; }
-    .habit-item.done .habit-title { text-decoration: line-through; color: #94a3b8; }
+    .habit-title { font-size: 0.95rem; font-weight: 500; color: var(--text-main); word-break: break-word; transition: all 0.2s ease; }
+    .habit-item.done .habit-title { text-decoration: line-through; color: rgba(255,255,255,0.4); }
     .mini-streak { font-size: 0.72rem; font-weight: 700; color: var(--streak-fire); display: flex; align-items: center; gap: 3px; background: var(--streak-bg); padding: 2px 6px; border-radius: 6px; border: 1px solid var(--streak-border); }
 
     .habit-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
@@ -149,15 +163,15 @@
 
     .edit-mode-container { display: flex; flex-direction: column; gap: 8px; width: 100%; }
     .edit-controls-row { display: flex; gap: 6px; width: 100%; }
-    .edit-input { width: 100%; background: var(--input-bg); border: 1px solid var(--inner-border); color: var(--text-main); padding: 9px 12px; border-radius: 10px; font-size: 0.9rem; outline: none; }
-    .edit-select { flex: 1; background: var(--input-bg); border: 1px solid var(--inner-border); color: var(--text-main); padding: 7px 10px; border-radius: 10px; font-size: 0.82rem; outline: none; }
-    .edit-btn-save { background: var(--completed); border: none; color: #ffffff; padding: 7px 14px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
+    .edit-input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--inner-border); color: var(--text-main); padding: 9px 12px; border-radius: 10px; font-size: 0.9rem; outline: none; }
+    .edit-select { flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--inner-border); color: var(--text-main); padding: 7px 10px; border-radius: 10px; font-size: 0.82rem; outline: none; }
+    .edit-btn-save { background: var(--completed); border: none; color: #ffffff; padding: 7px 14px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: inset 0 1px 1px rgba(255,255,255,0.3); }
     .edit-btn-cancel { background: transparent; border: 1px solid var(--inner-border); color: var(--text-sub); padding: 7px 12px; border-radius: 10px; font-size: 0.85rem; cursor: pointer; }
 
     /* Modals & Settings */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--modal-overlay); backdrop-filter: blur(14px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
     .modal-overlay.active { display: flex; }
-    .modal-card { background: var(--card-bg); backdrop-filter: blur(30px); border: 1px solid var(--card-border); border-radius: 24px; width: 100%; max-width: 400px; padding: 22px; box-shadow: var(--card-highlight); animation: modalSlideUp 0.25s ease-out; }
+    .modal-card { background: var(--card-bg); backdrop-filter: blur(40px); border: 1px solid var(--card-border); border-radius: 28px; width: 100%; max-width: 400px; padding: 22px; box-shadow: var(--card-highlight); animation: modalSlideUp 0.25s ease-out; }
     @keyframes modalSlideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--inner-border); }
     .modal-header h2 { font-size: 1.2rem; font-weight: 800; }
@@ -165,7 +179,7 @@
     .setting-group { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--inner-border); }
     .setting-info h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
     .setting-info p { font-size: 0.75rem; color: var(--text-sub); }
-    .theme-toggle-wrap { display: flex; background: var(--inner-bg); backdrop-filter: blur(10px); border: 1px solid var(--inner-border); border-radius: 30px; padding: 3px; gap: 2px; }
+    .theme-toggle-wrap { display: flex; background: var(--inner-bg); backdrop-filter: blur(10px); border: 1px solid var(--inner-border); border-radius: 30px; padding: 3px; gap: 2px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.3); }
     .theme-btn { background: transparent; border: none; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; cursor: pointer; color: var(--text-sub); display: flex; align-items: center; gap: 4px; font-weight: 600; }
     .theme-btn.active { background: var(--accent); color: #030712; font-weight: 700; }
     .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
@@ -176,99 +190,78 @@
     input:checked + .slider { background-color: var(--completed); border-color: var(--completed); }
     input:checked + .slider:before { transform: translateX(20px); }
     .data-actions { display: flex; gap: 8px; margin-top: 8px; width: 100%; }
-    .data-btn { flex: 1; background: var(--inner-bg); border: 1px solid var(--inner-border); color: var(--text-main); padding: 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s ease; }
+    .data-btn { flex: 1; background: var(--inner-bg); border: 1px solid var(--inner-border); color: var(--text-main); padding: 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s ease; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1); }
     .data-btn:hover { border-color: var(--accent); color: var(--accent); }
     .modal-footer { margin-top: 18px; text-align: right; }
     .empty-state { text-align: center; padding: 28px 16px; color: var(--text-sub); font-size: 0.9rem; }
 
-    /* ========================================= */
-    /* V2.5: THE CATEGORY COLOR INJECTION ENGINE */
-    /* ========================================= */
-    
+    /* CATEGORY COLOR INJECTION */
     .cat-badge { font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 8px; letter-spacing: 0.3px; white-space: nowrap; }
-    
-    /* CODING */
     .cat-coding { background: rgba(34, 211, 238, 0.15); color: var(--c-coding); border: 1px solid rgba(34, 211, 238, 0.4); }
     .habit-item[data-cat="coding"] { border-left: 4px solid var(--c-coding); }
     .habit-item[data-cat="coding"] .custom-checkbox { border-color: var(--c-coding); }
     .habit-item[data-cat="coding"].done .custom-checkbox { background-color: var(--c-coding); box-shadow: 0 0 14px var(--c-coding); }
-
-    /* STUDY */
     .cat-study { background: rgba(192, 132, 252, 0.15); color: var(--c-study); border: 1px solid rgba(192, 132, 252, 0.4); }
     .habit-item[data-cat="study"] { border-left: 4px solid var(--c-study); }
     .habit-item[data-cat="study"] .custom-checkbox { border-color: var(--c-study); }
     .habit-item[data-cat="study"].done .custom-checkbox { background-color: var(--c-study); box-shadow: 0 0 14px var(--c-study); }
-
-    /* ACTIVITY */
     .cat-activity { background: rgba(251, 146, 60, 0.15); color: var(--c-activity); border: 1px solid rgba(251, 146, 60, 0.4); }
     .habit-item[data-cat="activity"] { border-left: 4px solid var(--c-activity); }
     .habit-item[data-cat="activity"] .custom-checkbox { border-color: var(--c-activity); }
     .habit-item[data-cat="activity"].done .custom-checkbox { background-color: var(--c-activity); box-shadow: 0 0 14px var(--c-activity); }
-
-    /* HEALTH */
     .cat-health { background: rgba(52, 211, 153, 0.15); color: var(--c-health); border: 1px solid rgba(52, 211, 153, 0.4); }
     .habit-item[data-cat="health"] { border-left: 4px solid var(--c-health); }
     .habit-item[data-cat="health"] .custom-checkbox { border-color: var(--c-health); }
     .habit-item[data-cat="health"].done .custom-checkbox { background-color: var(--c-health); box-shadow: 0 0 14px var(--c-health); }
-
-    /* SKILLS */
     .cat-skills { background: rgba(250, 204, 21, 0.15); color: var(--c-skills); border: 1px solid rgba(250, 204, 21, 0.4); }
     .habit-item[data-cat="skills"] { border-left: 4px solid var(--c-skills); }
     .habit-item[data-cat="skills"] .custom-checkbox { border-color: var(--c-skills); }
     .habit-item[data-cat="skills"].done .custom-checkbox { background-color: var(--c-skills); box-shadow: 0 0 14px var(--c-skills); }
-
-    /* REST */
     .cat-rest { background: rgba(129, 140, 248, 0.15); color: var(--c-rest); border: 1px solid rgba(129, 140, 248, 0.4); }
     .habit-item[data-cat="rest"] { border-left: 4px solid var(--c-rest); }
     .habit-item[data-cat="rest"] .custom-checkbox { border-color: var(--c-rest); }
     .habit-item[data-cat="rest"].done .custom-checkbox { background-color: var(--c-rest); box-shadow: 0 0 14px var(--c-rest); }
-
-    /* SELF CARE */
     .cat-selfcare { background: rgba(244, 114, 182, 0.15); color: var(--c-selfcare); border: 1px solid rgba(244, 114, 182, 0.4); }
     .habit-item[data-cat="selfcare"] { border-left: 4px solid var(--c-selfcare); }
     .habit-item[data-cat="selfcare"] .custom-checkbox { border-color: var(--c-selfcare); }
     .habit-item[data-cat="selfcare"].done .custom-checkbox { background-color: var(--c-selfcare); box-shadow: 0 0 14px var(--c-selfcare); }
-
-    /* GENERAL */
     .cat-general { background: rgba(148, 163, 184, 0.15); color: var(--c-general); border: 1px solid rgba(148, 163, 184, 0.4); }
     .habit-item[data-cat="general"] { border-left: 4px solid var(--c-general); }
     .habit-item[data-cat="general"] .custom-checkbox { border-color: var(--c-general); }
     .habit-item[data-cat="general"].done .custom-checkbox { background-color: var(--c-general); box-shadow: 0 0 14px var(--c-general); }
 
-    /* ========================================= */
-    /* V2.5: REORDER MODE UI                     */
-    /* ========================================= */
-    .reorder-active-btn { color: var(--streak-fire) !important; border-color: var(--streak-fire) !important; box-shadow: 0 0 12px var(--streak-bg); transform: rotate(180deg); }
+    /* REORDER UI */
     .reorder-actions { display: flex; gap: 8px; }
-    .reorder-move-btn { background: var(--inner-bg); border: 1px solid var(--inner-border); color: var(--text-main); font-size: 1.2rem; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; }
+    .reorder-move-btn { background: rgba(0,0,0,0.3); border: 1px solid var(--inner-border); color: var(--text-main); font-size: 1.2rem; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; }
     .reorder-move-btn:active { background: rgba(255,255,255,0.2); transform: scale(0.95); }
     .drag-handle { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; color: var(--text-sub); flex-shrink: 0; }
   </style>
 </head>
 <body>
 
-  <div class="ambient-orb orb-1"></div>
-  <div class="ambient-orb orb-2"></div>
-  <div class="ambient-orb orb-3"></div>
+  <!-- Floating Orbs -->
+  <div class="orb-1"></div>
+  <div class="orb-2"></div>
+  <div class="orb-3"></div>
 
   <div class="app-container">
     <header>
       <div class="header-top">
         <div class="brand-wrap">
-          <div class="brand-icon">⚡</div>
+          <div class="brand-icon">W</div>
           <h1>WinStreak</h1>
         </div>
         <div class="header-actions">
-          <div class="date-badge" id="dateBadge">Today</div>
-          <button class="icon-btn" id="openSettingsBtn" title="Open Settings">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <span class="date-badge" id="dateBadge"></span>
+          <button class="icon-btn" id="openSettingsBtn" title="Settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="3"></circle>
               <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
             </svg>
           </button>
         </div>
       </div>
-      <p>Stack your daily victories. Build momentum.</p>
+      <p>Master your day, one habit at a time.</p>
     </header>
 
     <div class="streak-container">
@@ -280,7 +273,7 @@
         </div>
       </div>
       <div class="streak-card">
-        <div class="streak-icon">🏆</div>
+        <div class="streak-icon">👑</div>
         <div class="streak-info">
           <div class="streak-count" id="bestStreak">0</div>
           <div class="streak-label">Peak Streak</div>
@@ -291,7 +284,7 @@
     <div class="week-history">
       <div class="week-header">
         <span>Last 7 Days</span>
-        <span id="weekSuccessRate">0%</span>
+        <span id="weekSuccessRate" style="color: var(--accent);">0/7 (0%)</span>
       </div>
       <div class="week-bubbles" id="weekBubbles"></div>
     </div>
@@ -304,20 +297,23 @@
       <div class="progress-bar-bg">
         <div class="progress-bar-fill" id="progressBar"></div>
       </div>
-      <div class="progress-status" id="statusMessage">No habits added yet.</div>
+      <div class="progress-status" id="statusMessage">Check off your first habit!</div>
     </div>
 
     <form class="input-form" id="habitForm">
-      <input type="text" id="habitInput" placeholder="What will you conquer today?" required autocomplete="off" />
+      <input type="text" id="habitInput" placeholder="What's your new habit?" autocomplete="off">
       <div class="input-actions-row">
         <select id="habitCategory" class="category-select">
           <option value="coding">💻 Coding</option>
-          <option value="fitness">🏋️ Fitness</option>
           <option value="study">📚 Study</option>
-          <option value="mindset">🧘 Mindset</option>
+          <option value="activity">🏃 Activity</option>
+          <option value="health">🍎 Health</option>
+          <option value="skills">🛠️ Skills</option>
+          <option value="rest">🔋 Rest</option>
+          <option value="selfcare">🧘 Self Care</option>
           <option value="general" selected>⚡ General</option>
         </select>
-        <button type="submit" class="add-btn">+ Add Habit</button>
+        <button type="submit" class="add-btn">Add</button>
       </div>
     </form>
 
@@ -325,63 +321,72 @@
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="active">Active</button>
       <button class="filter-btn" data-filter="done">Done</button>
-      <button class="filter-btn" data-filter="coding">💻 Coding</button>
-      <button class="filter-btn" data-filter="fitness">🏋️ Fitness</button>
-      <button class="filter-btn" data-filter="study">📚 Study</button>
-      <button class="filter-btn" data-filter="mindset">🧘 Mindset</button>
-      <button class="filter-btn" data-filter="general">⚡ General</button>
+      <button class="filter-btn" data-filter="coding">Coding</button>
+      <button class="filter-btn" data-filter="study">Study</button>
+      <button class="filter-btn" data-filter="activity">Activity</button>
+      <button class="filter-btn" data-filter="health">Health</button>
+      <button class="filter-btn" data-filter="skills">Skills</button>
+      <button class="filter-btn" data-filter="rest">Rest</button>
+      <button class="filter-btn" data-filter="selfcare">Self Care</button>
+      <button class="filter-btn" data-filter="general">General</button>
     </div>
 
+    <!-- The Header is injected here automatically via JS -->
     <ul class="habit-list" id="habitList"></ul>
   </div>
 
+  <!-- Settings Modal -->
   <div class="modal-overlay" id="settingsModal">
     <div class="modal-card">
       <div class="modal-header">
-        <h2>WinStreak Settings</h2>
-        <button class="close-modal-btn" id="closeSettingsBtn" title="Close">✕</button>
+        <h2>Settings</h2>
+        <button class="close-modal-btn" id="closeSettingsBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
-
+      
       <div class="setting-group">
         <div class="setting-info">
           <h4>Appearance</h4>
-          <p>Switch between dark and light glass</p>
+          <p>Choose your visual style</p>
         </div>
         <div class="theme-toggle-wrap">
-          <button class="theme-btn active" id="darkThemeBtn" data-theme="dark">🌙 Dark</button>
-          <button class="theme-btn" id="lightThemeBtn" data-theme="light">☀️ Light</button>
+          <button class="theme-btn active" id="darkThemeBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            Dark
+          </button>
+          <button class="theme-btn" id="lightThemeBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            Light
+          </button>
         </div>
       </div>
 
       <div class="setting-group">
         <div class="setting-info">
           <h4>Sound Effects</h4>
-          <p>Crisp audio chimes on completion</p>
+          <p>Play chimes on completion</p>
         </div>
-        <label class="switch">
-          <input type="checkbox" id="soundToggle" checked>
-          <span class="slider"></span>
-        </label>
+        <label class="switch"><input type="checkbox" id="soundToggle" checked><span class="slider"></span></label>
       </div>
 
       <div class="setting-group">
         <div class="setting-info">
-          <h4>Haptic Feedback</h4>
-          <p>Subtle vibration buzz on tap</p>
+          <h4>Haptics</h4>
+          <p>Vibrate on interactions</p>
         </div>
-        <label class="switch">
-          <input type="checkbox" id="hapticToggle" checked>
-          <span class="slider"></span>
-        </label>
+        <label class="switch"><input type="checkbox" id="hapticToggle" checked><span class="slider"></span></label>
       </div>
 
+      <!-- Backup Buttons injected here via JS -->
+      
       <div class="modal-footer">
-        <button class="edit-btn-save" id="doneSettingsBtn">Done</button>
+        <button class="add-btn" id="doneSettingsBtn">Done</button>
       </div>
     </div>
   </div>
 
-<script>
+  <script>
     const STORAGE_KEY_HABITS = 'habits_data';
     const STORAGE_KEY_META = 'habits_meta';
     const STORAGE_KEY_HISTORY = 'habits_history';
@@ -406,18 +411,13 @@
       try {
         if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         if (audioCtx.state === 'suspended') audioCtx.resume();
-        const now = audioCtx.currentTime;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
+        const now = audioCtx.currentTime; const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type = 'sine';
         if (isDone) {
           osc.frequency.setValueAtTime(587.33, now); osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
-          gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-          osc.start(now); osc.stop(now + 0.35);
+          gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35); osc.start(now); osc.stop(now + 0.35);
         } else {
           osc.frequency.setValueAtTime(440, now); osc.frequency.exponentialRampToValueAtTime(260, now + 0.1);
-          gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
-          osc.start(now); osc.stop(now + 0.15);
+          gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15); osc.start(now); osc.stop(now + 0.15);
         }
         osc.connect(gain); gain.connect(audioCtx.destination);
       } catch (err) {}
@@ -429,9 +429,8 @@
     }
 
     const categoryLabels = {
-      coding: { label: 'Coding', class: 'cat-coding' }, study: { label: 'Study', class: 'cat-study' },
-      activity: { label: 'Activity', class: 'cat-activity' }, health: { label: 'Health', class: 'cat-health' },
-      skills: { label: 'Skills', class: 'cat-skills' }, rest: { label: 'Rest', class: 'cat-rest' },
+      coding: { label: 'Coding', class: 'cat-coding' }, study: { label: 'Study', class: 'cat-study' }, activity: { label: 'Activity', class: 'cat-activity' },
+      health: { label: 'Health', class: 'cat-health' }, skills: { label: 'Skills', class: 'cat-skills' }, rest: { label: 'Rest', class: 'cat-rest' },
       selfcare: { label: 'Self Care', class: 'cat-selfcare' }, general: { label: 'General', class: 'cat-general' }
     };
 
@@ -465,14 +464,21 @@
         modalFooter.parentNode.insertBefore(backupDiv, modalFooter);
       }
       
-      // Inject Reorder Button
-      const headerActions = document.querySelector('.header-actions');
-      if (headerActions && !document.getElementById('reorderBtn')) {
-        const reorderBtn = document.createElement('button');
-        reorderBtn.id = 'reorderBtn'; reorderBtn.className = 'icon-btn'; reorderBtn.title = 'Reorder Habits';
-        reorderBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 10 12 5 17 10"></polyline><polyline points="7 14 12 19 17 14"></polyline></svg>`;
-        reorderBtn.onclick = toggleReorderMode;
-        headerActions.insertBefore(reorderBtn, headerActions.firstChild);
+      // Inject "Your Habits" List Header
+      if (habitList && !document.getElementById('listSectionHeader')) {
+        const listHeader = document.createElement('div');
+        listHeader.id = 'listSectionHeader'; listHeader.className = 'list-section-header';
+        listHeader.innerHTML = `<span>Your Habits</span>`;
+        habitList.parentNode.insertBefore(listHeader, habitList);
+      }
+
+      // Inject Floating Apple FAB for Reorder
+      if (!document.getElementById('floatingReorderFab')) {
+        const fab = document.createElement('div');
+        fab.id = 'floatingReorderFab'; fab.className = 'fab-reorder';
+        fab.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> <span>Reorder</span>`;
+        fab.onclick = toggleReorderMode;
+        document.body.appendChild(fab);
       }
     }
 
@@ -500,13 +506,8 @@
     function getTodayDateString() {
       const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
     }
-
     function formatDisplayDate() { return new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' }); }
-
-    function getDayDifference(d1Str, d2Str) {
-      if (!d1Str || !d2Str) return null;
-      return Math.round(Math.abs(new Date(d2Str) - new Date(d1Str)) / (1000 * 60 * 60 * 24));
-    }
+    function getDayDifference(d1Str, d2Str) { if (!d1Str || !d2Str) return null; return Math.round(Math.abs(new Date(d2Str) - new Date(d1Str)) / (1000 * 60 * 60 * 24)); }
 
     function fireConfetti() {
       if (typeof confetti === 'function') {
@@ -607,8 +608,6 @@
           const li = document.createElement('li');
           const isPaused = habit.paused ? 'paused' : '';
           li.className = `habit-item ${habit.completed ? 'done' : ''} ${isPaused}`;
-          
-          // IMPORTANT: This injects the dynamic CSS color mapping!
           li.setAttribute('data-cat', habit.category || 'general');
 
           if (isEditing) {
@@ -686,8 +685,7 @@
     });
 
     window.toggleHabit = function(id) {
-      if (editingHabitId) return;
-      let newState = false;
+      if (editingHabitId) return; let newState = false;
       habits = habits.map(habit => {
         if (habit.id === id) {
           if (habit.paused) return habit;
@@ -718,13 +716,20 @@
       editingHabitId = null; saveHabits(); renderHabits();
     };
 
-    // V2.5: Reorder Engine
+    // V2.5: Reorder Engine (Floating Button Toggle)
     window.toggleReorderMode = function() {
       if (editingHabitId) cancelHabitEdit();
       isReorderMode = !isReorderMode;
-      const btn = document.getElementById('reorderBtn');
-      if (btn) { if (isReorderMode) btn.classList.add('reorder-active-btn'); else btn.classList.remove('reorder-active-btn'); }
-      // Force filter back to "All" when reordering so indexing doesn't get messed up
+      const fab = document.getElementById('floatingReorderFab');
+      if (fab) { 
+        if (isReorderMode) {
+          fab.classList.add('active');
+          fab.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Done</span>`;
+        } else {
+          fab.classList.remove('active');
+          fab.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> <span>Reorder</span>`;
+        }
+      }
       if (isReorderMode && currentFilter !== 'all') {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
@@ -743,7 +748,6 @@
       if (idx > -1 && idx < habits.length - 1) { [habits[idx + 1], habits[idx]] = [habits[idx], habits[idx + 1]]; triggerHaptic(); saveHabits(); renderHabits(); }
     };
 
-    // Backup & Restore
     window.exportData = function() {
       const data = { habits, meta, completedHistory, activeTheme, soundEnabled, hapticEnabled };
       const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
