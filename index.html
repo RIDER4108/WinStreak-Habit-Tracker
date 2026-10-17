@@ -557,13 +557,19 @@
       if (mData && typeof mData === 'object') meta = mData;
     } catch(e) { console.error("Meta parse error safely caught."); }
 
-    // 🚀 INSTRUCTIBLE BACKWARD COMPATIBILITY PATCH
+// 🚀 INSTRUCTIBLE BACKWARD COMPATIBILITY PATCH
     if (!meta.history) meta.history = {};
     if (typeof meta.currentStreak !== 'number') meta.currentStreak = 0;
     if (typeof meta.bestStreak !== 'number') meta.bestStreak = 0;
     if (!meta.theme) meta.theme = 'dark';
     
     habits.forEach((habit, i) => {
+      // NEW FIX: Translate legacy property names to 'text'
+      if (habit.name && !habit.text) habit.text = habit.name;
+      if (habit.title && !habit.text) habit.text = habit.title;
+      if (habit.habitName && !habit.text) habit.text = habit.habitName;
+      if (!habit.text) habit.text = "Recovered Habit"; // Failsafe
+      
       if (!habit.id) habit.id = Date.now() + i; 
       if (!habit.category) habit.category = 'general';
       if (typeof habit.paused === 'undefined') habit.paused = false;
