@@ -557,14 +557,14 @@
       if (mData && typeof mData === 'object') meta = mData;
     } catch(e) { console.error("Meta parse error safely caught."); }
 
-// 🚀 INSTRUCTIBLE BACKWARD COMPATIBILITY PATCH
+    // 🚀 INSTRUCTIBLE BACKWARD COMPATIBILITY PATCH
     if (!meta.history) meta.history = {};
     if (typeof meta.currentStreak !== 'number') meta.currentStreak = 0;
     if (typeof meta.bestStreak !== 'number') meta.bestStreak = 0;
     if (!meta.theme) meta.theme = 'dark';
     
     habits.forEach((habit, i) => {
-      // NEW FIX: Translate legacy property names to 'text'
+      // Translate legacy property names to 'text'
       if (habit.name && !habit.text) habit.text = habit.name;
       if (habit.title && !habit.text) habit.text = habit.title;
       if (habit.habitName && !habit.text) habit.text = habit.habitName;
@@ -700,6 +700,7 @@
 
     let currentFilter = 'all';
     let isReorderMode = false;
+    let editingIndex = -1;
 
     // --- DOM RENDERING ---
     function renderHabits() {
@@ -740,7 +741,33 @@
               <button class="reorder-move-btn" onclick="moveHabit(${realIndex}, 1)">↓</button>
             </div>
           `;
+        } else if (editingIndex === realIndex) {
+          li.innerHTML = `
+            <div class="edit-mode-container">
+              <input type="text" class="edit-input" id="edit-text-${realIndex}" value="${habit.text}">
+              <div class="edit-controls-row">
+                <select class="edit-select" id="edit-cat-${realIndex}">
+                  <option value="coding" ${habit.category === 'coding' ? 'selected' : ''}>Coding</option>
+                  <option value="study" ${habit.category === 'study' ? 'selected' : ''}>Study</option>
+                  <option value="activity" ${habit.category === 'activity' ? 'selected' : ''}>Activity</option>
+                  <option value="health" ${habit.category === 'health' ? 'selected' : ''}>Health</option>
+                  <option value="skills" ${habit.category === 'skills' ? 'selected' : ''}>Skills</option>
+                  <option value="rest" ${habit.category === 'rest' ? 'selected' : ''}>Rest</option>
+                  <option value="selfcare" ${habit.category === 'selfcare' ? 'selected' : ''}>Self-Care</option>
+                  <option value="general" ${habit.category === 'general' ? 'selected' : ''}>General</option>
+                </select>
+                <button class="edit-btn-save" onclick="saveEdit(${realIndex})">Save</button>
+                <button class="edit-btn-cancel" onclick="cancelEdit()">Cancel</button>
+              </div>
+            </div>
+          `;
         } else {
+          const pauseIcon = habit.paused 
+            ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>' 
+            : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+          const editIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>';
+          const deleteIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>';
+
           li.innerHTML = `
             <div class="habit-left" onclick="toggleHabit(${realIndex})">
               <div class="custom-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
@@ -751,8 +778,9 @@
               </div>
             </div>
             <div class="habit-actions">
-              <button class="action-btn pause-btn" onclick="togglePause(${realIndex})" title="${habit.paused ? 'Resume' : 'Pause'}">${habit.paused ? '▶' : '⏸'}</button>
-              <button class="action-btn delete-btn" onclick="deleteHabit(${realIndex})">🗑</button>
+              <button class="action-btn" onclick="editHabit(${realIndex})" title="Edit">${editIcon}</button>
+              <button class="action-btn pause-btn" onclick="togglePause(${realIndex})" title="${habit.paused ? 'Resume' : 'Pause'}">${pauseIcon}</button>
+              <button class="action-btn delete-btn" onclick="deleteHabit(${realIndex})">${deleteIcon}</button>
             </div>
           `;
         }
@@ -772,6 +800,21 @@
         sfx.error(); input.classList.add('shake'); setTimeout(() => input.classList.remove('shake'), 400);
       }
     }
+
+    window.editHabit = (index) => { editingIndex = index; sfx.pop(); renderHabits(); };
+    window.cancelEdit = () => { editingIndex = -1; sfx.pop(); renderHabits(); };
+    window.saveEdit = (index) => {
+      const newText = document.getElementById(`edit-text-${index}`).value.trim();
+      const newCat = document.getElementById(`edit-cat-${index}`).value;
+      if (newText) {
+        habits[index].text = newText;
+        habits[index].category = newCat;
+        editingIndex = -1;
+        sfx.pop(); saveData(); renderHabits();
+      } else {
+        sfx.error();
+      }
+    };
 
     window.toggleHabit = (index) => {
       const h = habits[index];
