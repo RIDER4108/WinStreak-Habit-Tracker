@@ -513,7 +513,7 @@
     </div>
   </div>
 
-  <script>
+<script>
     // --- SYNTHESIZER AUDIO SYSTEM ---
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let soundEnabled = true;
@@ -543,12 +543,25 @@
       }
     };
 
-    // --- CORE DATA LOGIC ---
+    // --- CORE DATA LOGIC & SAFE UPGRADE PATCH ---
     let habits = JSON.parse(localStorage.getItem('winstreak_habits')) || [];
-    let meta = JSON.parse(localStorage.getItem('winstreak_meta')) || { 
-      currentStreak: 0, bestStreak: 0, lastActiveDate: null, 
-      theme: 'dark', history: {}
-    };
+    let meta = JSON.parse(localStorage.getItem('winstreak_meta')) || {};
+
+    // 🚀 BACKWARD COMPATIBILITY PATCH (Fixes the crash on old data)
+    if (!meta.history) meta.history = {};
+    if (typeof meta.currentStreak !== 'number') meta.currentStreak = 0;
+    if (typeof meta.bestStreak !== 'number') meta.bestStreak = 0;
+    if (!meta.theme) meta.theme = 'dark';
+    
+    habits.forEach((habit, i) => {
+      if (!habit.id) habit.id = Date.now() + i; 
+      if (!habit.category) habit.category = 'general';
+      if (typeof habit.paused === 'undefined') habit.paused = false;
+      if (typeof habit.streak !== 'number') habit.streak = 0;
+    });
+    // Save the patched data so it never crashes again
+    localStorage.setItem('winstreak_habits', JSON.stringify(habits));
+    localStorage.setItem('winstreak_meta', JSON.stringify(meta));
 
     const getTodayStr = () => new Date().toISOString().split('T')[0];
     const isYesterday = (dateStr) => {
@@ -564,16 +577,15 @@
 
     function checkDailyReset() {
       const today = getTodayStr();
-      const allActiveHabits = habits.filter(h => !h.paused);
       
       if (meta.lastActiveDate !== today) {
         if (!isYesterday(meta.lastActiveDate) && meta.lastActiveDate !== null) {
-          meta.currentStreak = 0; // Broke the global streak
+          meta.currentStreak = 0; 
         }
         
         habits.forEach(h => {
           if (!h.paused && !isYesterday(h.lastCompleted)) {
-            h.streak = 0; // Broke individual streak
+            h.streak = 0; 
           }
           h.completedToday = false; 
         });
@@ -606,7 +618,7 @@
       
       saveData();
       updateUI();
-      checkAchievements(); // Update badges dynamically
+      checkAchievements(); 
     }
 
     // --- GAMIFICATION / TROPHY LOGIC ---
@@ -672,7 +684,8 @@
         const dayName = d.toLocaleDateString('en-US', { weekday: 'narrow' });
         
         const isToday = dateStr === currentDayStr;
-        const isDone = meta.history[dateStr] === true;
+        // Safely check history
+        const isDone = meta.history && meta.history[dateStr] === true;
         
         weekContainer.innerHTML += `
           <div class="day-column">
@@ -768,7 +781,7 @@
 
     window.toggleHabit = (index) => {
       const h = habits[index];
-      if (h.paused) return; // Cannot check paused habits
+      if (h.paused) return; 
       
       h.completedToday = !h.completedToday;
       if (h.completedToday) {
