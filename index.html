@@ -15,7 +15,7 @@
     :root {
       --bg: #000000; 
       
-      /* TRUE IOS REFRACTIVE THICK GLASS (High Transparency + Thick Inner Edge Refraction) */
+      /* TRUE IOS REFRACTIVE THICK GLASS */
       --module-bg: rgba(255, 255, 255, 0.05); 
       --module-border: rgba(255, 255, 255, 0.24);
       --module-highlight: 
@@ -37,6 +37,16 @@
       --input-bg: rgba(0, 0, 0, 0.35);
       --modal-overlay: rgba(0, 0, 0, 0.80);
       
+      /* ACHIEVEMENT GLOW COLORS */
+      --glow-spark: rgba(251, 146, 60, 0.5);   /* Bronze/Orange */
+      --glow-surge: rgba(56, 189, 248, 0.5);   /* Cyan */
+      --glow-unstoppable: rgba(217, 70, 239, 0.5); /* Pink/Purple */
+      --glow-apex: rgba(220, 38, 38, 0.65);    /* Crimson Red */
+      --glow-seed: rgba(16, 185, 129, 0.5);    /* Green */
+      --glow-iron: rgba(100, 116, 139, 0.6);   /* Steel Blue */
+      --glow-nature: rgba(147, 51, 234, 0.5);  /* Deep Purple */
+      --glow-ascended: rgba(244, 114, 182, 0.5);/* Neon Magenta */
+      
       --c-coding: #22d3ee; --c-study: #c084fc; --c-activity: #fb923c; --c-health: #34d399;
       --c-skills: #facc15; --c-rest: #818cf8; --c-selfcare: #f472b6; --c-general: #cbd5e1;
     }
@@ -56,21 +66,15 @@
       --c-skills: #ca8a04; --c-rest: #4f46e5; --c-selfcare: #db2777; --c-general: #64748b;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease; -webkit-tap-highlight-color: transparent; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.4s ease; -webkit-tap-highlight-color: transparent; }
     html, body { overscroll-behavior-y: none; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
     
     body { background-color: var(--bg); color: var(--text-main); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; min-height: 100dvh; overflow-x: hidden; position: relative; }
     
     .app-container { 
-      width: 100%; 
-      max-width: 600px; 
+      width: 100%; max-width: 600px; 
       padding: calc(env(safe-area-inset-top, 24px) + 28px) 14px calc(env(safe-area-inset-bottom, 24px) + 120px) 14px; 
-      position: relative; 
-      z-index: 1; 
-      margin: 0 auto; 
-      display: flex; 
-      flex-direction: column; 
-      gap: 14px; 
+      position: relative; z-index: 1; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; 
     }
     
     @media (max-width: 600px) { 
@@ -78,22 +82,16 @@
       header h1 { font-size: 1.8rem; } 
     }
 
-    /* BALANCED AMBIENT ORBS (Smooth 45px blur & controlled opacity so it's not too harsh) */
     .orb-1 { position: fixed; width: 320px; height: 320px; top: 4%; left: -8%; background: rgba(56, 189, 248, 0.48); filter: blur(45px); border-radius: 50%; z-index: 0; pointer-events: none; }
     .orb-2 { position: fixed; width: 360px; height: 360px; bottom: 8%; right: -12%; background: rgba(168, 85, 247, 0.44); filter: blur(45px); border-radius: 50%; z-index: 0; pointer-events: none; }
     .orb-3 { position: fixed; width: 260px; height: 260px; top: 42%; left: 18%; background: rgba(16, 185, 129, 0.38); filter: blur(45px); border-radius: 50%; z-index: 0; pointer-events: none; }
 
-    /* REFRACTIVE IOS GLASS REORDER PILL */
     .fab-reorder {
       position: fixed; bottom: max(24px, env(safe-area-inset-bottom, 24px)); left: 50%; transform: translateX(-50%);
       background: rgba(255, 255, 255, 0.06); 
       backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter);
       border: 1.5px solid rgba(255, 255, 255, 0.28); 
-      box-shadow: 
-        inset 0 2px 2px rgba(255, 255, 255, 0.6),
-        inset 0 -1px 2px rgba(255, 255, 255, 0.2),
-        inset 0 0 18px rgba(255, 255, 255, 0.08),
-        0 14px 35px rgba(0, 0, 0, 0.85);
+      box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(255, 255, 255, 0.2), inset 0 0 18px rgba(255, 255, 255, 0.08), 0 14px 35px rgba(0, 0, 0, 0.85);
       color: #fff; font-weight: 600; font-size: 0.95rem; padding: 12px 28px; border-radius: 99px;
       display: flex; align-items: center; gap: 8px; z-index: 100; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -102,7 +100,6 @@
     body.light-theme .fab-reorder { background: rgba(255, 255, 255, 0.45); color: #000; border-color: rgba(255,255,255,0.8); }
     body.light-theme .fab-reorder.active { background: #0f172a; color: #fff; }
 
-    /* HEADER */
     header { padding: 8px 4px 4px 4px; overflow: visible; }
     .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 8px; overflow: visible; }
     .brand-wrap { display: flex; align-items: center; gap: 12px; overflow: visible; }
@@ -115,7 +112,6 @@
     .icon-btn:hover { color: var(--accent); border-color: var(--accent); transform: rotate(30deg); }
     header p { color: var(--text-sub); font-size: 0.88rem; }
 
-    /* REFRACTIVE THICK GLASS MODULES */
     .streak-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .streak-card { background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1.5px solid var(--module-border); padding: 14px 16px; border-radius: 24px; display: flex; align-items: center; gap: 12px; box-shadow: var(--module-highlight); }
     .streak-icon { font-size: 1.6rem; line-height: 1; filter: drop-shadow(0 2px 4px rgba(251,146,60,0.4)); }
@@ -149,43 +145,17 @@
     .add-btn { background: linear-gradient(135deg, var(--accent), #2563eb); color: #ffffff; border: none; font-weight: 700; padding: 0 20px; border-radius: 14px; cursor: pointer; font-size: 0.92rem; transition: all 0.2s ease; flex-shrink: 0; box-shadow: 0 4px 16px var(--accent-glow), inset 0 1.5px 1px rgba(255,255,255,0.45); }
     .add-btn:active { transform: scale(0.96); }
 
-    /* REFRACTIVE FILTER PILLS WITH INVERSION */
     .filter-bar { display: flex; gap: 8px; overflow-x: auto; padding: 6px 2px; scrollbar-width: none; -webkit-overflow-scrolling: touch; align-items: center; }
     .filter-bar::-webkit-scrollbar { display: none; }
-    .filter-btn { 
-      background: rgba(255, 255, 255, 0.04); 
-      backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); 
-      border: 1.5px solid rgba(255, 255, 255, 0.22); 
-      color: var(--text-sub); 
-      padding: 8px 16px; 
-      border-radius: 99px; 
-      font-size: 0.8rem; 
-      font-weight: 600; 
-      cursor: pointer; 
-      white-space: nowrap; 
-      flex-shrink: 0; 
-      transition: all 0.2s ease; 
-      box-shadow: 
-        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.45), 
-        inset 0 -1px 1px rgba(255, 255, 255, 0.12),
-        inset 0 0 12px rgba(255, 255, 255, 0.06); 
-    }
+    .filter-btn { background: rgba(255, 255, 255, 0.04); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1.5px solid rgba(255, 255, 255, 0.22); color: var(--text-sub); padding: 8px 16px; border-radius: 99px; font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s ease; box-shadow: inset 0 1.5px 1.5px rgba(255, 255, 255, 0.45), inset 0 -1px 1px rgba(255, 255, 255, 0.12), inset 0 0 12px rgba(255, 255, 255, 0.06); }
     .filter-btn:hover { border-color: rgba(255, 255, 255, 0.4); color: var(--text-main); }
-    .filter-btn.active { 
-      background: #ffffff; 
-      color: #000000; 
-      border-color: #ffffff; 
-      box-shadow: none; 
-      font-weight: 700; 
-    }
+    .filter-btn.active { background: #ffffff; color: #000000; border-color: #ffffff; box-shadow: none; font-weight: 700; }
     body.light-theme .filter-btn { background: rgba(255, 255, 255, 0.45); border-color: rgba(0, 0, 0, 0.1); color: #475569; }
     body.light-theme .filter-btn.active { background: #0f172a; color: #ffffff; border-color: #0f172a; }
 
     .list-section-header { font-size: 0.8rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; padding-left: 4px; margin-top: 2px; }
-
     .habit-list { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-bottom: 40px; }
     
-    /* REFRACTIVE HABIT CARDS */
     .habit-item { display: flex; align-items: center; justify-content: space-between; background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); padding: 14px 16px; border-radius: 22px; border: 1.5px solid var(--module-border); gap: 10px; transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1); position: relative; box-shadow: var(--module-highlight); }
     .habit-item:active { transform: scale(0.985); }
     .habit-item.paused { opacity: 0.55; border-color: rgba(148, 163, 184, 0.3); border-style: dashed; }
@@ -220,11 +190,15 @@
     /* Modals & Settings */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--modal-overlay); backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
     .modal-overlay.active { display: flex; }
-    .modal-card { background: rgba(18, 24, 38, 0.45); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1.5px solid var(--module-border); border-radius: 28px; width: 100%; max-width: 400px; padding: 22px; box-shadow: var(--module-highlight); animation: modalSlideUp 0.25s ease-out; }
+    .modal-card { background: rgba(18, 24, 38, 0.45); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1.5px solid var(--module-border); border-radius: 28px; width: 100%; max-width: 400px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: var(--module-highlight); animation: modalSlideUp 0.25s ease-out; }
     @keyframes modalSlideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--module-border); }
-    .modal-header h2 { font-size: 1.2rem; font-weight: 800; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 22px 22px 16px 22px; border-bottom: 1px solid var(--module-border); flex-shrink: 0; }
+    .modal-header h2 { font-size: 1.2rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
     .close-modal-btn { background: transparent; border: none; color: var(--text-sub); cursor: pointer; font-size: 1.2rem; padding: 4px; }
+    
+    .modal-body { overflow-y: auto; padding: 0 22px 22px 22px; scrollbar-width: none; }
+    .modal-body::-webkit-scrollbar { display: none; }
+
     .setting-group { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--module-border); }
     .setting-info h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
     .setting-info p { font-size: 0.75rem; color: var(--text-sub); }
@@ -241,8 +215,48 @@
     .data-actions { display: flex; gap: 8px; margin-top: 8px; width: 100%; }
     .data-btn { flex: 1; background: rgba(0,0,0,0.25); border: 1.5px solid var(--module-border); color: var(--text-main); padding: 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s ease; box-shadow: inset 0 1px 1px rgba(255,255,255,0.25); }
     .data-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .modal-footer { margin-top: 18px; text-align: right; }
+    .modal-footer { padding-top: 18px; text-align: right; }
     .empty-state { text-align: center; padding: 28px 16px; color: var(--text-sub); font-size: 0.9rem; }
+
+    /* ACHIVEMENTS GAMIFICATION UI */
+    .achievements-section { margin-top: 18px; }
+    .achievements-section h3 { font-size: 0.85rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .achievements-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    
+    .badge-card {
+      background: rgba(255,255,255,0.02);
+      border: 1.5px solid var(--module-border);
+      border-radius: 18px;
+      padding: 16px 12px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    /* Locked State: Dark, desaturated, heavy frost */
+    .badge-card.locked {
+      opacity: 0.6; filter: grayscale(100%);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+    }
+    
+    /* Unlocked States: Glowing Neon Glass */
+    .badge-card.unlocked { opacity: 1; filter: grayscale(0%); transform: scale(1.02); }
+    .badge-card.unlocked .badge-icon { animation: badgePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    
+    @keyframes badgePop { 0% { transform: scale(0.5); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
+    
+    .glow-spark { box-shadow: 0 0 18px var(--glow-spark), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-spark); border-color: rgba(251, 146, 60, 0.5); }
+    .glow-surge { box-shadow: 0 0 18px var(--glow-surge), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-surge); border-color: rgba(56, 189, 248, 0.5); }
+    .glow-unstoppable { box-shadow: 0 0 18px var(--glow-unstoppable), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-unstoppable); border-color: rgba(217, 70, 239, 0.5); }
+    .glow-apex { box-shadow: 0 0 18px var(--glow-apex), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-apex); border-color: rgba(220, 38, 38, 0.6); }
+    
+    .glow-seed { box-shadow: 0 0 18px var(--glow-seed), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-seed); border-color: rgba(16, 185, 129, 0.5); }
+    .glow-iron { box-shadow: 0 0 18px var(--glow-iron), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-iron); border-color: rgba(100, 116, 139, 0.6); }
+    .glow-nature { box-shadow: 0 0 18px var(--glow-nature), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-nature); border-color: rgba(147, 51, 234, 0.5); }
+    .glow-ascended { box-shadow: 0 0 18px var(--glow-ascended), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-ascended); border-color: rgba(244, 114, 182, 0.5); }
+
+    .badge-icon { font-size: 2.2rem; margin-bottom: 6px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+    .badge-title { font-size: 0.85rem; font-weight: 800; color: var(--text-main); margin-bottom: 2px; }
+    .badge-desc { font-size: 0.65rem; color: var(--text-sub); font-weight: 500; line-height: 1.2; }
 
     /* CATEGORY COLOR INJECTION */
     .cat-badge { font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 8px; letter-spacing: 0.3px; white-space: nowrap; }
@@ -279,7 +293,6 @@
     .habit-item[data-cat="general"] .custom-checkbox { border-color: var(--c-general); }
     .habit-item[data-cat="general"].done .custom-checkbox { background-color: var(--c-general); box-shadow: 0 0 14px var(--c-general); }
 
-    /* REORDER UI */
     .reorder-actions { display: flex; gap: 8px; }
     .reorder-move-btn { background: rgba(0,0,0,0.3); border: 1.5px solid var(--module-border); color: var(--text-main); font-size: 1.2rem; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; }
     .reorder-move-btn:active { background: rgba(255,255,255,0.2); transform: scale(0.95); }
@@ -288,541 +301,589 @@
 </head>
 <body>
 
-  <!-- Ambient Glowing Orbs -->
+  <!-- AMBIENT GLOWING ORBS -->
   <div class="orb-1"></div>
   <div class="orb-2"></div>
   <div class="orb-3"></div>
 
   <div class="app-container">
+    
+    <!-- HEADER -->
     <header>
       <div class="header-top">
         <div class="brand-wrap">
-          <img src="./icon.svg" alt="WinStreak" class="app-logo">
+          <img src="./icon.svg" alt="WinStreak Logo" class="app-logo">
           <h1>WinStreak</h1>
         </div>
         <div class="header-actions">
-          <span class="date-badge" id="dateBadge"></span>
-          <button class="icon-btn" id="openSettingsBtn" title="Settings">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
-          </button>
+          <div class="date-badge" id="current-date">Today</div>
+          <button class="icon-btn" id="achievements-btn" title="Trophy Cabinet">🏆</button>
+          <button class="icon-btn" id="settings-btn" title="Settings">⚙️</button>
         </div>
       </div>
-      <p>Master your day, one habit at a time.</p>
+      <p id="motivational-quote">Consistency is your ultimate weapon.</p>
     </header>
 
+    <!-- STREAK MODULES -->
     <div class="streak-container">
       <div class="streak-card">
         <div class="streak-icon">🔥</div>
         <div class="streak-info">
-          <div class="streak-count" id="currentStreak">0</div>
-          <div class="streak-label">Win Streak</div>
+          <div class="streak-count" id="current-streak">0</div>
+          <div class="streak-label">Active Streak</div>
         </div>
       </div>
       <div class="streak-card">
-        <div class="streak-icon">👑</div>
+        <div class="streak-icon">🚀</div>
         <div class="streak-info">
-          <div class="streak-count" id="bestStreak">0</div>
+          <div class="streak-count" id="peak-streak">0</div>
           <div class="streak-label">Peak Streak</div>
         </div>
       </div>
     </div>
 
+    <!-- WEEKLY HISTORY MODULE -->
     <div class="week-history">
       <div class="week-header">
-        <span>Last 7 Days</span>
-        <span id="weekSuccessRate" style="color: var(--accent);">0/7 (0%)</span>
+        <span>Current Week</span>
+        <span id="week-range"></span>
       </div>
-      <div class="week-bubbles" id="weekBubbles"></div>
+      <div class="week-bubbles" id="week-bubbles">
+        <!-- Bubbles injected by JS -->
+      </div>
     </div>
 
+    <!-- PROGRESS BAR MODULE -->
     <div class="progress-section">
       <div class="progress-header">
-        <span id="counterText">0 of 0 completed</span>
-        <span class="percentage" id="percentageText">0%</span>
+        <span>Daily Completion</span>
+        <span class="percentage" id="progress-text">0%</span>
       </div>
       <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progressBar"></div>
+        <div class="progress-bar-fill" id="progress-fill"></div>
       </div>
-      <div class="progress-status" id="statusMessage">Check off your first habit!</div>
+      <div class="progress-status" id="progress-status-text">Let's get started.</div>
     </div>
 
-    <form class="input-form" id="habitForm">
-      <input type="text" id="habitInput" placeholder="What's your new habit?" autocomplete="off">
+    <!-- CATEGORY FILTERS -->
+    <div class="filter-bar" id="filter-bar">
+      <div class="filter-btn active" data-filter="all">All</div>
+      <div class="filter-btn" data-filter="active">Active</div>
+      <div class="filter-btn" data-filter="done">Done</div>
+      <div class="filter-btn" data-filter="coding">Coding</div>
+      <div class="filter-btn" data-filter="study">Study</div>
+      <div class="filter-btn" data-filter="activity">Activity</div>
+      <div class="filter-btn" data-filter="health">Health</div>
+      <div class="filter-btn" data-filter="skills">Skills</div>
+      <div class="filter-btn" data-filter="rest">Rest</div>
+      <div class="filter-btn" data-filter="selfcare">Self-Care</div>
+      <div class="filter-btn" data-filter="general">General</div>
+    </div>
+
+    <!-- NEW HABIT INPUT MODULE -->
+    <div class="input-form">
+      <input type="text" id="habit-input" placeholder="What's your next habit?" autocomplete="off" enterkeyhint="done">
       <div class="input-actions-row">
-        <select id="habitCategory" class="category-select">
+        <select class="category-select" id="habit-category">
           <option value="coding">💻 Coding</option>
           <option value="study">📚 Study</option>
           <option value="activity">🏃 Activity</option>
-          <option value="health">🍎 Health</option>
-          <option value="skills">🛠️ Skills</option>
-          <option value="rest">🔋 Rest</option>
-          <option value="selfcare">🧘 Self Care</option>
-          <option value="general" selected>⚡ General</option>
+          <option value="health">🥗 Health</option>
+          <option value="skills">🎸 Skills</option>
+          <option value="rest">🧘 Rest</option>
+          <option value="selfcare">🛁 Self-Care</option>
+          <option value="general" selected>📌 General</option>
         </select>
-        <button type="submit" class="add-btn">Add</button>
+        <button class="add-btn" id="add-btn">Add</button>
       </div>
-    </form>
-
-    <div class="filter-bar" id="filterBar">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="active">Active</button>
-      <button class="filter-btn" data-filter="done">Done</button>
-      <button class="filter-btn" data-filter="coding">Coding</button>
-      <button class="filter-btn" data-filter="study">Study</button>
-      <button class="filter-btn" data-filter="activity">Activity</button>
-      <button class="filter-btn" data-filter="health">Health</button>
-      <button class="filter-btn" data-filter="skills">Skills</button>
-      <button class="filter-btn" data-filter="rest">Rest</button>
-      <button class="filter-btn" data-filter="selfcare">Self Care</button>
-      <button class="filter-btn" data-filter="general">General</button>
     </div>
 
-    <!-- The Header is injected here automatically via JS -->
-    <ul class="habit-list" id="habitList"></ul>
+    <div class="list-section-header">Your Habits</div>
+    <ul class="habit-list" id="habit-list"></ul>
+    
   </div>
 
-  <!-- Settings Modal -->
-  <div class="modal-overlay" id="settingsModal">
+  <!-- FLOATING REORDER PILL -->
+  <div class="fab-reorder" id="reorder-fab">
+    <span>↕️</span> Reorder
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div class="modal-overlay" id="settings-modal">
     <div class="modal-card">
       <div class="modal-header">
-        <h2>Settings</h2>
-        <button class="close-modal-btn" id="closeSettingsBtn">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
+        <h2>⚙️ Settings</h2>
+        <button class="close-modal-btn" id="close-settings">✖</button>
       </div>
-      
-      <div class="setting-group">
-        <div class="setting-info">
-          <h4>Appearance</h4>
-          <p>Choose your visual style</p>
+      <div class="modal-body">
+        <div class="setting-group">
+          <div class="setting-info">
+            <h4>App Theme</h4>
+            <p>Glassmorphism style</p>
+          </div>
+          <div class="theme-toggle-wrap">
+            <button class="theme-btn active" id="theme-dark">Dark</button>
+            <button class="theme-btn" id="theme-light">Light</button>
+          </div>
         </div>
-        <div class="theme-toggle-wrap">
-          <button class="theme-btn active" id="darkThemeBtn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            Dark
-          </button>
-          <button class="theme-btn" id="lightThemeBtn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            Light
-          </button>
+        <div class="setting-group">
+          <div class="setting-info">
+            <h4>Sound Effects</h4>
+            <p>Haptic & audio feedback</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="sound-toggle" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="setting-group">
+          <div class="setting-info">
+            <h4>Data Backup</h4>
+            <p>Save or load local data</p>
+          </div>
+        </div>
+        <div class="data-actions">
+          <button class="data-btn" id="export-data">Export</button>
+          <button class="data-btn" id="import-data" onclick="document.getElementById('import-file').click()">Import</button>
+          <input type="file" id="import-file" style="display:none" accept=".json">
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="setting-group">
-        <div class="setting-info">
-          <h4>Sound Effects</h4>
-          <p>Play chimes on completion</p>
-        </div>
-        <label class="switch"><input type="checkbox" id="soundToggle" checked><span class="slider"></span></label>
+  <!-- TROPHY CABINET MODAL -->
+  <div class="modal-overlay" id="achievements-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>🏆 Trophy Cabinet</h2>
+        <button class="close-modal-btn" id="close-achievements">✖</button>
       </div>
-
-      <div class="setting-group">
-        <div class="setting-info">
-          <h4>Haptics</h4>
-          <p>Vibrate on interactions</p>
+      <div class="modal-body">
+        <div class="achievements-section">
+          <h3>Global Milestones (Peak)</h3>
+          <div class="achievements-grid">
+            <div class="badge-card locked" id="badge-spark">
+              <div class="badge-icon">✨</div>
+              <div class="badge-title">The Spark</div>
+              <div class="badge-desc">3-Day Peak Streak</div>
+            </div>
+            <div class="badge-card locked" id="badge-surge">
+              <div class="badge-icon">⚡</div>
+              <div class="badge-title">The Surge</div>
+              <div class="badge-desc">7-Day Peak Streak</div>
+            </div>
+            <div class="badge-card locked" id="badge-unstoppable">
+              <div class="badge-icon">☄️</div>
+              <div class="badge-title">Unstoppable</div>
+              <div class="badge-desc">14-Day Peak Streak</div>
+            </div>
+            <div class="badge-card locked" id="badge-apex">
+              <div class="badge-icon">🦅</div>
+              <div class="badge-title">Apex</div>
+              <div class="badge-desc">30-Day Peak Streak</div>
+            </div>
+          </div>
         </div>
-        <label class="switch"><input type="checkbox" id="hapticToggle" checked><span class="slider"></span></label>
-      </div>
-
-      <!-- Backup Buttons injected here via JS -->
-      
-      <div class="modal-footer">
-        <button class="add-btn" id="doneSettingsBtn">Done</button>
+        <div class="achievements-section">
+          <h3>Habit Masteries (Single)</h3>
+          <div class="achievements-grid">
+            <div class="badge-card locked" id="badge-seed">
+              <div class="badge-icon">🌱</div>
+              <div class="badge-title">Seed Planted</div>
+              <div class="badge-desc">3-Day Habit Streak</div>
+            </div>
+            <div class="badge-card locked" id="badge-iron">
+              <div class="badge-icon">⛓️</div>
+              <div class="badge-title">Iron Routine</div>
+              <div class="badge-desc">7-Day Habit Streak</div>
+            </div>
+            <div class="badge-card locked" id="badge-nature">
+              <div class="badge-icon">🧠</div>
+              <div class="badge-title">Second Nature</div>
+              <div class="badge-desc">21-Day Habit Streak</div>
+            </div>
+            <div class="badge-card locked" id="badge-ascended">
+              <div class="badge-icon">🌌</div>
+              <div class="badge-title">Ascended</div>
+              <div class="badge-desc">50-Day Habit Streak</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY_HABITS = 'habits_data';
-    const STORAGE_KEY_META = 'habits_meta';
-    const STORAGE_KEY_HISTORY = 'habits_history';
-    const STORAGE_KEY_THEME = 'habits_theme';
-    const STORAGE_KEY_SOUND = 'habits_sound';
-    const STORAGE_KEY_HAPTIC = 'habits_haptic';
+    // --- SYNTHESIZER AUDIO SYSTEM ---
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let soundEnabled = true;
 
-    let habits = JSON.parse(localStorage.getItem(STORAGE_KEY_HABITS)) || [];
-    let meta = JSON.parse(localStorage.getItem(STORAGE_KEY_META)) || { lastActiveDate: '', currentStreak: 0, bestStreak: 0, lastCompletedDate: '' };
-    let completedHistory = JSON.parse(localStorage.getItem(STORAGE_KEY_HISTORY)) || [];
-    let currentFilter = 'all';
-    let editingHabitId = null;
-    let isReorderMode = false;
-    let wasAllCompleted = false;
-    let activeTheme = localStorage.getItem(STORAGE_KEY_THEME) || 'dark';
-    let soundEnabled = localStorage.getItem(STORAGE_KEY_SOUND) !== 'false';
-    let hapticEnabled = localStorage.getItem(STORAGE_KEY_HAPTIC) !== 'false';
-
-    let audioCtx = null;
-    function playChime(isDone) {
+    function playTone(freq, type, duration, vol) {
       if (!soundEnabled) return;
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const now = audioCtx.currentTime; const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type = 'sine';
-        if (isDone) {
-          osc.frequency.setValueAtTime(587.33, now); osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
-          gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35); osc.start(now); osc.stop(now + 0.35);
-        } else {
-          osc.frequency.setValueAtTime(440, now); osc.frequency.exponentialRampToValueAtTime(260, now + 0.1);
-          gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15); osc.start(now); osc.stop(now + 0.15);
-        }
-        osc.connect(gain); gain.connect(audioCtx.destination);
-      } catch (err) {}
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(); osc.stop(audioCtx.currentTime + duration);
     }
-
-    function triggerHaptic() {
-      if (!hapticEnabled) return;
-      if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(18);
-    }
-
-    const categoryLabels = {
-      coding: { label: 'Coding', class: 'cat-coding' }, study: { label: 'Study', class: 'cat-study' }, activity: { label: 'Activity', class: 'cat-activity' },
-      health: { label: 'Health', class: 'cat-health' }, skills: { label: 'Skills', class: 'cat-skills' }, rest: { label: 'Rest', class: 'cat-rest' },
-      selfcare: { label: 'Self Care', class: 'cat-selfcare' }, general: { label: 'General', class: 'cat-general' }
+    
+    const sfx = {
+      pop: () => playTone(600, 'sine', 0.1, 0.3),
+      check: () => { playTone(400, 'sine', 0.05, 0.2); setTimeout(() => playTone(800, 'sine', 0.15, 0.3), 50); },
+      uncheck: () => { playTone(300, 'sine', 0.1, 0.2); },
+      delete: () => { playTone(200, 'sawtooth', 0.15, 0.2); },
+      error: () => { playTone(150, 'square', 0.2, 0.2); setTimeout(() => playTone(150, 'square', 0.2, 0.2), 100); },
+      tada: () => { 
+        [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+          setTimeout(() => playTone(freq, 'sine', 0.3, 0.3), i * 100);
+        });
+      }
     };
 
-    const habitForm = document.getElementById('habitForm');
-    const habitInput = document.getElementById('habitInput');
-    const habitCategory = document.getElementById('habitCategory');
-    const habitList = document.getElementById('habitList');
-    const filterBar = document.getElementById('filterBar');
-    const counterText = document.getElementById('counterText');
-    const percentageText = document.getElementById('percentageText');
-    const progressBar = document.getElementById('progressBar');
-    const statusMessage = document.getElementById('statusMessage');
-    const dateBadge = document.getElementById('dateBadge');
-    const currentStreakEl = document.getElementById('currentStreak');
-    const bestStreakEl = document.getElementById('bestStreak');
-    const weekBubblesEl = document.getElementById('weekBubbles');
-    const weekSuccessRateEl = document.getElementById('weekSuccessRate');
+    // --- CORE DATA LOGIC ---
+    let habits = JSON.parse(localStorage.getItem('winstreak_habits')) || [];
+    let meta = JSON.parse(localStorage.getItem('winstreak_meta')) || { 
+      currentStreak: 0, bestStreak: 0, lastActiveDate: null, 
+      theme: 'dark', history: {}
+    };
 
-    function autoInjectV2UI() {
-      if (habitCategory) {
-        habitCategory.innerHTML = `<option value="coding">💻 Coding</option><option value="study">📚 Study</option><option value="activity">🏃 Activity</option><option value="health">🍎 Health</option><option value="skills">🛠️ Skills</option><option value="rest">🔋 Rest</option><option value="selfcare">🧘 Self Care</option><option value="general" selected>⚡ General</option>`;
-      }
-      if (filterBar) {
-        filterBar.innerHTML = `<button class="filter-btn active" data-filter="all">All</button><button class="filter-btn" data-filter="active">Active</button><button class="filter-btn" data-filter="done">Done</button><button class="filter-btn" data-filter="coding">Coding</button><button class="filter-btn" data-filter="study">Study</button><button class="filter-btn" data-filter="activity">Activity</button><button class="filter-btn" data-filter="health">Health</button><button class="filter-btn" data-filter="skills">Skills</button><button class="filter-btn" data-filter="rest">Rest</button><button class="filter-btn" data-filter="selfcare">Self Care</button><button class="filter-btn" data-filter="general">General</button>`;
-      }
-      const modalFooter = document.querySelector('.modal-footer');
-      if (modalFooter && !document.getElementById('backupContainer')) {
-        const backupDiv = document.createElement('div');
-        backupDiv.id = 'backupContainer'; backupDiv.className = 'setting-group'; backupDiv.style.flexDirection = 'column'; backupDiv.style.alignItems = 'flex-start';
-        backupDiv.innerHTML = `<div class="setting-info" style="margin-bottom: 8px;"><h4>Data Backup</h4><p>Export or import your streaks</p></div><div class="data-actions"><button class="data-btn" onclick="exportData()">Export Data</button><button class="data-btn" onclick="document.getElementById('importFile').click()">Import Data</button><input type="file" id="importFile" style="display:none" accept=".json" onchange="importData(event)"></div>`;
-        modalFooter.parentNode.insertBefore(backupDiv, modalFooter);
-      }
-      
-      if (habitList && !document.getElementById('listSectionHeader')) {
-        const listHeader = document.createElement('div');
-        listHeader.id = 'listSectionHeader'; listHeader.className = 'list-section-header';
-        listHeader.innerHTML = `<span>Your Habits</span>`;
-        habitList.parentNode.insertBefore(listHeader, habitList);
-      }
+    const getTodayStr = () => new Date().toISOString().split('T')[0];
+    const isYesterday = (dateStr) => {
+      if(!dateStr) return false;
+      const d = new Date(dateStr); d.setDate(d.getDate() + 1);
+      return d.toISOString().split('T')[0] === getTodayStr();
+    };
 
-      if (!document.getElementById('floatingReorderFab')) {
-        const fab = document.createElement('div');
-        fab.id = 'floatingReorderFab'; fab.className = 'fab-reorder';
-        fab.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> <span>Reorder</span>`;
-        fab.onclick = toggleReorderMode;
-        document.body.appendChild(fab);
-      }
-    }
-
-    const settingsModal = document.getElementById('settingsModal');
-    document.getElementById('openSettingsBtn').addEventListener('click', () => settingsModal.classList.add('active'));
-    document.getElementById('closeSettingsBtn').addEventListener('click', () => settingsModal.classList.remove('active'));
-    document.getElementById('doneSettingsBtn').addEventListener('click', () => settingsModal.classList.remove('active'));
-
-    function applyTheme(theme) {
-      activeTheme = theme; localStorage.setItem(STORAGE_KEY_THEME, theme);
-      if (theme === 'light') { document.body.classList.add('light-theme'); document.getElementById('lightThemeBtn').classList.add('active'); document.getElementById('darkThemeBtn').classList.remove('active'); } 
-      else { document.body.classList.remove('light-theme'); document.getElementById('darkThemeBtn').classList.add('active'); document.getElementById('lightThemeBtn').classList.remove('active'); }
-    }
-    document.getElementById('darkThemeBtn').addEventListener('click', () => applyTheme('dark'));
-    document.getElementById('lightThemeBtn').addEventListener('click', () => applyTheme('light'));
-
-    const soundToggle = document.getElementById('soundToggle');
-    soundToggle.checked = soundEnabled;
-    soundToggle.addEventListener('change', (e) => { soundEnabled = e.target.checked; localStorage.setItem(STORAGE_KEY_SOUND, soundEnabled); if (soundEnabled) playChime(true); });
-
-    const hapticToggle = document.getElementById('hapticToggle');
-    hapticToggle.checked = hapticEnabled;
-    hapticToggle.addEventListener('change', (e) => { hapticEnabled = e.target.checked; localStorage.setItem(STORAGE_KEY_HAPTIC, hapticEnabled); if (hapticEnabled) triggerHaptic(); });
-
-    function getTodayDateString() {
-      const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-    }
-    function formatDisplayDate() { return new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' }); }
-    function getDayDifference(d1Str, d2Str) { if (!d1Str || !d2Str) return null; return Math.round(Math.abs(new Date(d2Str) - new Date(d1Str)) / (1000 * 60 * 60 * 24)); }
-
-    function fireConfetti() {
-      if (typeof confetti === 'function') {
-        confetti({ particleCount: 65, spread: 60, origin: { x: 0.2, y: 0.85 }, colors: ['#38bdf8', '#10b981', '#fb923c', '#a855f7'] });
-        confetti({ particleCount: 65, spread: 60, origin: { x: 0.8, y: 0.85 }, colors: ['#38bdf8', '#10b981', '#fb923c', '#a855f7'] });
-      }
-    }
-
-    function saveHabits() { localStorage.setItem(STORAGE_KEY_HABITS, JSON.stringify(habits)); }
-    function saveMeta() { localStorage.setItem(STORAGE_KEY_META, JSON.stringify(meta)); }
-    function saveHistory() { localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(completedHistory)); }
+    // --- INITIALIZATION ---
+    document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    if(meta.theme === 'light') { document.body.classList.add('light-theme'); document.getElementById('theme-light').classList.add('active'); document.getElementById('theme-dark').classList.remove('active'); }
+    document.getElementById('sound-toggle').checked = soundEnabled;
 
     function checkDailyReset() {
-      const today = getTodayDateString(); dateBadge.textContent = formatDisplayDate();
-      if (meta.lastActiveDate && meta.lastActiveDate !== today) {
-        const daysMissed = getDayDifference(meta.lastActiveDate, today);
-        habits = habits.map(h => {
-          let newStreak = h.streak || 0;
-          if (!h.completed && !h.paused) newStreak = 0;
-          if (daysMissed > 1 && !h.paused) newStreak = 0;
-          return { ...h, completed: false, paused: false, streak: newStreak };
+      const today = getTodayStr();
+      const allActiveHabits = habits.filter(h => !h.paused);
+      
+      if (meta.lastActiveDate !== today) {
+        if (!isYesterday(meta.lastActiveDate) && meta.lastActiveDate !== null) {
+          meta.currentStreak = 0; // Broke the global streak
+        }
+        
+        habits.forEach(h => {
+          if (!h.paused && !isYesterday(h.lastCompleted)) {
+            h.streak = 0; // Broke individual streak
+          }
+          h.completedToday = false; 
         });
-        saveHabits();
-        if (meta.lastCompletedDate) { if (getDayDifference(meta.lastCompletedDate, today) > 1) meta.currentStreak = 0; }
+        
+        meta.lastActiveDate = today;
+        saveData();
       }
-      meta.lastActiveDate = today; saveMeta(); updateStreakUI();
     }
 
-    function updateStreakLogic(allCompleted) {
-      const today = getTodayDateString();
-      if (allCompleted && habits.filter(h => !h.paused).length > 0) {
-        if (!completedHistory.includes(today)) { completedHistory.push(today); saveHistory(); }
-        if (meta.lastCompletedDate !== today) {
-          if (!meta.lastCompletedDate) meta.currentStreak = 1;
-          else {
-            const diff = getDayDifference(meta.lastCompletedDate, today);
-            if (diff === 1) meta.currentStreak += 1; else if (diff > 1) meta.currentStreak = 1;
-          }
-          meta.lastCompletedDate = today; meta.bestStreak = Math.max(meta.bestStreak, meta.currentStreak); saveMeta();
+    function calculateStreaks() {
+      const allActiveHabits = habits.filter(h => !h.paused);
+      if (allActiveHabits.length === 0) return;
+
+      const allDoneToday = allActiveHabits.every(h => h.completedToday);
+      
+      if (allDoneToday) {
+        if (!meta.history[getTodayStr()]) {
+          meta.history[getTodayStr()] = true;
+          meta.currentStreak += 1;
+          if (meta.currentStreak > meta.bestStreak) meta.bestStreak = meta.currentStreak;
+          sfx.tada();
+          confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#38bdf8', '#10b981', '#fb923c'] });
         }
       } else {
-        if (completedHistory.includes(today)) {
-          completedHistory = completedHistory.filter(d => d !== today); saveHistory();
-          if (meta.lastCompletedDate === today) {
-            meta.currentStreak = Math.max(0, meta.currentStreak - 1);
-            meta.lastCompletedDate = completedHistory.length > 0 ? completedHistory[completedHistory.length - 1] : '';
-            saveMeta();
-          }
+        if (meta.history[getTodayStr()]) {
+          delete meta.history[getTodayStr()];
+          meta.currentStreak = Math.max(0, meta.currentStreak - 1);
         }
       }
-      updateStreakUI(); renderWeekBubbles();
+      
+      saveData();
+      updateUI();
+      checkAchievements(); // Update badges dynamically
     }
 
-    function renderWeekBubbles() {
-      weekBubblesEl.innerHTML = ''; const todayStr = getTodayDateString(); const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      let completedInWeek = 0;
-      for (let i = 6; i >= 0; i--) {
-        const d = new Date(); d.setDate(d.getDate() - i);
-        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-        const isDone = completedHistory.includes(dateStr);
-        if (isDone) completedInWeek++;
-        weekBubblesEl.innerHTML += `<div class="day-column"><span class="day-name">${dateStr === todayStr ? 'Today' : days[d.getDay()]}</span><div class="day-bubble ${dateStr === todayStr ? 'today' : ''} ${isDone ? 'done' : ''}">${isDone ? '✓' : '•'}</div></div>`;
-      }
-      weekSuccessRateEl.textContent = `${completedInWeek}/7 (${Math.round((completedInWeek / 7) * 100)}%)`;
-    }
+    // --- GAMIFICATION / TROPHY LOGIC ---
+    function checkAchievements() {
+      const best = meta.bestStreak || 0;
+      let maxSingle = 0;
+      habits.forEach(h => { if(h.streak > maxSingle) maxSingle = h.streak; });
 
-    function updateStreakUI() { currentStreakEl.textContent = meta.currentStreak; bestStreakEl.textContent = meta.bestStreak; }
-
-    function updateProgress(isInitial = false) {
-      const activeHabits = habits.filter(h => !h.paused);
-      const total = activeHabits.length; const completed = activeHabits.filter(h => h.completed).length;
-      const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
-      counterText.textContent = `${completed} of ${total} active completed`; percentageText.textContent = `${percent}%`; progressBar.style.width = `${percent}%`;
-      const allDone = total > 0 && completed === total; updateStreakLogic(allDone);
-      if (allDone && !wasAllCompleted && !isInitial) fireConfetti();
-      wasAllCompleted = allDone;
-      if (habits.length === 0) statusMessage.textContent = 'Add a habit above to begin your WinStreak.';
-      else if (total === 0) statusMessage.textContent = 'All habits paused for today. Rest up!';
-      else if (allDone) statusMessage.textContent = '🎉 All habits crushed! WinStreak maintained!';
-      else if (percent >= 50) statusMessage.textContent = '💪 Halfway there, keep the streak going!';
-      else statusMessage.textContent = '🌱 Check off your first habit!';
-    }
-
-    function renderHabits(isInitial = false) {
-      habitList.innerHTML = '';
-      const visibleHabits = habits.filter(h => {
-        if (currentFilter === 'all') return true;
-        if (currentFilter === 'active') return !h.completed;
-        if (currentFilter === 'done') return h.completed;
-        return (h.category || 'general') === currentFilter;
-      });
-
-      if (visibleHabits.length === 0) {
-        habitList.innerHTML = `<li class="empty-state">${habits.length > 0 ? `No habits found in "${currentFilter}".` : 'No habits added yet. Add one above!'}</li>`;
-      } else {
-        visibleHabits.forEach(habit => {
-          const isEditing = editingHabitId === habit.id;
-          const li = document.createElement('li');
-          const isPaused = habit.paused ? 'paused' : '';
-          li.className = `habit-item ${habit.completed ? 'done' : ''} ${isPaused}`;
-          li.setAttribute('data-cat', habit.category || 'general');
-
-          if (isEditing) {
-            li.innerHTML = `
-              <div class="edit-mode-container">
-                <input type="text" class="edit-input" id="editInput_${habit.id}" value="${escapeHtml(habit.name)}" />
-                <div class="edit-controls-row">
-                  <select class="edit-select" id="editSelect_${habit.id}">
-                    <option value="coding" ${habit.category === 'coding' ? 'selected' : ''}>💻 Coding</option>
-                    <option value="study" ${habit.category === 'study' ? 'selected' : ''}>📚 Study</option>
-                    <option value="activity" ${habit.category === 'activity' ? 'selected' : ''}>🏃 Activity</option>
-                    <option value="health" ${habit.category === 'health' ? 'selected' : ''}>🍎 Health</option>
-                    <option value="skills" ${habit.category === 'skills' ? 'selected' : ''}>🛠️ Skills</option>
-                    <option value="rest" ${habit.category === 'rest' ? 'selected' : ''}>🔋 Rest</option>
-                    <option value="selfcare" ${habit.category === 'selfcare' ? 'selected' : ''}>🧘 Self Care</option>
-                    <option value="general" ${(!habit.category || habit.category === 'general') ? 'selected' : ''}>⚡ General</option>
-                  </select>
-                  <button class="edit-btn-save" onclick="saveHabitEdit('${habit.id}')">Save</button>
-                  <button class="edit-btn-cancel" onclick="cancelHabitEdit()">Cancel</button>
-                </div>
-              </div>`;
-            setTimeout(() => {
-              const input = document.getElementById(`editInput_${habit.id}`);
-              if (input) { input.focus(); input.addEventListener('keydown', (e) => { if (e.key === 'Enter') saveHabitEdit(habit.id); if (e.key === 'Escape') cancelHabitEdit(); }); }
-            }, 0);
-          } else {
-            const cat = categoryLabels[habit.category] || categoryLabels.general;
-            const streakCount = habit.streak || 0;
-            const streakHTML = streakCount > 0 ? `<div class="mini-streak">🔥${streakCount}</div>` : '';
-            const titleLabel = habit.paused ? `${escapeHtml(habit.name)} (Paused)` : escapeHtml(habit.name);
-
-            if (isReorderMode) {
-              li.innerHTML = `
-                <div class="habit-left">
-                  <div class="drag-handle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
-                  <div class="habit-text-wrap"><span class="cat-badge ${cat.class}">${cat.label}</span>${streakHTML}<span class="habit-title">${titleLabel}</span></div>
-                </div>
-                <div class="reorder-actions">
-                  <button class="reorder-move-btn" onclick="moveHabitUp('${habit.id}')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
-                  <button class="reorder-move-btn" onclick="moveHabitDown('${habit.id}')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
-                </div>`;
-            } else {
-              li.innerHTML = `
-                <div class="habit-left" onclick="toggleHabit('${habit.id}')">
-                  <div class="custom-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                  <div class="habit-text-wrap"><span class="cat-badge ${cat.class}">${cat.label}</span>${streakHTML}<span class="habit-title">${titleLabel}</span></div>
-                </div>
-                <div class="habit-actions">
-                  <button class="action-btn pause-btn" onclick="togglePause('${habit.id}')" title="Pause for today"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg></button>
-                  <button class="action-btn" onclick="startHabitEdit('${habit.id}')" title="Edit Habit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
-                  <button class="action-btn delete-btn" onclick="deleteHabit('${habit.id}')" title="Delete Habit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></button>
-                </div>`;
-            }
-          }
-          habitList.appendChild(li);
-        });
-      }
-      updateProgress(isInitial);
-    }
-
-    function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
-
-    filterBar.addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-btn');
-      if (!btn) return;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active'); currentFilter = btn.dataset.filter; renderHabits();
-    });
-
-    habitForm.addEventListener('submit', (e) => {
-      e.preventDefault(); const name = habitInput.value.trim(); const category = habitCategory.value;
-      if (!name) return;
-      habits.push({ id: Date.now().toString(), name: name, category: category, completed: false, paused: false, streak: 0 });
-      saveHabits(); renderHabits(); habitInput.value = '';
-    });
-
-    window.toggleHabit = function(id) {
-      if (editingHabitId) return; let newState = false;
-      habits = habits.map(habit => {
-        if (habit.id === id) {
-          if (habit.paused) return habit;
-          newState = !habit.completed;
-          let newStreak = habit.streak || 0;
-          if (newState) newStreak += 1; else newStreak = Math.max(0, newStreak - 1);
-          return { ...habit, completed: newState, streak: newStreak };
-        }
-        return habit;
-      });
-      triggerHaptic(); playChime(newState); saveHabits(); renderHabits();
-    };
-
-    window.togglePause = function(id) {
-      if (editingHabitId) return;
-      habits = habits.map(habit => { if (habit.id === id) return { ...habit, paused: !habit.paused, completed: false }; return habit; });
-      triggerHaptic(); saveHabits(); renderHabits();
-    };
-
-    window.deleteHabit = function(id) { habits = habits.filter(habit => habit.id !== id); if (editingHabitId === id) editingHabitId = null; saveHabits(); renderHabits(); };
-    window.startHabitEdit = function(id) { editingHabitId = id; renderHabits(); };
-    window.cancelHabitEdit = function() { editingHabitId = null; renderHabits(); };
-
-    window.saveHabitEdit = function(id) {
-      const input = document.getElementById(`editInput_${id}`); const select = document.getElementById(`editSelect_${id}`);
-      if (!input || !select) return; const newName = input.value.trim(); if (!newName) return;
-      habits = habits.map(h => { if (h.id === id) return { ...h, name: newName, category: select.value }; return h; });
-      editingHabitId = null; saveHabits(); renderHabits();
-    };
-
-    window.toggleReorderMode = function() {
-      if (editingHabitId) cancelHabitEdit();
-      isReorderMode = !isReorderMode;
-      const fab = document.getElementById('floatingReorderFab');
-      if (fab) { 
-        if (isReorderMode) {
-          fab.classList.add('active');
-          fab.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Done</span>`;
+      const toggleBadge = (id, unlocked, glowClass) => {
+        const el = document.getElementById(id);
+        if(!el) return;
+        if(unlocked) {
+          el.classList.remove('locked'); el.classList.add('unlocked', glowClass);
         } else {
-          fab.classList.remove('active');
-          fab.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> <span>Reorder</span>`;
+          el.classList.add('locked'); el.classList.remove('unlocked', glowClass);
         }
+      };
+
+      // Global
+      toggleBadge('badge-spark', best >= 3, 'glow-spark');
+      toggleBadge('badge-surge', best >= 7, 'glow-surge');
+      toggleBadge('badge-unstoppable', best >= 14, 'glow-unstoppable');
+      toggleBadge('badge-apex', best >= 30, 'glow-apex');
+      // Single
+      toggleBadge('badge-seed', maxSingle >= 3, 'glow-seed');
+      toggleBadge('badge-iron', maxSingle >= 7, 'glow-iron');
+      toggleBadge('badge-nature', maxSingle >= 21, 'glow-nature');
+      toggleBadge('badge-ascended', maxSingle >= 50, 'glow-ascended');
+    }
+
+    function updateUI() {
+      document.getElementById('current-streak').textContent = meta.currentStreak;
+      document.getElementById('peak-streak').textContent = meta.bestStreak;
+      
+      const activeHabits = habits.filter(h => !h.paused);
+      const completed = activeHabits.filter(h => h.completedToday).length;
+      const total = activeHabits.length;
+      const pct = total === 0 ? 0 : Math.round((completed / total) * 100);
+      
+      document.getElementById('progress-text').textContent = `${pct}%`;
+      document.getElementById('progress-fill').style.width = `${pct}%`;
+      
+      const statusText = document.getElementById('progress-status-text');
+      if (total === 0) statusText.textContent = "Add a habit to start.";
+      else if (pct === 0) statusText.textContent = "Let's get to work.";
+      else if (pct < 50) statusText.textContent = "Making progress.";
+      else if (pct < 100) statusText.textContent = "Almost there, keep pushing!";
+      else statusText.textContent = "Perfect day! You crushed it.";
+
+      renderWeekTracker();
+    }
+
+    function renderWeekTracker() {
+      const weekContainer = document.getElementById('week-bubbles');
+      weekContainer.innerHTML = '';
+      const today = new Date();
+      const currentDayStr = getTodayStr();
+      
+      for(let i = 6; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
+        const dateStr = d.toISOString().split('T')[0];
+        const dayName = d.toLocaleDateString('en-US', { weekday: 'narrow' });
+        
+        const isToday = dateStr === currentDayStr;
+        const isDone = meta.history[dateStr] === true;
+        
+        weekContainer.innerHTML += `
+          <div class="day-column">
+            <span class="day-name">${dayName}</span>
+            <div class="day-bubble ${isToday ? 'today' : ''} ${isDone ? 'done' : ''}">${isDone ? '✓' : ''}</div>
+          </div>
+        `;
       }
-      if (isReorderMode && currentFilter !== 'all') {
+    }
+
+    let currentFilter = 'all';
+    let isReorderMode = false;
+
+    // --- DOM RENDERING ---
+    function renderHabits() {
+      const list = document.getElementById('habit-list');
+      list.innerHTML = '';
+      
+      if (habits.length === 0) {
+        list.innerHTML = '<div class="empty-state">No habits yet. Add one above!</div>';
+        return;
+      }
+
+      const filteredHabits = habits.filter(h => {
+        if(currentFilter === 'all') return true;
+        if(currentFilter === 'active') return !h.paused;
+        if(currentFilter === 'done') return h.completedToday;
+        return h.category === currentFilter;
+      });
+
+      if(filteredHabits.length === 0) {
+        list.innerHTML = `<div class="empty-state">No ${currentFilter} habits found.</div>`;
+        return;
+      }
+
+      filteredHabits.forEach((habit, index) => {
+        const realIndex = habits.findIndex(h => h.id === habit.id);
+        const li = document.createElement('li');
+        li.className = `habit-item ${habit.completedToday ? 'done' : ''} ${habit.paused ? 'paused' : ''}`;
+        li.dataset.cat = habit.category || 'general';
+
+        if(isReorderMode) {
+          li.innerHTML = `
+            <div class="drag-handle">☰</div>
+            <div class="habit-left" style="pointer-events:none;">
+              <div class="habit-text-wrap">
+                <span class="habit-title">${habit.text}</span>
+              </div>
+            </div>
+            <div class="reorder-actions">
+              <button class="reorder-move-btn" onclick="moveHabit(${realIndex}, -1)">↑</button>
+              <button class="reorder-move-btn" onclick="moveHabit(${realIndex}, 1)">↓</button>
+            </div>
+          `;
+        } else {
+          li.innerHTML = `
+            <div class="habit-left" onclick="toggleHabit(${realIndex})">
+              <div class="custom-checkbox">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div class="habit-text-wrap">
+                <span class="habit-title">${habit.text}</span>
+                ${habit.streak > 0 ? `<span class="mini-streak">🔥 ${habit.streak}</span>` : ''}
+                <span class="cat-badge cat-${habit.category || 'general'}">${habit.category || 'general'}</span>
+              </div>
+            </div>
+            <div class="habit-actions">
+              <button class="action-btn pause-btn" onclick="togglePause(${realIndex})" title="${habit.paused ? 'Resume' : 'Pause'}">
+                ${habit.paused ? '▶' : '⏸'}
+              </button>
+              <button class="action-btn delete-btn" onclick="deleteHabit(${realIndex})">🗑</button>
+            </div>
+          `;
+        }
+        list.appendChild(li);
+      });
+    }
+
+    // --- ACTIONS ---
+    function addHabit() {
+      const input = document.getElementById('habit-input');
+      const cat = document.getElementById('habit-category').value;
+      const text = input.value.trim();
+      
+      if (text) {
+        habits.push({ id: Date.now(), text, completedToday: false, streak: 0, lastCompleted: null, category: cat, paused: false });
+        input.value = ''; sfx.pop(); saveData(); renderHabits(); updateUI();
+      } else {
+        sfx.error(); input.classList.add('shake');
+        setTimeout(() => input.classList.remove('shake'), 400);
+      }
+    }
+
+    window.toggleHabit = (index) => {
+      const h = habits[index];
+      if (h.paused) return; // Cannot check paused habits
+      
+      h.completedToday = !h.completedToday;
+      if (h.completedToday) {
+        h.streak += 1; h.lastCompleted = getTodayStr(); sfx.check();
+      } else {
+        h.streak = Math.max(0, h.streak - 1); h.lastCompleted = null; sfx.uncheck();
+      }
+      saveData(); renderHabits(); calculateStreaks();
+    };
+
+    window.togglePause = (index) => {
+      habits[index].paused = !habits[index].paused;
+      habits[index].completedToday = false; 
+      sfx.pop(); saveData(); renderHabits(); calculateStreaks();
+    };
+
+    window.deleteHabit = (index) => {
+      if(confirm('Delete this habit permanently?')) {
+        habits.splice(index, 1); sfx.delete(); saveData(); renderHabits(); calculateStreaks();
+      }
+    };
+
+    window.moveHabit = (index, direction) => {
+      if (index + direction < 0 || index + direction >= habits.length) return;
+      const temp = habits[index];
+      habits[index] = habits[index + direction];
+      habits[index + direction] = temp;
+      sfx.pop(); saveData(); renderHabits();
+    };
+
+    const saveData = () => {
+      localStorage.setItem('winstreak_habits', JSON.stringify(habits));
+      localStorage.setItem('winstreak_meta', JSON.stringify(meta));
+    };
+
+    // --- EVENT LISTENERS ---
+    document.getElementById('add-btn').addEventListener('click', addHabit);
+    document.getElementById('habit-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') addHabit(); });
+    
+    document.getElementById('filter-bar').addEventListener('click', (e) => {
+      if(e.target.classList.contains('filter-btn')) {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
-        currentFilter = 'all';
+        e.target.classList.add('active'); currentFilter = e.target.dataset.filter;
+        sfx.pop(); renderHabits();
       }
-      renderHabits();
-    };
+    });
 
-    window.moveHabitUp = function(id) {
-      const idx = habits.findIndex(h => h.id === id);
-      if (idx > 0) { [habits[idx - 1], habits[idx]] = [habits[idx], habits[idx - 1]]; triggerHaptic(); saveHabits(); renderHabits(); }
-    };
+    document.getElementById('reorder-fab').addEventListener('click', () => {
+      isReorderMode = !isReorderMode;
+      document.getElementById('reorder-fab').classList.toggle('active');
+      currentFilter = 'all'; 
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+      sfx.pop(); renderHabits();
+    });
 
-    window.moveHabitDown = function(id) {
-      const idx = habits.findIndex(h => h.id === id);
-      if (idx > -1 && idx < habits.length - 1) { [habits[idx + 1], habits[idx]] = [habits[idx], habits[idx + 1]]; triggerHaptic(); saveHabits(); renderHabits(); }
-    };
+    // Modals
+    document.getElementById('settings-btn').addEventListener('click', () => document.getElementById('settings-modal').classList.add('active'));
+    document.getElementById('close-settings').addEventListener('click', () => document.getElementById('settings-modal').classList.remove('active'));
+    
+    document.getElementById('achievements-btn').addEventListener('click', () => {
+      checkAchievements();
+      document.getElementById('achievements-modal').classList.add('active');
+      sfx.pop();
+    });
+    document.getElementById('close-achievements').addEventListener('click', () => document.getElementById('achievements-modal').classList.remove('active'));
 
-    window.exportData = function() {
-      const data = { habits, meta, completedHistory, activeTheme, soundEnabled, hapticEnabled };
-      const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+    // Settings logic
+    document.getElementById('theme-dark').addEventListener('click', () => {
+      document.body.classList.remove('light-theme'); meta.theme = 'dark';
+      document.getElementById('theme-dark').classList.add('active'); document.getElementById('theme-light').classList.remove('active');
+      saveData(); sfx.pop();
+    });
+    document.getElementById('theme-light').addEventListener('click', () => {
+      document.body.classList.add('light-theme'); meta.theme = 'light';
+      document.getElementById('theme-light').classList.add('active'); document.getElementById('theme-dark').classList.remove('active');
+      saveData(); sfx.pop();
+    });
+    
+    document.getElementById('sound-toggle').addEventListener('change', (e) => {
+      soundEnabled = e.target.checked; if(soundEnabled) sfx.pop();
+    });
+
+    // Data backup
+    document.getElementById('export-data').addEventListener('click', () => {
+      const dataStr = JSON.stringify({ habits, meta });
+      const blob = new Blob([dataStr], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = `WinStreak_Backup_${getTodayDateString()}.json`; a.click(); URL.revokeObjectURL(url);
-    };
-
-    window.importData = function(event) {
-      const file = event.target.files[0]; if (!file) return;
+      const a = document.createElement('a'); a.href = url; a.download = 'winstreak_backup.json'; a.click();
+    });
+    
+    document.getElementById('import-file').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if(!file) return;
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = (event) => {
         try {
-          const data = JSON.parse(e.target.result);
-          if (data.habits && data.meta) {
-            localStorage.setItem(STORAGE_KEY_HABITS, JSON.stringify(data.habits)); localStorage.setItem(STORAGE_KEY_META, JSON.stringify(data.meta)); localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(data.completedHistory || []));
-            alert('WinStreak Data imported successfully! Reloading...'); location.reload();
+          const parsed = JSON.parse(event.target.result);
+          if(parsed.habits && parsed.meta) {
+            habits = parsed.habits; meta = parsed.meta;
+            saveData(); location.reload();
           } else alert('Invalid backup file.');
-        } catch(err) { alert('Error reading file.'); }
+        } catch(err) { alert('Failed to read file.'); }
       };
       reader.readAsText(file);
-    };
+    });
 
-    if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {})); }
-
-    autoInjectV2UI();
-    applyTheme(activeTheme);
+    // Boot up
     checkDailyReset();
-    renderWeekBubbles();
-    renderHabits(true);
+    updateUI();
+    renderHabits();
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').then(() => console.log('SW registered'));
+    }
   </script>
 </body>
 </html>
