@@ -38,14 +38,14 @@
       --modal-overlay: rgba(0, 0, 0, 0.80);
       
       /* ACHIEVEMENT GLOW COLORS */
-      --glow-spark: rgba(251, 146, 60, 0.5);   /* Bronze/Orange */
-      --glow-surge: rgba(56, 189, 248, 0.5);   /* Cyan */
-      --glow-unstoppable: rgba(217, 70, 239, 0.5); /* Pink/Purple */
-      --glow-apex: rgba(220, 38, 38, 0.65);    /* Crimson Red */
-      --glow-seed: rgba(16, 185, 129, 0.5);    /* Green */
-      --glow-iron: rgba(100, 116, 139, 0.6);   /* Steel Blue */
-      --glow-nature: rgba(147, 51, 234, 0.5);  /* Deep Purple */
-      --glow-ascended: rgba(244, 114, 182, 0.5);/* Neon Magenta */
+      --glow-spark: rgba(251, 146, 60, 0.5);   
+      --glow-surge: rgba(56, 189, 248, 0.5);   
+      --glow-unstoppable: rgba(217, 70, 239, 0.5); 
+      --glow-apex: rgba(220, 38, 38, 0.65);    
+      --glow-seed: rgba(16, 185, 129, 0.5);    
+      --glow-iron: rgba(100, 116, 139, 0.6);   
+      --glow-nature: rgba(147, 51, 234, 0.5);  
+      --glow-ascended: rgba(244, 114, 182, 0.5);
       
       --c-coding: #22d3ee; --c-study: #c084fc; --c-activity: #fb923c; --c-health: #34d399;
       --c-skills: #facc15; --c-rest: #818cf8; --c-selfcare: #f472b6; --c-general: #cbd5e1;
@@ -86,19 +86,30 @@
     .orb-2 { position: fixed; width: 360px; height: 360px; bottom: 8%; right: -12%; background: rgba(168, 85, 247, 0.44); filter: blur(45px); border-radius: 50%; z-index: 0; pointer-events: none; }
     .orb-3 { position: fixed; width: 260px; height: 260px; top: 42%; left: 18%; background: rgba(16, 185, 129, 0.38); filter: blur(45px); border-radius: 50%; z-index: 0; pointer-events: none; }
 
+    /* UPGRADED REORDER PILL - ULTRA TRANSPARENT & REFLECTIVE */
     .fab-reorder {
       position: fixed; bottom: max(24px, env(safe-area-inset-bottom, 24px)); left: 50%; transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.06); 
-      backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter);
-      border: 1.5px solid rgba(255, 255, 255, 0.28); 
-      box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(255, 255, 255, 0.2), inset 0 0 18px rgba(255, 255, 255, 0.08), 0 14px 35px rgba(0, 0, 0, 0.85);
-      color: #fff; font-weight: 600; font-size: 0.95rem; padding: 12px 28px; border-radius: 99px;
-      display: flex; align-items: center; gap: 8px; z-index: 100; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: rgba(255, 255, 255, 0.02); 
+      backdrop-filter: blur(25px) saturate(120%); -webkit-backdrop-filter: blur(25px) saturate(120%);
+      border: 1px solid rgba(255, 255, 255, 0.15); 
+      box-shadow: 
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.7), 
+        inset 0 -1.5px 2px rgba(255, 255, 255, 0.3), 
+        inset 1.5px 0 2px rgba(255, 255, 255, 0.4),
+        inset -1.5px 0 2px rgba(255, 255, 255, 0.4),
+        inset 0 0 12px rgba(255, 255, 255, 0.05),
+        0 14px 35px rgba(0, 0, 0, 0.85);
+      color: #fff; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; padding: 12px 32px; border-radius: 99px;
+      display: flex; align-items: center; justify-content: center; z-index: 100; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .fab-reorder:active { transform: translateX(-50%) scale(0.95); }
     .fab-reorder.active { background: #ffffff; color: #000000; border-color: #ffffff; box-shadow: 0 12px 35px rgba(255, 255, 255, 0.3); }
-    body.light-theme .fab-reorder { background: rgba(255, 255, 255, 0.45); color: #000; border-color: rgba(255,255,255,0.8); }
-    body.light-theme .fab-reorder.active { background: #0f172a; color: #fff; }
+    
+    body.light-theme .fab-reorder { 
+      background: rgba(0, 0, 0, 0.02); color: #000; border-color: rgba(255, 255, 255, 0.6); 
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 1), inset 0 -1.5px 2px rgba(0, 0, 0, 0.1), inset 1.5px 0 2px rgba(255, 255, 255, 0.8), inset -1.5px 0 2px rgba(255, 255, 255, 0.8), 0 12px 30px rgba(0, 0, 0, 0.15); 
+    }
+    body.light-theme .fab-reorder.active { background: #0f172a; color: #fff; border-color: #0f172a; }
 
     header { padding: 8px 4px 4px 4px; overflow: visible; }
     .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 8px; overflow: visible; }
@@ -232,16 +243,9 @@
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     
-    /* Locked State: Dark, desaturated, heavy frost */
-    .badge-card.locked {
-      opacity: 0.6; filter: grayscale(100%);
-      box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
-    }
-    
-    /* Unlocked States: Glowing Neon Glass */
+    .badge-card.locked { opacity: 0.6; filter: grayscale(100%); box-shadow: inset 0 1px 1px rgba(255,255,255,0.1); }
     .badge-card.unlocked { opacity: 1; filter: grayscale(0%); transform: scale(1.02); }
     .badge-card.unlocked .badge-icon { animation: badgePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    
     @keyframes badgePop { 0% { transform: scale(0.5); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
     
     .glow-spark { box-shadow: 0 0 18px var(--glow-spark), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-spark); border-color: rgba(251, 146, 60, 0.5); }
@@ -403,9 +407,9 @@
     
   </div>
 
-  <!-- FLOATING REORDER PILL -->
+<!-- FLOATING REORDER PILL -->
   <div class="fab-reorder" id="reorder-fab">
-    <span>↕️</span> Reorder
+    Reorder
   </div>
 
   <!-- SETTINGS MODAL -->
