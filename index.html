@@ -543,11 +543,21 @@
       }
     };
 
-    // --- CORE DATA LOGIC & SAFE UPGRADE PATCH ---
-    let habits = JSON.parse(localStorage.getItem('winstreak_habits')) || [];
-    let meta = JSON.parse(localStorage.getItem('winstreak_meta')) || {};
+    // --- ARMOR-PLATED DATA RECOVERY ---
+    let habits = [];
+    let meta = {};
 
-    // 🚀 BACKWARD COMPATIBILITY PATCH (Fixes the crash on old data)
+    try {
+      const hData = JSON.parse(localStorage.getItem('winstreak_habits'));
+      if (Array.isArray(hData)) habits = hData;
+    } catch(e) { console.error("Habit parse error safely caught."); }
+
+    try {
+      const mData = JSON.parse(localStorage.getItem('winstreak_meta'));
+      if (mData && typeof mData === 'object') meta = mData;
+    } catch(e) { console.error("Meta parse error safely caught."); }
+
+    // 🚀 INSTRUCTIBLE BACKWARD COMPATIBILITY PATCH
     if (!meta.history) meta.history = {};
     if (typeof meta.currentStreak !== 'number') meta.currentStreak = 0;
     if (typeof meta.bestStreak !== 'number') meta.bestStreak = 0;
@@ -559,7 +569,8 @@
       if (typeof habit.paused === 'undefined') habit.paused = false;
       if (typeof habit.streak !== 'number') habit.streak = 0;
     });
-    // Save the patched data so it never crashes again
+
+    // Save repaired data back to storage instantly
     localStorage.setItem('winstreak_habits', JSON.stringify(habits));
     localStorage.setItem('winstreak_meta', JSON.stringify(meta));
 
@@ -577,19 +588,12 @@
 
     function checkDailyReset() {
       const today = getTodayStr();
-      
       if (meta.lastActiveDate !== today) {
-        if (!isYesterday(meta.lastActiveDate) && meta.lastActiveDate !== null) {
-          meta.currentStreak = 0; 
-        }
-        
+        if (!isYesterday(meta.lastActiveDate) && meta.lastActiveDate !== null) meta.currentStreak = 0; 
         habits.forEach(h => {
-          if (!h.paused && !isYesterday(h.lastCompleted)) {
-            h.streak = 0; 
-          }
+          if (!h.paused && !isYesterday(h.lastCompleted)) h.streak = 0; 
           h.completedToday = false; 
         });
-        
         meta.lastActiveDate = today;
         saveData();
       }
@@ -615,13 +619,10 @@
           meta.currentStreak = Math.max(0, meta.currentStreak - 1);
         }
       }
-      
-      saveData();
-      updateUI();
-      checkAchievements(); 
+      saveData(); updateUI(); checkAchievements(); 
     }
 
-    // --- GAMIFICATION / TROPHY LOGIC ---
+    // --- GAMIFICATION LOGIC ---
     function checkAchievements() {
       const best = meta.bestStreak || 0;
       let maxSingle = 0;
@@ -630,19 +631,15 @@
       const toggleBadge = (id, unlocked, glowClass) => {
         const el = document.getElementById(id);
         if(!el) return;
-        if(unlocked) {
-          el.classList.remove('locked'); el.classList.add('unlocked', glowClass);
-        } else {
-          el.classList.add('locked'); el.classList.remove('unlocked', glowClass);
-        }
+        if(unlocked) { el.classList.remove('locked'); el.classList.add('unlocked', glowClass); } 
+        else { el.classList.add('locked'); el.classList.remove('unlocked', glowClass); }
       };
 
-      // Global
       toggleBadge('badge-spark', best >= 3, 'glow-spark');
       toggleBadge('badge-surge', best >= 7, 'glow-surge');
       toggleBadge('badge-unstoppable', best >= 14, 'glow-unstoppable');
       toggleBadge('badge-apex', best >= 30, 'glow-apex');
-      // Single
+      
       toggleBadge('badge-seed', maxSingle >= 3, 'glow-seed');
       toggleBadge('badge-iron', maxSingle >= 7, 'glow-iron');
       toggleBadge('badge-nature', maxSingle >= 21, 'glow-nature');
@@ -684,7 +681,6 @@
         const dayName = d.toLocaleDateString('en-US', { weekday: 'narrow' });
         
         const isToday = dateStr === currentDayStr;
-        // Safely check history
         const isDone = meta.history && meta.history[dateStr] === true;
         
         weekContainer.innerHTML += `
@@ -731,9 +727,7 @@
           li.innerHTML = `
             <div class="drag-handle">☰</div>
             <div class="habit-left" style="pointer-events:none;">
-              <div class="habit-text-wrap">
-                <span class="habit-title">${habit.text}</span>
-              </div>
+              <div class="habit-text-wrap"><span class="habit-title">${habit.text}</span></div>
             </div>
             <div class="reorder-actions">
               <button class="reorder-move-btn" onclick="moveHabit(${realIndex}, -1)">↑</button>
@@ -743,9 +737,7 @@
         } else {
           li.innerHTML = `
             <div class="habit-left" onclick="toggleHabit(${realIndex})">
-              <div class="custom-checkbox">
-                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              </div>
+              <div class="custom-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
               <div class="habit-text-wrap">
                 <span class="habit-title">${habit.text}</span>
                 ${habit.streak > 0 ? `<span class="mini-streak">🔥 ${habit.streak}</span>` : ''}
@@ -753,9 +745,7 @@
               </div>
             </div>
             <div class="habit-actions">
-              <button class="action-btn pause-btn" onclick="togglePause(${realIndex})" title="${habit.paused ? 'Resume' : 'Pause'}">
-                ${habit.paused ? '▶' : '⏸'}
-              </button>
+              <button class="action-btn pause-btn" onclick="togglePause(${realIndex})" title="${habit.paused ? 'Resume' : 'Pause'}">${habit.paused ? '▶' : '⏸'}</button>
               <button class="action-btn delete-btn" onclick="deleteHabit(${realIndex})">🗑</button>
             </div>
           `;
@@ -769,26 +759,20 @@
       const input = document.getElementById('habit-input');
       const cat = document.getElementById('habit-category').value;
       const text = input.value.trim();
-      
       if (text) {
         habits.push({ id: Date.now(), text, completedToday: false, streak: 0, lastCompleted: null, category: cat, paused: false });
         input.value = ''; sfx.pop(); saveData(); renderHabits(); updateUI();
       } else {
-        sfx.error(); input.classList.add('shake');
-        setTimeout(() => input.classList.remove('shake'), 400);
+        sfx.error(); input.classList.add('shake'); setTimeout(() => input.classList.remove('shake'), 400);
       }
     }
 
     window.toggleHabit = (index) => {
       const h = habits[index];
       if (h.paused) return; 
-      
       h.completedToday = !h.completedToday;
-      if (h.completedToday) {
-        h.streak += 1; h.lastCompleted = getTodayStr(); sfx.check();
-      } else {
-        h.streak = Math.max(0, h.streak - 1); h.lastCompleted = null; sfx.uncheck();
-      }
+      if (h.completedToday) { h.streak += 1; h.lastCompleted = getTodayStr(); sfx.check(); } 
+      else { h.streak = Math.max(0, h.streak - 1); h.lastCompleted = null; sfx.uncheck(); }
       saveData(); renderHabits(); calculateStreaks();
     };
 
@@ -799,16 +783,12 @@
     };
 
     window.deleteHabit = (index) => {
-      if(confirm('Delete this habit permanently?')) {
-        habits.splice(index, 1); sfx.delete(); saveData(); renderHabits(); calculateStreaks();
-      }
+      if(confirm('Delete this habit permanently?')) { habits.splice(index, 1); sfx.delete(); saveData(); renderHabits(); calculateStreaks(); }
     };
 
     window.moveHabit = (index, direction) => {
       if (index + direction < 0 || index + direction >= habits.length) return;
-      const temp = habits[index];
-      habits[index] = habits[index + direction];
-      habits[index + direction] = temp;
+      const temp = habits[index]; habits[index] = habits[index + direction]; habits[index + direction] = temp;
       sfx.pop(); saveData(); renderHabits();
     };
 
@@ -838,18 +818,14 @@
       sfx.pop(); renderHabits();
     });
 
-    // Modals
     document.getElementById('settings-btn').addEventListener('click', () => document.getElementById('settings-modal').classList.add('active'));
     document.getElementById('close-settings').addEventListener('click', () => document.getElementById('settings-modal').classList.remove('active'));
     
     document.getElementById('achievements-btn').addEventListener('click', () => {
-      checkAchievements();
-      document.getElementById('achievements-modal').classList.add('active');
-      sfx.pop();
+      checkAchievements(); document.getElementById('achievements-modal').classList.add('active'); sfx.pop();
     });
     document.getElementById('close-achievements').addEventListener('click', () => document.getElementById('achievements-modal').classList.remove('active'));
 
-    // Settings logic
     document.getElementById('theme-dark').addEventListener('click', () => {
       document.body.classList.remove('light-theme'); meta.theme = 'dark';
       document.getElementById('theme-dark').classList.add('active'); document.getElementById('theme-light').classList.remove('active');
@@ -861,11 +837,8 @@
       saveData(); sfx.pop();
     });
     
-    document.getElementById('sound-toggle').addEventListener('change', (e) => {
-      soundEnabled = e.target.checked; if(soundEnabled) sfx.pop();
-    });
+    document.getElementById('sound-toggle').addEventListener('change', (e) => { soundEnabled = e.target.checked; if(soundEnabled) sfx.pop(); });
 
-    // Data backup
     document.getElementById('export-data').addEventListener('click', () => {
       const dataStr = JSON.stringify({ habits, meta });
       const blob = new Blob([dataStr], { type: 'application/json' });
@@ -881,8 +854,9 @@
         try {
           const parsed = JSON.parse(event.target.result);
           if(parsed.habits && parsed.meta) {
-            habits = parsed.habits; meta = parsed.meta;
-            saveData(); location.reload();
+            localStorage.setItem('winstreak_habits', JSON.stringify(parsed.habits));
+            localStorage.setItem('winstreak_meta', JSON.stringify(parsed.meta));
+            location.reload();
           } else alert('Invalid backup file.');
         } catch(err) { alert('Failed to read file.'); }
       };
