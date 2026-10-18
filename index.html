@@ -580,10 +580,6 @@
       if (typeof habit.streak !== 'number') habit.streak = 0;
     });
 
-    // Save repaired data back to storage instantly
-    localStorage.setItem('winstreak_habits', JSON.stringify(habits));
-    localStorage.setItem('winstreak_meta', JSON.stringify(meta));
-
     const getTodayStr = () => new Date().toISOString().split('T')[0];
     const isYesterday = (dateStr) => {
       if(!dateStr) return false;
@@ -845,9 +841,30 @@
       sfx.pop(); saveData(); renderHabits();
     };
 
-    const saveData = () => {
+    // --- UPGRADED SAVEDATA: LOCAL + CLOUD SYNC ---
+    const saveData = async () => {
+      // 1. Save locally instantly so the app never feels slow
       localStorage.setItem('winstreak_habits', JSON.stringify(habits));
       localStorage.setItem('winstreak_meta', JSON.stringify(meta));
+
+      // 2. Silently sync to your Python Backend
+      try {
+        const payload = {
+          username: "RIDER", 
+          habits: habits,
+          meta: meta
+        };
+        
+        // Fire the HTTP request to your local FastAPI server
+        fetch('http://127.0.0.1:8000/api/sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(err => console.log("Backend offline - saved locally."));
+        
+      } catch (error) {
+        console.error("Sync error:", error);
+      }
     };
 
     // --- EVENT LISTENERS ---
@@ -917,6 +934,8 @@
     });
 
     // Boot up
+    // Run an initial patch save to ensure fresh data hits the backend on first load
+    saveData();
     checkDailyReset();
     updateUI();
     renderHabits();
