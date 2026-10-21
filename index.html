@@ -15,17 +15,17 @@
     :root {
       --bg: #000000; 
       
-      /* TRUE IOS REFRACTIVE THICK GLASS */
-      --module-bg: rgba(255, 255, 255, 0.05); 
-      --module-border: rgba(255, 255, 255, 0.24);
+      /* THICK IOS REFRACTIVE GLASS */
+      --module-bg: rgba(255, 255, 255, 0.02); 
+      --module-border: rgba(255, 255, 255, 0.15);
       --module-highlight: 
-        inset 0 2px 2px 0 rgba(255, 255, 255, 0.55),
-        inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.18),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.14),
-        inset 0 0 28px 2px rgba(255, 255, 255, 0.07),
-        0 20px 45px -10px rgba(0, 0, 0, 0.85);
+        inset 0 4px 6px -2px rgba(255, 255, 255, 0.5),   
+        inset 0 -4px 6px -2px rgba(0, 0, 0, 0.3),        
+        inset 0 0 0 1px rgba(255, 255, 255, 0.12),       
+        inset 0 0 20px rgba(255, 255, 255, 0.02),        
+        0 12px 32px rgba(0, 0, 0, 0.5);                  
       
-      --glass-filter: blur(80px) saturate(145%) brightness(1.08);
+      --glass-filter: blur(4px) saturate(120%);
       
       --text-main: #f8fafc; --text-sub: #94a3b8;
       
@@ -34,8 +34,8 @@
       --danger: #f43f5e;
       --streak-fire: #fb923c; --streak-bg: rgba(251, 146, 60, 0.12); --streak-border: rgba(251, 146, 60, 0.28);
       
-      --input-bg: rgba(0, 0, 0, 0.35);
-      --modal-overlay: rgba(0, 0, 0, 0.80);
+      --input-bg: rgba(0, 0, 0, 0.4);
+      --modal-overlay: rgba(0, 0, 0, 0.65);
       
       /* ACHIEVEMENT GLOW COLORS */
       --glow-spark: rgba(251, 146, 60, 0.5);   
@@ -86,7 +86,7 @@
     .orb-2 { position: fixed; width: 360px; height: 360px; bottom: 8%; right: -12%; background: rgba(168, 85, 247, 0.44); filter: blur(45px); border-radius: 50%; z-index: 0; pointer-events: none; }
     .orb-3 { position: fixed; width: 260px; height: 260px; top: 42%; left: 18%; background: rgba(16, 185, 129, 0.38); filter: blur(45px); border-radius: 50%; z-index: 0; pointer-events: none; }
 
-    /* UPGRADED REORDER PILL - ULTRA TRANSPARENT & REFLECTIVE */
+    /* UPGRADED REORDER PILL */
     .fab-reorder {
       position: fixed; bottom: max(24px, env(safe-area-inset-bottom, 24px)); left: 50%; transform: translateX(-50%);
       background: rgba(255, 255, 255, 0.02); 
@@ -118,27 +118,27 @@
     header h1 { font-size: 1.55rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; background: linear-gradient(135deg, var(--text-main) 50%, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .header-actions { display: flex; align-items: center; gap: 8px; }
     
-    .date-badge { font-size: 0.75rem; color: var(--accent); background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); padding: 6px 13px; border-radius: 20px; border: 1.5px solid var(--module-border); font-weight: 600; white-space: nowrap; box-shadow: var(--module-highlight); }
-    .icon-btn { background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1.5px solid var(--module-border); color: var(--text-sub); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s ease; flex-shrink: 0; box-shadow: var(--module-highlight); }
-    .icon-btn:hover { color: var(--accent); border-color: var(--accent); transform: rotate(30deg); }
+    .date-badge { font-size: 0.75rem; color: var(--accent); background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); padding: 6px 13px; border-radius: 20px; border: 1px solid var(--module-border); font-weight: 600; white-space: nowrap; box-shadow: var(--module-highlight); }
+    .icon-btn { background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1px solid var(--module-border); color: var(--text-sub); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s ease; flex-shrink: 0; box-shadow: var(--module-highlight); }
+    .icon-btn:hover { color: var(--accent); border-color: rgba(56, 189, 248, 0.4); transform: rotate(30deg); }
     header p { color: var(--text-sub); font-size: 0.88rem; }
 
     .streak-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .streak-card { background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1.5px solid var(--module-border); padding: 14px 16px; border-radius: 24px; display: flex; align-items: center; gap: 12px; box-shadow: var(--module-highlight); }
+    .streak-card { background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1px solid var(--module-border); padding: 14px 16px; border-radius: 24px; display: flex; align-items: center; gap: 12px; box-shadow: var(--module-highlight); }
     .streak-icon { font-size: 1.6rem; line-height: 1; filter: drop-shadow(0 2px 4px rgba(251,146,60,0.4)); }
     .streak-info .streak-count { font-size: 1.25rem; font-weight: 800; color: var(--streak-fire); line-height: 1.1; }
     .streak-info .streak-label { font-size: 0.7rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; font-weight: 600; }
 
-    .week-history { background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1.5px solid var(--module-border); border-radius: 24px; padding: 14px 16px; box-shadow: var(--module-highlight); }
+    .week-history { background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1px solid var(--module-border); border-radius: 24px; padding: 14px 16px; box-shadow: var(--module-highlight); }
     .week-header { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-sub); margin-bottom: 10px; display: flex; justify-content: space-between; }
     .week-bubbles { display: flex; justify-content: space-between; gap: 4px; }
     .day-column { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
     .day-name { font-size: 0.68rem; color: var(--text-sub); font-weight: 600; }
-    .day-bubble { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.04); border: 1.5px solid var(--module-border); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; color: var(--text-sub); box-shadow: inset 0 1px 1px rgba(255,255,255,0.35), inset 0 0 8px rgba(255,255,255,0.05); transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .day-bubble { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.04); border: 1px solid var(--module-border); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; color: var(--text-sub); box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), inset 0 0 8px rgba(255,255,255,0.02); transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
     .day-bubble.today { border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow), inset 0 1px 2px rgba(255,255,255,0.4); }
     .day-bubble.done { background: var(--completed-bg); border-color: var(--completed); color: var(--completed); transform: scale(1.06); box-shadow: 0 0 12px var(--completed-glow), inset 0 1px 2px rgba(255,255,255,0.4); }
 
-    .progress-section { background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); padding: 16px; border-radius: 24px; border: 1.5px solid var(--module-border); box-shadow: var(--module-highlight); }
+    .progress-section { background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); padding: 16px; border-radius: 24px; border: 1px solid var(--module-border); box-shadow: var(--module-highlight); }
     .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; font-size: 0.88rem; font-weight: 700; }
     .progress-header .percentage { color: var(--accent); font-size: 1rem; font-weight: 800; }
     .progress-bar-bg { width: 100%; height: 10px; background-color: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden; margin-bottom: 9px; position: relative; box-shadow: inset 0 1px 3px rgba(0,0,0,0.6); }
@@ -148,18 +148,18 @@
     @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
     .progress-status { font-size: 0.82rem; color: var(--text-sub); font-weight: 500; }
 
-    .input-form { display: flex; flex-direction: column; gap: 9px; background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); padding: 14px; border-radius: 24px; border: 1.5px solid var(--module-border); box-shadow: var(--module-highlight); }
-    .input-form input { width: 100%; background: var(--input-bg); backdrop-filter: blur(20px); border: 1.5px solid rgba(255,255,255,0.16); color: var(--text-main); padding: 12px 16px; border-radius: 14px; font-size: 0.95rem; outline: none; transition: all 0.2s ease; box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255,255,255,0.03); user-select: text; -webkit-user-select: text; }
-    .input-form input:focus, .category-select:focus, .edit-input:focus, .edit-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+    .input-form { display: flex; flex-direction: column; gap: 9px; background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); padding: 14px; border-radius: 24px; border: 1px solid var(--module-border); box-shadow: var(--module-highlight); }
+    .input-form input { width: 100%; background: var(--input-bg); border: 1px solid rgba(255,255,255,0.05); color: var(--text-main); padding: 12px 16px; border-radius: 14px; font-size: 0.95rem; outline: none; transition: all 0.2s ease; box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6); user-select: text; -webkit-user-select: text; }
+    .input-form input:focus, .category-select:focus, .edit-input:focus, .edit-select:focus { border-color: rgba(56, 189, 248, 0.4); box-shadow: inset 0 2px 5px rgba(0,0,0,0.6), 0 0 0 2px var(--accent-glow); }
     .input-actions-row { display: flex; gap: 8px; width: 100%; }
-    .category-select { flex: 1; background: var(--input-bg); backdrop-filter: blur(20px); border: 1.5px solid rgba(255,255,255,0.16); color: var(--text-main); padding: 11px 12px; border-radius: 14px; font-size: 0.88rem; outline: none; cursor: pointer; }
+    .category-select { flex: 1; background: var(--input-bg); border: 1px solid rgba(255,255,255,0.05); color: var(--text-main); padding: 11px 12px; border-radius: 14px; font-size: 0.88rem; outline: none; cursor: pointer; box-shadow: inset 0 2px 5px rgba(0,0,0,0.6); }
     .add-btn { background: linear-gradient(135deg, var(--accent), #2563eb); color: #ffffff; border: none; font-weight: 700; padding: 0 20px; border-radius: 14px; cursor: pointer; font-size: 0.92rem; transition: all 0.2s ease; flex-shrink: 0; box-shadow: 0 4px 16px var(--accent-glow), inset 0 1.5px 1px rgba(255,255,255,0.45); }
     .add-btn:active { transform: scale(0.96); }
 
     .filter-bar { display: flex; gap: 8px; overflow-x: auto; padding: 6px 2px; scrollbar-width: none; -webkit-overflow-scrolling: touch; align-items: center; }
     .filter-bar::-webkit-scrollbar { display: none; }
-    .filter-btn { background: rgba(255, 255, 255, 0.04); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1.5px solid rgba(255, 255, 255, 0.22); color: var(--text-sub); padding: 8px 16px; border-radius: 99px; font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s ease; box-shadow: inset 0 1.5px 1.5px rgba(255, 255, 255, 0.45), inset 0 -1px 1px rgba(255, 255, 255, 0.12), inset 0 0 12px rgba(255, 255, 255, 0.06); }
-    .filter-btn:hover { border-color: rgba(255, 255, 255, 0.4); color: var(--text-main); }
+    .filter-btn { background: rgba(255, 255, 255, 0.04); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-sub); padding: 8px 16px; border-radius: 99px; font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s ease; box-shadow: inset 0 1.5px 1.5px rgba(255, 255, 255, 0.15), inset 0 -1px 1px rgba(255, 255, 255, 0.05); }
+    .filter-btn:hover { border-color: rgba(255, 255, 255, 0.2); color: var(--text-main); }
     .filter-btn.active { background: #ffffff; color: #000000; border-color: #ffffff; box-shadow: none; font-weight: 700; }
     body.light-theme .filter-btn { background: rgba(255, 255, 255, 0.45); border-color: rgba(0, 0, 0, 0.1); color: #475569; }
     body.light-theme .filter-btn.active { background: #0f172a; color: #ffffff; border-color: #0f172a; }
@@ -167,9 +167,9 @@
     .list-section-header { font-size: 0.8rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; padding-left: 4px; margin-top: 2px; }
     .habit-list { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-bottom: 40px; }
     
-    .habit-item { display: flex; align-items: center; justify-content: space-between; background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); padding: 14px 16px; border-radius: 22px; border: 1.5px solid var(--module-border); gap: 10px; transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1); position: relative; box-shadow: var(--module-highlight); }
+    .habit-item { display: flex; align-items: center; justify-content: space-between; background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); padding: 14px 16px; border-radius: 22px; border: 1px solid var(--module-border); gap: 10px; transition: all 0.3s cubic-bezier(0.34, 1.25, 0.64, 1); position: relative; box-shadow: var(--module-highlight); }
     .habit-item:active { transform: scale(0.985); }
-    .habit-item.paused { opacity: 0.55; border-color: rgba(148, 163, 184, 0.3); border-style: dashed; }
+    .habit-item.paused { opacity: 0.55; border-color: rgba(148, 163, 184, 0.15); border-style: dashed; }
     .habit-item.paused .habit-title { color: var(--text-sub); }
     .habit-item.paused .custom-checkbox { background: rgba(148, 163, 184, 0.05) !important; border-color: rgba(148, 163, 184, 0.2) !important; box-shadow: none !important; }
 
@@ -193,39 +193,39 @@
 
     .edit-mode-container { display: flex; flex-direction: column; gap: 8px; width: 100%; }
     .edit-controls-row { display: flex; gap: 6px; width: 100%; }
-    .edit-input { width: 100%; background: rgba(0,0,0,0.3); border: 1.5px solid var(--module-border); color: var(--text-main); padding: 9px 12px; border-radius: 10px; font-size: 0.9rem; outline: none; }
-    .edit-select { flex: 1; background: rgba(0,0,0,0.3); border: 1.5px solid var(--module-border); color: var(--text-main); padding: 7px 10px; border-radius: 10px; font-size: 0.82rem; outline: none; }
+    .edit-input { width: 100%; background: var(--input-bg); border: 1px solid rgba(255,255,255,0.05); color: var(--text-main); padding: 9px 12px; border-radius: 10px; font-size: 0.9rem; outline: none; box-shadow: inset 0 2px 5px rgba(0,0,0,0.6); }
+    .edit-select { flex: 1; background: var(--input-bg); border: 1px solid rgba(255,255,255,0.05); color: var(--text-main); padding: 7px 10px; border-radius: 10px; font-size: 0.82rem; outline: none; box-shadow: inset 0 2px 5px rgba(0,0,0,0.6); }
     .edit-btn-save { background: var(--completed); border: none; color: #ffffff; padding: 7px 14px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
-    .edit-btn-cancel { background: transparent; border: 1.5px solid var(--module-border); color: var(--text-sub); padding: 7px 12px; border-radius: 10px; font-size: 0.85rem; cursor: pointer; }
+    .edit-btn-cancel { background: transparent; border: 1px solid var(--module-border); color: var(--text-sub); padding: 7px 12px; border-radius: 10px; font-size: 0.85rem; cursor: pointer; }
 
     /* Modals & Settings */
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--modal-overlay); backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--modal-overlay); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
     .modal-overlay.active { display: flex; }
-    .modal-card { background: rgba(18, 24, 38, 0.45); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1.5px solid var(--module-border); border-radius: 28px; width: 100%; max-width: 400px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: var(--module-highlight); animation: modalSlideUp 0.25s ease-out; }
+    .modal-card { background: var(--module-bg); backdrop-filter: var(--glass-filter); -webkit-backdrop-filter: var(--glass-filter); border: 1px solid var(--module-border); border-radius: 28px; width: 100%; max-width: 400px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: var(--module-highlight); animation: modalSlideUp 0.25s ease-out; }
     @keyframes modalSlideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 22px 22px 16px 22px; border-bottom: 1px solid var(--module-border); flex-shrink: 0; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 22px 22px 16px 22px; border-bottom: 1px solid rgba(255,255,255,0.05); flex-shrink: 0; }
     .modal-header h2 { font-size: 1.2rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
     .close-modal-btn { background: transparent; border: none; color: var(--text-sub); cursor: pointer; font-size: 1.2rem; padding: 4px; }
     
     .modal-body { overflow-y: auto; padding: 0 22px 22px 22px; scrollbar-width: none; }
     .modal-body::-webkit-scrollbar { display: none; }
 
-    .setting-group { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--module-border); }
+    .setting-group { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .setting-info h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
     .setting-info p { font-size: 0.75rem; color: var(--text-sub); }
-    .theme-toggle-wrap { display: flex; background: rgba(0,0,0,0.25); border: 1.5px solid var(--module-border); border-radius: 30px; padding: 3px; gap: 2px; }
+    .theme-toggle-wrap { display: flex; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 30px; padding: 3px; gap: 2px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.6); }
     .theme-btn { background: transparent; border: none; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; cursor: pointer; color: var(--text-sub); display: flex; align-items: center; gap: 4px; font-weight: 600; }
-    .theme-btn.active { background: #ffffff; color: #000000; font-weight: 700; }
+    .theme-btn.active { background: rgba(255,255,255,0.1); color: #ffffff; font-weight: 700; }
     .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
     .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255, 255, 255, 0.15); transition: .25s; border-radius: 34px; border: 1px solid rgba(255, 255, 255, 0.2); }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255, 255, 255, 0.1); transition: .25s; border-radius: 34px; border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: inset 0 2px 5px rgba(0,0,0,0.6); }
     body.light-theme .slider { background-color: rgba(0, 0, 0, 0.15); border: 1px solid rgba(0, 0, 0, 0.08); }
     .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 2px; bottom: 2px; background-color: white; transition: .25s; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.25); }
     input:checked + .slider { background-color: var(--completed); border-color: var(--completed); }
     input:checked + .slider:before { transform: translateX(20px); }
     .data-actions { display: flex; gap: 8px; margin-top: 8px; width: 100%; }
-    .data-btn { flex: 1; background: rgba(0,0,0,0.25); border: 1.5px solid var(--module-border); color: var(--text-main); padding: 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s ease; box-shadow: inset 0 1px 1px rgba(255,255,255,0.25); }
-    .data-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .data-btn { flex: 1; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); color: var(--text-main); padding: 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s ease; box-shadow: inset 0 2px 5px rgba(0,0,0,0.6); }
+    .data-btn:hover { border-color: rgba(56, 189, 248, 0.4); color: var(--accent); }
     .modal-footer { padding-top: 18px; text-align: right; }
     .empty-state { text-align: center; padding: 28px 16px; color: var(--text-sub); font-size: 0.9rem; }
 
@@ -236,27 +236,28 @@
     
     .badge-card {
       background: rgba(255,255,255,0.02);
-      border: 1.5px solid var(--module-border);
+      border: 1px solid rgba(255,255,255,0.05);
       border-radius: 18px;
       padding: 16px 12px;
       display: flex; flex-direction: column; align-items: center; text-align: center;
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
     }
     
-    .badge-card.locked { opacity: 0.6; filter: grayscale(100%); box-shadow: inset 0 1px 1px rgba(255,255,255,0.1); }
+    .badge-card.locked { opacity: 0.6; filter: grayscale(100%); }
     .badge-card.unlocked { opacity: 1; filter: grayscale(0%); transform: scale(1.02); }
     .badge-card.unlocked .badge-icon { animation: badgePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
     @keyframes badgePop { 0% { transform: scale(0.5); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
     
-    .glow-spark { box-shadow: 0 0 18px var(--glow-spark), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-spark); border-color: rgba(251, 146, 60, 0.5); }
-    .glow-surge { box-shadow: 0 0 18px var(--glow-surge), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-surge); border-color: rgba(56, 189, 248, 0.5); }
-    .glow-unstoppable { box-shadow: 0 0 18px var(--glow-unstoppable), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-unstoppable); border-color: rgba(217, 70, 239, 0.5); }
-    .glow-apex { box-shadow: 0 0 18px var(--glow-apex), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-apex); border-color: rgba(220, 38, 38, 0.6); }
+    .glow-spark { box-shadow: 0 0 18px var(--glow-spark), inset 0 2px 2px rgba(255,255,255,0.2), inset 0 0 20px var(--glow-spark); border-color: rgba(251, 146, 60, 0.5); }
+    .glow-surge { box-shadow: 0 0 18px var(--glow-surge), inset 0 2px 2px rgba(255,255,255,0.2), inset 0 0 20px var(--glow-surge); border-color: rgba(56, 189, 248, 0.5); }
+    .glow-unstoppable { box-shadow: 0 0 18px var(--glow-unstoppable), inset 0 2px 2px rgba(255,255,255,0.2), inset 0 0 20px var(--glow-unstoppable); border-color: rgba(217, 70, 239, 0.5); }
+    .glow-apex { box-shadow: 0 0 18px var(--glow-apex), inset 0 2px 2px rgba(255,255,255,0.2), inset 0 0 20px var(--glow-apex); border-color: rgba(220, 38, 38, 0.6); }
     
-    .glow-seed { box-shadow: 0 0 18px var(--glow-seed), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-seed); border-color: rgba(16, 185, 129, 0.5); }
-    .glow-iron { box-shadow: 0 0 18px var(--glow-iron), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-iron); border-color: rgba(100, 116, 139, 0.6); }
-    .glow-nature { box-shadow: 0 0 18px var(--glow-nature), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-nature); border-color: rgba(147, 51, 234, 0.5); }
-    .glow-ascended { box-shadow: 0 0 18px var(--glow-ascended), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 0 20px var(--glow-ascended); border-color: rgba(244, 114, 182, 0.5); }
+    .glow-seed { box-shadow: 0 0 18px var(--glow-seed), inset 0 2px 2px rgba(255,255,255,0.2), inset 0 0 20px var(--glow-seed); border-color: rgba(16, 185, 129, 0.5); }
+    .glow-iron { box-shadow: 0 0 18px var(--glow-iron), inset 0 2px 2px rgba(255,255,255,0.2), inset 0 0 20px var(--glow-iron); border-color: rgba(100, 116, 139, 0.6); }
+    .glow-nature { box-shadow: 0 0 18px var(--glow-nature), inset 0 2px 2px rgba(255,255,255,0.2), inset 0 0 20px var(--glow-nature); border-color: rgba(147, 51, 234, 0.5); }
+    .glow-ascended { box-shadow: 0 0 18px var(--glow-ascended), inset 0 2px 2px rgba(255,255,255,0.2), inset 0 0 20px var(--glow-ascended); border-color: rgba(244, 114, 182, 0.5); }
 
     .badge-icon { font-size: 2.2rem; margin-bottom: 6px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
     .badge-title { font-size: 0.85rem; font-weight: 800; color: var(--text-main); margin-bottom: 2px; }
@@ -298,14 +299,89 @@
     .habit-item[data-cat="general"].done .custom-checkbox { background-color: var(--c-general); box-shadow: 0 0 14px var(--c-general); }
 
     .reorder-actions { display: flex; gap: 8px; }
-    .reorder-move-btn { background: rgba(0,0,0,0.3); border: 1.5px solid var(--module-border); color: var(--text-main); font-size: 1.2rem; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; }
-    .reorder-move-btn:active { background: rgba(255,255,255,0.2); transform: scale(0.95); }
+    .reorder-move-btn { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); color: var(--text-main); font-size: 1.2rem; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; box-shadow: inset 0 2px 5px rgba(0,0,0,0.6); }
+    .reorder-move-btn:active { background: rgba(255,255,255,0.1); transform: scale(0.95); }
     .drag-handle { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; color: var(--text-sub); flex-shrink: 0; }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- AMBIENT GLOWING ORBS -->
+<!-- Auth Overlay -->
+<div id="authScreen" style="position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(10px); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    
+    <div style="position: absolute; width: 300px; height: 300px; background: rgba(56, 189, 248, 0.2); filter: blur(60px); border-radius: 50%; top: 20%; left: 20%; pointer-events: none;"></div>
+    <div style="position: absolute; width: 300px; height: 300px; background: rgba(168, 85, 247, 0.2); filter: blur(60px); border-radius: 50%; bottom: 20%; right: 20%; pointer-events: none;"></div>
+
+    <div style="width: 340px; padding: 2.5rem; border-radius: 24px; background: rgba(255, 255, 255, 0.015); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: inset 0 4px 6px -2px rgba(255, 255, 255, 0.5), inset 0 -4px 6px -2px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.15), 0 24px 40px rgba(0, 0, 0, 0.6); text-align: center; position: relative; z-index: 1;">
+        
+        <img src="./icon.svg" style="width: 60px; height: 60px; margin-bottom: 1rem; border-radius: 14px; box-shadow: 0 0 20px rgba(56,189,248,0.4); border: 1px solid rgba(255,255,255,0.2);">
+        <h2 style="margin-top: 0; margin-bottom: 2rem; font-weight: 600; letter-spacing: 1px; color: #fff;">WinStreak</h2>
+        
+        <input type="text" id="authUsername" placeholder="Username" style="display: block; width: 100%; margin-bottom: 1rem; padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.4); color: white; outline: none; box-shadow: inset 0 2px 5px rgba(0,0,0,0.6); transition: all 0.2s;">
+        
+        <input type="password" id="authPassword" placeholder="Password" style="display: block; width: 100%; margin-bottom: 1.5rem; padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.4); color: white; outline: none; box-shadow: inset 0 2px 5px rgba(0,0,0,0.6); transition: all 0.2s;">
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <button onclick="authenticate('login')" style="flex: 1; padding: 1rem; border: 1px solid rgba(56,189,248,0.4); border-radius: 12px; background: rgba(56,189,248,0.1); color: #38bdf8; cursor: pointer; font-weight: 600; box-shadow: inset 0 1px 1px rgba(56,189,248,0.2); transition: all 0.2s;">Login</button>
+            <button onclick="authenticate('signup')" style="flex: 1; padding: 1rem; border: 1px solid rgba(56,189,248,0.4); border-radius: 12px; background: rgba(56,189,248,0.1); color: #38bdf8; cursor: pointer; font-weight: 600; box-shadow: inset 0 1px 1px rgba(56,189,248,0.2); transition: all 0.2s;">Sign Up</button>
+        </div>
+        
+        <!-- FORGOT PASSWORD LINK -->
+        <a href="#" onclick="showForgotPasswordMsg()" style="color: #94a3b8; font-size: 0.8rem; text-decoration: none; transition: color 0.2s;">Forgot Password?</a>
+        
+        <p id="authError" style="color: #f43f5e; margin-top: 1rem; font-size: 0.85rem; min-height: 20px;"></p>
+    </div>
+</div>
+
+<!-- Account Modal (With Security Hub) -->
+<div id="accountModal" style="display: none; position: fixed; inset: 0; z-index: 10000; align-items: center; justify-content: center; background: rgba(0,0,0,0.65); backdrop-filter: blur(10px); overflow-y: auto; padding: 20px;">
+    
+    <div style="width: 340px; padding: 2.5rem; border-radius: 24px; background: rgba(255, 255, 255, 0.015); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: inset 0 4px 6px -2px rgba(255, 255, 255, 0.5), inset 0 -4px 6px -2px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.15), 0 24px 40px rgba(0, 0, 0, 0.6); text-align: center; color: #fff; margin: auto;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h2 style="margin: 0; font-weight: 600; letter-spacing: 1px;">Profile</h2>
+            <button onclick="document.getElementById('accountModal').style.display='none'" style="background: none; border: none; color: #94a3b8; font-size: 1.2rem; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">✖</button>
+        </div>
+        
+        <div id="pfpContainer" style="width: 100px; height: 100px; border-radius: 50%; background: rgba(0,0,0,0.4); margin: 0 auto 2rem auto; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.08); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5), 0 8px 20px rgba(0,0,0,0.4); overflow: hidden; position: relative; transition: all 0.2s;" onclick="document.getElementById('pfpInput').click()">
+            <span id="pfpPlaceholder" style="font-size: 2rem; opacity: 0.5;">📷</span>
+            <img id="pfpPreviewImage" style="display: none; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+        </div>
+        <input type="file" id="pfpInput" style="display: none;" accept="image/*">
+        
+        <input type="text" id="displayNameInput" placeholder="Display Name" style="width: 100%; padding: 1rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; color: #fff; margin-bottom: 2rem; outline: none; text-align: center; font-size: 1.1rem; letter-spacing: 1px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.6);">
+        
+        <!-- NEW SECURITY HUB -->
+        <div style="margin-bottom: 2rem; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">
+            <h3 style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">Account Security</h3>
+            
+            <!-- Change Password Toggle -->
+            <button onclick="toggleSecurityUI('changePwUI')" style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: white; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s;">Change Password</button>
+            
+            <div id="changePwUI" style="display: none; margin-bottom: 1rem; padding-top: 5px;">
+                <input type="password" id="currentPwInput" placeholder="Current Password" style="width: 100%; padding: 0.8rem; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); color: white; outline: none;">
+                <input type="password" id="newPwInput" placeholder="New Password" style="width: 100%; padding: 0.8rem; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); color: white; outline: none;">
+                <button onclick="submitChangePassword()" style="width: 100%; padding: 0.8rem; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.5); border-radius: 8px; color: #10b981; font-weight: bold; cursor: pointer; transition: all 0.2s;">Confirm New Password</button>
+                <p id="secMsg1" style="color: #38bdf8; font-size: 0.8rem; margin-top: 5px; min-height: 15px;"></p>
+            </div>
+
+            <!-- Delete Account Toggle -->
+            <button onclick="toggleSecurityUI('deleteAccUI')" style="width: 100%; padding: 0.8rem; background: rgba(244, 63, 94, 0.05); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: 10px; color: #f43f5e; cursor: pointer; transition: all 0.2s;">Delete Account</button>
+            
+            <div id="deleteAccUI" style="display: none; margin-top: 0.5rem; padding-top: 5px;">
+                <input type="password" id="deletePwInput" placeholder="Enter Password to Confirm" style="width: 100%; padding: 0.8rem; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); color: white; outline: none;">
+                <button onclick="submitDeleteAccount()" style="width: 100%; padding: 0.8rem; background: rgba(244, 63, 94, 0.2); border: 1px solid rgba(244, 63, 94, 0.5); border-radius: 8px; color: #f43f5e; font-weight: bold; cursor: pointer; transition: all 0.2s;">Permanently Delete</button>
+                <p id="secMsg2" style="color: #f43f5e; font-size: 0.8rem; margin-top: 5px; min-height: 15px;"></p>
+            </div>
+        </div>
+
+        <button onclick="saveProfile()" style="width: 100%; padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255, 255, 255, 0.05); color: white; font-weight: 600; margin-bottom: 1rem; cursor: pointer; box-shadow: inset 0 1px 1px rgba(255,255,255,0.2); transition: all 0.2s;">Save Profile Data</button>
+        
+        <button onclick="logout()" style="width: 100%; padding: 1rem; border-radius: 12px; border: 1px solid rgba(244, 63, 94, 0.3); background: rgba(244, 63, 94, 0.05); color: #f43f5e; font-weight: 600; cursor: pointer; transition: all 0.2s;">Sign Out</button>
+    </div>
+</div>
+
+<!-- AMBIENT GLOWING ORBS -->
   <div class="orb-1"></div>
   <div class="orb-2"></div>
   <div class="orb-3"></div>
@@ -323,6 +399,11 @@
           <div class="date-badge" id="current-date">Today</div>
           <button class="icon-btn" id="achievements-btn" title="Trophy Cabinet">🏆</button>
           <button class="icon-btn" id="settings-btn" title="Settings">⚙️</button>
+          
+          <div id="headerPfp" onclick="document.getElementById('accountModal').style.display = 'flex'" style="width: 34px; height: 34px; border-radius: 50%; background: var(--module-bg); backdrop-filter: var(--glass-filter); cursor: pointer; overflow: hidden; border: 1px solid var(--module-border); display: flex; align-items: center; justify-content: center; box-shadow: var(--module-highlight); flex-shrink: 0; transition: all 0.25s ease;">
+              <span id="headerPfpPlaceholder" style="font-size: 1rem; opacity: 0.8;">👤</span>
+              <img id="headerPfpImage" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+          </div>
         </div>
       </div>
       <p id="motivational-quote">Consistency is your ultimate weapon.</p>
@@ -352,9 +433,7 @@
         <span>Current Week</span>
         <span id="week-range"></span>
       </div>
-      <div class="week-bubbles" id="week-bubbles">
-        <!-- Bubbles injected by JS -->
-      </div>
+      <div class="week-bubbles" id="week-bubbles"></div>
     </div>
 
     <!-- PROGRESS BAR MODULE -->
@@ -407,10 +486,7 @@
     
   </div>
 
-<!-- FLOATING REORDER PILL -->
-  <div class="fab-reorder" id="reorder-fab">
-    Reorder
-  </div>
+  <div class="fab-reorder" id="reorder-fab">Reorder</div>
 
   <!-- SETTINGS MODAL -->
   <div class="modal-overlay" id="settings-modal">
@@ -518,431 +594,535 @@
   </div>
 
 <script>
-    // --- SYNTHESIZER AUDIO SYSTEM ---
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let soundEnabled = true;
-
-    function playTone(freq, type, duration, vol) {
-      if (!soundEnabled) return;
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-      osc.connect(gain); gain.connect(audioCtx.destination);
-      osc.start(); osc.stop(audioCtx.currentTime + duration);
-    }
+  // --- AUTHENTICATION ---
+  async function authenticate(action) {
+    const userVal = document.getElementById('authUsername').value.trim();
+    const passVal = document.getElementById('authPassword').value.trim();
+    const errorText = document.getElementById('authError');
     
-    const sfx = {
-      pop: () => playTone(600, 'sine', 0.1, 0.3),
-      check: () => { playTone(400, 'sine', 0.05, 0.2); setTimeout(() => playTone(800, 'sine', 0.15, 0.3), 50); },
-      uncheck: () => { playTone(300, 'sine', 0.1, 0.2); },
-      delete: () => { playTone(200, 'sawtooth', 0.15, 0.2); },
-      error: () => { playTone(150, 'square', 0.2, 0.2); setTimeout(() => playTone(150, 'square', 0.2, 0.2), 100); },
-      tada: () => { 
-        [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
-          setTimeout(() => playTone(freq, 'sine', 0.3, 0.3), i * 100);
+    if (!userVal || !passVal) {
+        errorText.style.color = '#f43f5e';
+        errorText.innerText = "Please enter both username and password.";
+        return;
+    }
+
+    try {
+        const response = await fetch(`https://winstreak-by-rider.onrender.com/api/${action}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: userVal, password: passVal })
         });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            localStorage.setItem('currentUser', userVal);
+            document.getElementById('authScreen').style.display = 'none';
+        } else {
+            errorText.style.color = '#f43f5e';
+            errorText.innerText = data.detail || "Authentication failed.";
+        }
+    } catch (err) {
+        errorText.style.color = '#f43f5e';
+        errorText.innerText = "Cannot connect to server.";
+    }
+  }
+
+  function showForgotPasswordMsg() {
+      const msgBox = document.getElementById('authError');
+      msgBox.style.color = '#38bdf8';
+      msgBox.innerText = "To reset your password securely without an email server, please contact your administrator. (Automated Email resetting is coming in Phase 3!)";
+  }
+
+  window.onload = () => {
+      if (localStorage.getItem('currentUser')) {
+          document.getElementById('authScreen').style.display = 'none';
       }
+  };
+
+  // --- NEW SECURITY LOGIC ---
+  function toggleSecurityUI(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+
+  async function submitChangePassword() {
+      const currentPw = document.getElementById('currentPwInput').value;
+      const newPw = document.getElementById('newPwInput').value;
+      const userVal = localStorage.getItem('currentUser');
+      const msgBox = document.getElementById('secMsg1');
+      
+      if (!currentPw || !newPw) { msgBox.style.color = '#f43f5e'; msgBox.innerText = "Please fill out both fields."; return; }
+      
+      try {
+          const res = await fetch('https://winstreak-by-rider.onrender.com/api/change-password', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({ username: userVal, current_password: currentPw, new_password: newPw })
+          });
+          const data = await res.json();
+          if(res.ok) {
+              msgBox.style.color = '#10b981';
+              msgBox.innerText = "Password successfully updated!";
+              document.getElementById('currentPwInput').value = '';
+              document.getElementById('newPwInput').value = '';
+          } else {
+              msgBox.style.color = '#f43f5e';
+              msgBox.innerText = data.detail || "Error updating password.";
+          }
+      } catch(e) { msgBox.style.color = '#f43f5e'; msgBox.innerText = "Server connection failed."; }
+  }
+
+  async function submitDeleteAccount() {
+      const deletePw = document.getElementById('deletePwInput').value;
+      const userVal = localStorage.getItem('currentUser');
+      const msgBox = document.getElementById('secMsg2');
+      
+      if (!deletePw) { msgBox.innerText = "Please enter your password to confirm."; return; }
+      
+      if (!confirm("Are you absolutely sure? This will permanently wipe your data from the server and cannot be undone.")) return;
+      
+      try {
+          const res = await fetch('https://winstreak-by-rider.onrender.com/api/delete-account', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({ username: userVal, password: deletePw })
+          });
+          const data = await res.json();
+          if(res.ok) {
+              alert("Your account and data have been permanently deleted.");
+              logout(); 
+          } else {
+              msgBox.innerText = data.detail || "Invalid password. Deletion cancelled.";
+          }
+      } catch(e) { msgBox.innerText = "Server connection failed."; }
+  }
+
+  // --- SYNTHESIZER AUDIO SYSTEM ---
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  let soundEnabled = true;
+
+  function playTone(freq, type, duration, vol) {
+    if (!soundEnabled) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(); osc.stop(audioCtx.currentTime + duration);
+  }
+  
+  const sfx = {
+    pop: () => playTone(600, 'sine', 0.1, 0.3),
+    check: () => { playTone(400, 'sine', 0.05, 0.2); setTimeout(() => playTone(800, 'sine', 0.15, 0.3), 50); },
+    uncheck: () => { playTone(300, 'sine', 0.1, 0.2); },
+    delete: () => { playTone(200, 'sawtooth', 0.15, 0.2); },
+    error: () => { playTone(150, 'square', 0.2, 0.2); setTimeout(() => playTone(150, 'square', 0.2, 0.2), 100); },
+    tada: () => { 
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => { setTimeout(() => playTone(freq, 'sine', 0.3, 0.3), i * 100); });
+    }
+  };
+
+  // --- DATA RECOVERY & SYNC ---
+  let habits = [];
+  let meta = {};
+
+  try {
+    const hData = JSON.parse(localStorage.getItem('winstreak_habits'));
+    if (Array.isArray(hData)) habits = hData;
+  } catch(e) {}
+  try {
+    const mData = JSON.parse(localStorage.getItem('winstreak_meta'));
+    if (mData && typeof mData === 'object') meta = mData;
+  } catch(e) {}
+
+  if (!meta.history) meta.history = {};
+  if (typeof meta.currentStreak !== 'number') meta.currentStreak = 0;
+  if (typeof meta.bestStreak !== 'number') meta.bestStreak = 0;
+  if (!meta.theme) meta.theme = 'dark';
+  
+  habits.forEach((habit, i) => {
+    if (habit.name && !habit.text) habit.text = habit.name;
+    if (habit.title && !habit.text) habit.text = habit.title;
+    if (!habit.text) habit.text = "Recovered Habit"; 
+    if (!habit.id) habit.id = Date.now() + i; 
+    if (!habit.category) habit.category = 'general';
+    if (typeof habit.paused === 'undefined') habit.paused = false;
+    if (typeof habit.streak !== 'number') habit.streak = 0;
+  });
+
+  const getTodayStr = () => new Date().toISOString().split('T')[0];
+  const isYesterday = (dateStr) => {
+    if(!dateStr) return false;
+    const d = new Date(dateStr); d.setDate(d.getDate() + 1);
+    return d.toISOString().split('T')[0] === getTodayStr();
+  };
+
+  document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  if(meta.theme === 'light') { document.body.classList.add('light-theme'); document.getElementById('theme-light').classList.add('active'); document.getElementById('theme-dark').classList.remove('active'); }
+  document.getElementById('sound-toggle').checked = soundEnabled;
+
+  function checkDailyReset() {
+    const today = getTodayStr();
+    if (meta.lastActiveDate !== today) {
+      if (!isYesterday(meta.lastActiveDate) && meta.lastActiveDate !== null) meta.currentStreak = 0; 
+      habits.forEach(h => {
+        if (!h.paused && !isYesterday(h.lastCompleted)) h.streak = 0; 
+        h.completedToday = false; 
+      });
+      meta.lastActiveDate = today;
+      saveData();
+    }
+  }
+
+  function calculateStreaks() {
+    const allActiveHabits = habits.filter(h => !h.paused);
+    if (allActiveHabits.length === 0) return;
+    const allDoneToday = allActiveHabits.every(h => h.completedToday);
+    
+    if (allDoneToday) {
+      if (!meta.history[getTodayStr()]) {
+        meta.history[getTodayStr()] = true;
+        meta.currentStreak += 1;
+        if (meta.currentStreak > meta.bestStreak) meta.bestStreak = meta.currentStreak;
+        sfx.tada();
+        confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#38bdf8', '#10b981', '#fb923c'] });
+      }
+    } else {
+      if (meta.history[getTodayStr()]) {
+        delete meta.history[getTodayStr()];
+        meta.currentStreak = Math.max(0, meta.currentStreak - 1);
+      }
+    }
+    saveData(); updateUI(); checkAchievements(); 
+  }
+
+  function checkAchievements() {
+    const best = meta.bestStreak || 0;
+    let maxSingle = 0;
+    habits.forEach(h => { if(h.streak > maxSingle) maxSingle = h.streak; });
+
+    const toggleBadge = (id, unlocked, glowClass) => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      if(unlocked) { el.classList.remove('locked'); el.classList.add('unlocked', glowClass); } 
+      else { el.classList.add('locked'); el.classList.remove('unlocked', glowClass); }
     };
 
-    // --- ARMOR-PLATED DATA RECOVERY ---
-    let habits = [];
-    let meta = {};
+    toggleBadge('badge-spark', best >= 3, 'glow-spark');
+    toggleBadge('badge-surge', best >= 7, 'glow-surge');
+    toggleBadge('badge-unstoppable', best >= 14, 'glow-unstoppable');
+    toggleBadge('badge-apex', best >= 30, 'glow-apex');
+    toggleBadge('badge-seed', maxSingle >= 3, 'glow-seed');
+    toggleBadge('badge-iron', maxSingle >= 7, 'glow-iron');
+    toggleBadge('badge-nature', maxSingle >= 21, 'glow-nature');
+    toggleBadge('badge-ascended', maxSingle >= 50, 'glow-ascended');
+  }
 
-    try {
-      const hData = JSON.parse(localStorage.getItem('winstreak_habits'));
-      if (Array.isArray(hData)) habits = hData;
-    } catch(e) { console.error("Habit parse error safely caught."); }
-
-    try {
-      const mData = JSON.parse(localStorage.getItem('winstreak_meta'));
-      if (mData && typeof mData === 'object') meta = mData;
-    } catch(e) { console.error("Meta parse error safely caught."); }
-
-    // 🚀 INSTRUCTIBLE BACKWARD COMPATIBILITY PATCH
-    if (!meta.history) meta.history = {};
-    if (typeof meta.currentStreak !== 'number') meta.currentStreak = 0;
-    if (typeof meta.bestStreak !== 'number') meta.bestStreak = 0;
-    if (!meta.theme) meta.theme = 'dark';
+  function updateUI() {
+    document.getElementById('current-streak').textContent = meta.currentStreak;
+    document.getElementById('peak-streak').textContent = meta.bestStreak;
     
-    habits.forEach((habit, i) => {
-      // Translate legacy property names to 'text'
-      if (habit.name && !habit.text) habit.text = habit.name;
-      if (habit.title && !habit.text) habit.text = habit.title;
-      if (habit.habitName && !habit.text) habit.text = habit.habitName;
-      if (!habit.text) habit.text = "Recovered Habit"; // Failsafe
-      
-      if (!habit.id) habit.id = Date.now() + i; 
-      if (!habit.category) habit.category = 'general';
-      if (typeof habit.paused === 'undefined') habit.paused = false;
-      if (typeof habit.streak !== 'number') habit.streak = 0;
+    const activeHabits = habits.filter(h => !h.paused);
+    const completed = activeHabits.filter(h => h.completedToday).length;
+    const total = activeHabits.length;
+    const pct = total === 0 ? 0 : Math.round((completed / total) * 100);
+    
+    document.getElementById('progress-text').textContent = `${pct}%`;
+    document.getElementById('progress-fill').style.width = `${pct}%`;
+    
+    const statusText = document.getElementById('progress-status-text');
+    if (total === 0) statusText.textContent = "Add a habit to start.";
+    else if (pct === 0) statusText.textContent = "Let's get to work.";
+    else if (pct < 50) statusText.textContent = "Making progress.";
+    else if (pct < 100) statusText.textContent = "Almost there, keep pushing!";
+    else statusText.textContent = "Perfect day! You crushed it.";
+
+    const weekContainer = document.getElementById('week-bubbles');
+    weekContainer.innerHTML = '';
+    const today = new Date();
+    const currentDayStr = getTodayStr();
+    
+    for(let i = 6; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(today.getDate() - i);
+      const dateStr = d.toISOString().split('T')[0];
+      const dayName = d.toLocaleDateString('en-US', { weekday: 'narrow' });
+      const isToday = dateStr === currentDayStr;
+      const isDone = meta.history && meta.history[dateStr] === true;
+      weekContainer.innerHTML += `<div class="day-column"><span class="day-name">${dayName}</span><div class="day-bubble ${isToday ? 'today' : ''} ${isDone ? 'done' : ''}">${isDone ? '✓' : ''}</div></div>`;
+    }
+  }
+
+  let currentFilter = 'all';
+  let isReorderMode = false;
+  let editingIndex = -1;
+
+  function renderHabits() {
+    const list = document.getElementById('habit-list');
+    list.innerHTML = '';
+    
+    if (habits.length === 0) { list.innerHTML = '<div class="empty-state">No habits yet. Add one above!</div>'; return; }
+
+    const filteredHabits = habits.filter(h => {
+      if(currentFilter === 'all') return true;
+      if(currentFilter === 'active') return !h.paused;
+      if(currentFilter === 'done') return h.completedToday;
+      return h.category === currentFilter;
     });
 
-    const getTodayStr = () => new Date().toISOString().split('T')[0];
-    const isYesterday = (dateStr) => {
-      if(!dateStr) return false;
-      const d = new Date(dateStr); d.setDate(d.getDate() + 1);
-      return d.toISOString().split('T')[0] === getTodayStr();
-    };
+    if(filteredHabits.length === 0) { list.innerHTML = `<div class="empty-state">No ${currentFilter} habits found.</div>`; return; }
 
-    // --- INITIALIZATION ---
-    document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-    if(meta.theme === 'light') { document.body.classList.add('light-theme'); document.getElementById('theme-light').classList.add('active'); document.getElementById('theme-dark').classList.remove('active'); }
-    document.getElementById('sound-toggle').checked = soundEnabled;
+    filteredHabits.forEach((habit, index) => {
+      const realIndex = habits.findIndex(h => h.id === habit.id);
+      const li = document.createElement('li');
+      li.className = `habit-item ${habit.completedToday ? 'done' : ''} ${habit.paused ? 'paused' : ''}`;
+      li.dataset.cat = habit.category || 'general';
 
-    function checkDailyReset() {
-      const today = getTodayStr();
-      if (meta.lastActiveDate !== today) {
-        if (!isYesterday(meta.lastActiveDate) && meta.lastActiveDate !== null) meta.currentStreak = 0; 
-        habits.forEach(h => {
-          if (!h.paused && !isYesterday(h.lastCompleted)) h.streak = 0; 
-          h.completedToday = false; 
-        });
-        meta.lastActiveDate = today;
-        saveData();
-      }
-    }
-
-    function calculateStreaks() {
-      const allActiveHabits = habits.filter(h => !h.paused);
-      if (allActiveHabits.length === 0) return;
-
-      const allDoneToday = allActiveHabits.every(h => h.completedToday);
-      
-      if (allDoneToday) {
-        if (!meta.history[getTodayStr()]) {
-          meta.history[getTodayStr()] = true;
-          meta.currentStreak += 1;
-          if (meta.currentStreak > meta.bestStreak) meta.bestStreak = meta.currentStreak;
-          sfx.tada();
-          confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#38bdf8', '#10b981', '#fb923c'] });
-        }
+      if(isReorderMode) {
+        li.innerHTML = `
+          <div class="drag-handle">☰</div>
+          <div class="habit-left" style="pointer-events:none;"><div class="habit-text-wrap"><span class="habit-title">${habit.text}</span></div></div>
+          <div class="reorder-actions">
+            <button class="reorder-move-btn" onclick="moveHabit(${realIndex}, -1)">↑</button>
+            <button class="reorder-move-btn" onclick="moveHabit(${realIndex}, 1)">↓</button>
+          </div>
+        `;
+      } else if (editingIndex === realIndex) {
+        li.innerHTML = `
+          <div class="edit-mode-container">
+            <input type="text" class="edit-input" id="edit-text-${realIndex}" value="${habit.text}">
+            <div class="edit-controls-row">
+              <select class="edit-select" id="edit-cat-${realIndex}">
+                <option value="coding" ${habit.category === 'coding' ? 'selected' : ''}>Coding</option>
+                <option value="study" ${habit.category === 'study' ? 'selected' : ''}>Study</option>
+                <option value="activity" ${habit.category === 'activity' ? 'selected' : ''}>Activity</option>
+                <option value="health" ${habit.category === 'health' ? 'selected' : ''}>Health</option>
+                <option value="skills" ${habit.category === 'skills' ? 'selected' : ''}>Skills</option>
+                <option value="rest" ${habit.category === 'rest' ? 'selected' : ''}>Rest</option>
+                <option value="selfcare" ${habit.category === 'selfcare' ? 'selected' : ''}>Self-Care</option>
+                <option value="general" ${habit.category === 'general' ? 'selected' : ''}>General</option>
+              </select>
+              <button class="edit-btn-save" onclick="saveEdit(${realIndex})">Save</button>
+              <button class="edit-btn-cancel" onclick="cancelEdit()">Cancel</button>
+            </div>
+          </div>
+        `;
       } else {
-        if (meta.history[getTodayStr()]) {
-          delete meta.history[getTodayStr()];
-          meta.currentStreak = Math.max(0, meta.currentStreak - 1);
-        }
-      }
-      saveData(); updateUI(); checkAchievements(); 
-    }
+        const pauseIcon = habit.paused 
+          ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>' 
+          : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+        const editIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>';
+        const deleteIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>';
 
-    // --- GAMIFICATION LOGIC ---
-    function checkAchievements() {
-      const best = meta.bestStreak || 0;
-      let maxSingle = 0;
-      habits.forEach(h => { if(h.streak > maxSingle) maxSingle = h.streak; });
-
-      const toggleBadge = (id, unlocked, glowClass) => {
-        const el = document.getElementById(id);
-        if(!el) return;
-        if(unlocked) { el.classList.remove('locked'); el.classList.add('unlocked', glowClass); } 
-        else { el.classList.add('locked'); el.classList.remove('unlocked', glowClass); }
-      };
-
-      toggleBadge('badge-spark', best >= 3, 'glow-spark');
-      toggleBadge('badge-surge', best >= 7, 'glow-surge');
-      toggleBadge('badge-unstoppable', best >= 14, 'glow-unstoppable');
-      toggleBadge('badge-apex', best >= 30, 'glow-apex');
-      
-      toggleBadge('badge-seed', maxSingle >= 3, 'glow-seed');
-      toggleBadge('badge-iron', maxSingle >= 7, 'glow-iron');
-      toggleBadge('badge-nature', maxSingle >= 21, 'glow-nature');
-      toggleBadge('badge-ascended', maxSingle >= 50, 'glow-ascended');
-    }
-
-    function updateUI() {
-      document.getElementById('current-streak').textContent = meta.currentStreak;
-      document.getElementById('peak-streak').textContent = meta.bestStreak;
-      
-      const activeHabits = habits.filter(h => !h.paused);
-      const completed = activeHabits.filter(h => h.completedToday).length;
-      const total = activeHabits.length;
-      const pct = total === 0 ? 0 : Math.round((completed / total) * 100);
-      
-      document.getElementById('progress-text').textContent = `${pct}%`;
-      document.getElementById('progress-fill').style.width = `${pct}%`;
-      
-      const statusText = document.getElementById('progress-status-text');
-      if (total === 0) statusText.textContent = "Add a habit to start.";
-      else if (pct === 0) statusText.textContent = "Let's get to work.";
-      else if (pct < 50) statusText.textContent = "Making progress.";
-      else if (pct < 100) statusText.textContent = "Almost there, keep pushing!";
-      else statusText.textContent = "Perfect day! You crushed it.";
-
-      renderWeekTracker();
-    }
-
-    function renderWeekTracker() {
-      const weekContainer = document.getElementById('week-bubbles');
-      weekContainer.innerHTML = '';
-      const today = new Date();
-      const currentDayStr = getTodayStr();
-      
-      for(let i = 6; i >= 0; i--) {
-        const d = new Date(today);
-        d.setDate(today.getDate() - i);
-        const dateStr = d.toISOString().split('T')[0];
-        const dayName = d.toLocaleDateString('en-US', { weekday: 'narrow' });
-        
-        const isToday = dateStr === currentDayStr;
-        const isDone = meta.history && meta.history[dateStr] === true;
-        
-        weekContainer.innerHTML += `
-          <div class="day-column">
-            <span class="day-name">${dayName}</span>
-            <div class="day-bubble ${isToday ? 'today' : ''} ${isDone ? 'done' : ''}">${isDone ? '✓' : ''}</div>
+        li.innerHTML = `
+          <div class="habit-left" onclick="toggleHabit(${realIndex})">
+            <div class="custom-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="habit-text-wrap">
+              <span class="habit-title">${habit.text}</span>
+              ${habit.streak > 0 ? `<span class="mini-streak">🔥 ${habit.streak}</span>` : ''}
+              <span class="cat-badge cat-${habit.category || 'general'}">${habit.category || 'general'}</span>
+            </div>
+          </div>
+          <div class="habit-actions">
+            <button class="action-btn" onclick="editHabit(${realIndex})" title="Edit">${editIcon}</button>
+            <button class="action-btn pause-btn" onclick="togglePause(${realIndex})" title="${habit.paused ? 'Resume' : 'Pause'}">${pauseIcon}</button>
+            <button class="action-btn delete-btn" onclick="deleteHabit(${realIndex})">${deleteIcon}</button>
           </div>
         `;
       }
-    }
+      list.appendChild(li);
+    });
+  }
 
-    let currentFilter = 'all';
-    let isReorderMode = false;
-    let editingIndex = -1;
+  function addHabit() {
+    const input = document.getElementById('habit-input');
+    const cat = document.getElementById('habit-category').value;
+    const text = input.value.trim();
+    if (text) {
+      habits.push({ id: Date.now(), text, completedToday: false, streak: 0, lastCompleted: null, category: cat, paused: false });
+      input.value = ''; sfx.pop(); saveData(); renderHabits(); updateUI();
+    } else { sfx.error(); input.classList.add('shake'); setTimeout(() => input.classList.remove('shake'), 400); }
+  }
 
-    // --- DOM RENDERING ---
-    function renderHabits() {
-      const list = document.getElementById('habit-list');
-      list.innerHTML = '';
-      
-      if (habits.length === 0) {
-        list.innerHTML = '<div class="empty-state">No habits yet. Add one above!</div>';
-        return;
-      }
+  window.editHabit = (index) => { editingIndex = index; sfx.pop(); renderHabits(); };
+  window.cancelEdit = () => { editingIndex = -1; sfx.pop(); renderHabits(); };
+  window.saveEdit = (index) => {
+    const newText = document.getElementById(`edit-text-${index}`).value.trim();
+    const newCat = document.getElementById(`edit-cat-${index}`).value;
+    if (newText) { habits[index].text = newText; habits[index].category = newCat; editingIndex = -1; sfx.pop(); saveData(); renderHabits(); } 
+    else sfx.error();
+  };
+  window.toggleHabit = (index) => {
+    const h = habits[index];
+    if (h.paused) return; 
+    h.completedToday = !h.completedToday;
+    if (h.completedToday) { h.streak += 1; h.lastCompleted = getTodayStr(); sfx.check(); } 
+    else { h.streak = Math.max(0, h.streak - 1); h.lastCompleted = null; sfx.uncheck(); }
+    saveData(); renderHabits(); calculateStreaks();
+  };
+  window.togglePause = (index) => {
+    habits[index].paused = !habits[index].paused;
+    habits[index].completedToday = false; 
+    sfx.pop(); saveData(); renderHabits(); calculateStreaks();
+  };
+  window.deleteHabit = (index) => {
+    if(confirm('Delete this habit permanently?')) { habits.splice(index, 1); sfx.delete(); saveData(); renderHabits(); calculateStreaks(); }
+  };
+  window.moveHabit = (index, direction) => {
+    if (index + direction < 0 || index + direction >= habits.length) return;
+    const temp = habits[index]; habits[index] = habits[index + direction]; habits[index + direction] = temp;
+    sfx.pop(); saveData(); renderHabits();
+  };
 
-      const filteredHabits = habits.filter(h => {
-        if(currentFilter === 'all') return true;
-        if(currentFilter === 'active') return !h.paused;
-        if(currentFilter === 'done') return h.completedToday;
-        return h.category === currentFilter;
-      });
-
-      if(filteredHabits.length === 0) {
-        list.innerHTML = `<div class="empty-state">No ${currentFilter} habits found.</div>`;
-        return;
-      }
-
-      filteredHabits.forEach((habit, index) => {
-        const realIndex = habits.findIndex(h => h.id === habit.id);
-        const li = document.createElement('li');
-        li.className = `habit-item ${habit.completedToday ? 'done' : ''} ${habit.paused ? 'paused' : ''}`;
-        li.dataset.cat = habit.category || 'general';
-
-        if(isReorderMode) {
-          li.innerHTML = `
-            <div class="drag-handle">☰</div>
-            <div class="habit-left" style="pointer-events:none;">
-              <div class="habit-text-wrap"><span class="habit-title">${habit.text}</span></div>
-            </div>
-            <div class="reorder-actions">
-              <button class="reorder-move-btn" onclick="moveHabit(${realIndex}, -1)">↑</button>
-              <button class="reorder-move-btn" onclick="moveHabit(${realIndex}, 1)">↓</button>
-            </div>
-          `;
-        } else if (editingIndex === realIndex) {
-          li.innerHTML = `
-            <div class="edit-mode-container">
-              <input type="text" class="edit-input" id="edit-text-${realIndex}" value="${habit.text}">
-              <div class="edit-controls-row">
-                <select class="edit-select" id="edit-cat-${realIndex}">
-                  <option value="coding" ${habit.category === 'coding' ? 'selected' : ''}>Coding</option>
-                  <option value="study" ${habit.category === 'study' ? 'selected' : ''}>Study</option>
-                  <option value="activity" ${habit.category === 'activity' ? 'selected' : ''}>Activity</option>
-                  <option value="health" ${habit.category === 'health' ? 'selected' : ''}>Health</option>
-                  <option value="skills" ${habit.category === 'skills' ? 'selected' : ''}>Skills</option>
-                  <option value="rest" ${habit.category === 'rest' ? 'selected' : ''}>Rest</option>
-                  <option value="selfcare" ${habit.category === 'selfcare' ? 'selected' : ''}>Self-Care</option>
-                  <option value="general" ${habit.category === 'general' ? 'selected' : ''}>General</option>
-                </select>
-                <button class="edit-btn-save" onclick="saveEdit(${realIndex})">Save</button>
-                <button class="edit-btn-cancel" onclick="cancelEdit()">Cancel</button>
-              </div>
-            </div>
-          `;
-        } else {
-          const pauseIcon = habit.paused 
-            ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>' 
-            : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
-          const editIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>';
-          const deleteIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>';
-
-          li.innerHTML = `
-            <div class="habit-left" onclick="toggleHabit(${realIndex})">
-              <div class="custom-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-              <div class="habit-text-wrap">
-                <span class="habit-title">${habit.text}</span>
-                ${habit.streak > 0 ? `<span class="mini-streak">🔥 ${habit.streak}</span>` : ''}
-                <span class="cat-badge cat-${habit.category || 'general'}">${habit.category || 'general'}</span>
-              </div>
-            </div>
-            <div class="habit-actions">
-              <button class="action-btn" onclick="editHabit(${realIndex})" title="Edit">${editIcon}</button>
-              <button class="action-btn pause-btn" onclick="togglePause(${realIndex})" title="${habit.paused ? 'Resume' : 'Pause'}">${pauseIcon}</button>
-              <button class="action-btn delete-btn" onclick="deleteHabit(${realIndex})">${deleteIcon}</button>
-            </div>
-          `;
-        }
-        list.appendChild(li);
-      });
-    }
-
-    // --- ACTIONS ---
-    function addHabit() {
-      const input = document.getElementById('habit-input');
-      const cat = document.getElementById('habit-category').value;
-      const text = input.value.trim();
-      if (text) {
-        habits.push({ id: Date.now(), text, completedToday: false, streak: 0, lastCompleted: null, category: cat, paused: false });
-        input.value = ''; sfx.pop(); saveData(); renderHabits(); updateUI();
-      } else {
-        sfx.error(); input.classList.add('shake'); setTimeout(() => input.classList.remove('shake'), 400);
-      }
-    }
-
-    window.editHabit = (index) => { editingIndex = index; sfx.pop(); renderHabits(); };
-    window.cancelEdit = () => { editingIndex = -1; sfx.pop(); renderHabits(); };
-    window.saveEdit = (index) => {
-      const newText = document.getElementById(`edit-text-${index}`).value.trim();
-      const newCat = document.getElementById(`edit-cat-${index}`).value;
-      if (newText) {
-        habits[index].text = newText;
-        habits[index].category = newCat;
-        editingIndex = -1;
-        sfx.pop(); saveData(); renderHabits();
-      } else {
-        sfx.error();
-      }
-    };
-
-    window.toggleHabit = (index) => {
-      const h = habits[index];
-      if (h.paused) return; 
-      h.completedToday = !h.completedToday;
-      if (h.completedToday) { h.streak += 1; h.lastCompleted = getTodayStr(); sfx.check(); } 
-      else { h.streak = Math.max(0, h.streak - 1); h.lastCompleted = null; sfx.uncheck(); }
-      saveData(); renderHabits(); calculateStreaks();
-    };
-
-    window.togglePause = (index) => {
-      habits[index].paused = !habits[index].paused;
-      habits[index].completedToday = false; 
-      sfx.pop(); saveData(); renderHabits(); calculateStreaks();
-    };
-
-    window.deleteHabit = (index) => {
-      if(confirm('Delete this habit permanently?')) { habits.splice(index, 1); sfx.delete(); saveData(); renderHabits(); calculateStreaks(); }
-    };
-
-    window.moveHabit = (index, direction) => {
-      if (index + direction < 0 || index + direction >= habits.length) return;
-      const temp = habits[index]; habits[index] = habits[index + direction]; habits[index + direction] = temp;
-      sfx.pop(); saveData(); renderHabits();
-    };
-
-    // --- UPGRADED SAVEDATA: LOCAL + CLOUD SYNC ---
-    const saveData = async () => {
-      // 1. Save locally instantly so the app never feels slow
+  const saveData = async () => {
       localStorage.setItem('winstreak_habits', JSON.stringify(habits));
       localStorage.setItem('winstreak_meta', JSON.stringify(meta));
-
-      // 2. Silently sync to your Python Backend
+      
+      const currentUser = localStorage.getItem('currentUser');
+      if (!currentUser) return; 
+      
       try {
-        const payload = {
-          username: "RIDER", 
-          habits: habits,
-          meta: meta
-        };
-        
-        // Fire the HTTP request to your local FastAPI server
-        fetch('http://127.0.0.1:8000/api/sync', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }).catch(err => console.log("Backend offline - saved locally."));
-        
-      } catch (error) {
-        console.error("Sync error:", error);
-      }
-    };
+          const payload = { username: currentUser, habits: habits, meta: meta };
+          fetch('https://winstreak-by-rider.onrender.com/api/sync', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+          }).catch(err => console.log("Backend offline - saved locally."));
+      } catch(e) {}
+  };
 
-    // --- EVENT LISTENERS ---
-    document.getElementById('add-btn').addEventListener('click', addHabit);
-    document.getElementById('habit-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') addHabit(); });
-    
-    document.getElementById('filter-bar').addEventListener('click', (e) => {
-      if(e.target.classList.contains('filter-btn')) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active'); currentFilter = e.target.dataset.filter;
-        sfx.pop(); renderHabits();
-      }
-    });
-
-    document.getElementById('reorder-fab').addEventListener('click', () => {
-      isReorderMode = !isReorderMode;
-      document.getElementById('reorder-fab').classList.toggle('active');
-      currentFilter = 'all'; 
+  document.getElementById('add-btn').addEventListener('click', addHabit);
+  document.getElementById('habit-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') addHabit(); });
+  
+  document.getElementById('filter-bar').addEventListener('click', (e) => {
+    if(e.target.classList.contains('filter-btn')) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+      e.target.classList.add('active'); currentFilter = e.target.dataset.filter;
       sfx.pop(); renderHabits();
-    });
-
-    document.getElementById('settings-btn').addEventListener('click', () => document.getElementById('settings-modal').classList.add('active'));
-    document.getElementById('close-settings').addEventListener('click', () => document.getElementById('settings-modal').classList.remove('active'));
-    
-    document.getElementById('achievements-btn').addEventListener('click', () => {
-      checkAchievements(); document.getElementById('achievements-modal').classList.add('active'); sfx.pop();
-    });
-    document.getElementById('close-achievements').addEventListener('click', () => document.getElementById('achievements-modal').classList.remove('active'));
-
-    document.getElementById('theme-dark').addEventListener('click', () => {
-      document.body.classList.remove('light-theme'); meta.theme = 'dark';
-      document.getElementById('theme-dark').classList.add('active'); document.getElementById('theme-light').classList.remove('active');
-      saveData(); sfx.pop();
-    });
-    document.getElementById('theme-light').addEventListener('click', () => {
-      document.body.classList.add('light-theme'); meta.theme = 'light';
-      document.getElementById('theme-light').classList.add('active'); document.getElementById('theme-dark').classList.remove('active');
-      saveData(); sfx.pop();
-    });
-    
-    document.getElementById('sound-toggle').addEventListener('change', (e) => { soundEnabled = e.target.checked; if(soundEnabled) sfx.pop(); });
-
-    document.getElementById('export-data').addEventListener('click', () => {
-      const dataStr = JSON.stringify({ habits, meta });
-      const blob = new Blob([dataStr], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'winstreak_backup.json'; a.click();
-    });
-    
-    document.getElementById('import-file').addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if(!file) return;
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        try {
-          const parsed = JSON.parse(event.target.result);
-          if(parsed.habits && parsed.meta) {
-            localStorage.setItem('winstreak_habits', JSON.stringify(parsed.habits));
-            localStorage.setItem('winstreak_meta', JSON.stringify(parsed.meta));
-            location.reload();
-          } else alert('Invalid backup file.');
-        } catch(err) { alert('Failed to read file.'); }
-      };
-      reader.readAsText(file);
-    });
-
-    // Boot up
-    // Run an initial patch save to ensure fresh data hits the backend on first load
-    saveData();
-    checkDailyReset();
-    updateUI();
-    renderHabits();
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js').then(() => console.log('SW registered'));
     }
-  </script>
+  });
+
+  document.getElementById('reorder-fab').addEventListener('click', () => {
+    isReorderMode = !isReorderMode;
+    document.getElementById('reorder-fab').classList.toggle('active');
+    currentFilter = 'all'; 
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+    sfx.pop(); renderHabits();
+  });
+
+  document.getElementById('settings-btn').addEventListener('click', () => document.getElementById('settings-modal').classList.add('active'));
+  document.getElementById('close-settings').addEventListener('click', () => document.getElementById('settings-modal').classList.remove('active'));
+  document.getElementById('achievements-btn').addEventListener('click', () => { checkAchievements(); document.getElementById('achievements-modal').classList.add('active'); sfx.pop(); });
+  document.getElementById('close-achievements').addEventListener('click', () => document.getElementById('achievements-modal').classList.remove('active'));
+
+  document.getElementById('theme-dark').addEventListener('click', () => {
+    document.body.classList.remove('light-theme'); meta.theme = 'dark';
+    document.getElementById('theme-dark').classList.add('active'); document.getElementById('theme-light').classList.remove('active');
+    saveData(); sfx.pop();
+  });
+  document.getElementById('theme-light').addEventListener('click', () => {
+    document.body.classList.add('light-theme'); meta.theme = 'light';
+    document.getElementById('theme-light').classList.add('active'); document.getElementById('theme-dark').classList.remove('active');
+    saveData(); sfx.pop();
+  });
+  
+  document.getElementById('sound-toggle').addEventListener('change', (e) => { soundEnabled = e.target.checked; if(soundEnabled) sfx.pop(); });
+  document.getElementById('export-data').addEventListener('click', () => {
+    const dataStr = JSON.stringify({ habits, meta });
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'winstreak_backup.json'; a.click();
+  });
+  
+  document.getElementById('import-file').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const parsed = JSON.parse(event.target.result);
+        if(parsed.habits && parsed.meta) {
+          localStorage.setItem('winstreak_habits', JSON.stringify(parsed.habits));
+          localStorage.setItem('winstreak_meta', JSON.stringify(parsed.meta));
+          location.reload();
+        } else alert('Invalid backup file.');
+      } catch(err) { alert('Failed to read file.'); }
+    };
+    reader.readAsText(file);
+  });
+
+  saveData();
+  checkDailyReset();
+  updateUI();
+  renderHabits();
+
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./sw.js').then(() => console.log('SW registered')); }
+  
+  document.getElementById('pfpInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+              const base64Image = e.target.result;
+              document.getElementById('pfpPreviewImage').src = base64Image;
+              document.getElementById('pfpPreviewImage').style.display = 'block';
+              document.getElementById('pfpPlaceholder').style.display = 'none';
+              window.tempPfp = base64Image;
+          };
+          reader.readAsDataURL(file); 
+      }
+  });
+
+  window.saveProfile = () => {
+      const displayName = document.getElementById('displayNameInput').value;
+      if (window.tempPfp) localStorage.setItem('winstreak_pfp', window.tempPfp);
+      if (displayName) localStorage.setItem('winstreak_displayName', displayName);
+      if (typeof loadProfileData === 'function') loadProfileData();
+      document.getElementById('accountModal').style.display = 'none';
+  };
+
+  window.logout = () => {
+      localStorage.removeItem('currentUser');
+      habits = [];
+      if (typeof renderHabits === "function") renderHabits();
+      document.getElementById('accountModal').style.display = 'none';
+      
+      document.getElementById('authUsername').value = '';
+      document.getElementById('authPassword').value = '';
+      document.getElementById('authError').innerText = '';
+      
+      document.getElementById('authScreen').style.display = 'flex';
+  };
+
+  window.loadProfileData = function() {
+      const savedPfp = localStorage.getItem('winstreak_pfp');
+      const savedName = localStorage.getItem('winstreak_displayName');
+      
+      if (savedPfp) {
+          document.getElementById('pfpPreviewImage').src = savedPfp;
+          document.getElementById('pfpPreviewImage').style.display = 'block';
+          document.getElementById('pfpPlaceholder').style.display = 'none';
+          
+          const headerImg = document.getElementById('headerPfpImage');
+          if (headerImg) {
+              headerImg.src = savedPfp;
+              headerImg.style.display = 'block';
+              document.getElementById('headerPfpPlaceholder').style.display = 'none';
+          }
+      }
+      if (savedName) {
+          const headerTitle = document.querySelector('.brand-wrap h1');
+          if (headerTitle) headerTitle.textContent = savedName;
+          document.getElementById('displayNameInput').value = savedName;
+      }
+  };
+
+  loadProfileData();
+
+</script>
 </body>
 </html>
