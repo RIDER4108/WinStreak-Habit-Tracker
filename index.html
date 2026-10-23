@@ -395,7 +395,7 @@
 
             <h3 class="settings-header-bold">Account Settings</h3>
             <button onclick="logout()" class="full-btn outline-btn">Sign Out</button>
-            <button onclick="toggleSecurityUI('deleteAccUI')" class="full-btn danger-btn">Delete Acc.</button>
+            <button onclick="toggleSecurityUI('deleteAccUI')" class="full-btn danger-btn">Delete Account</button>
             
             <div id="deleteAccUI" style="display: none; margin-top: 0.5rem; padding-top: 5px;">
                 <input type="password" id="deletePwInput" placeholder="Enter Password to Confirm" style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--input-bg); color: white; outline: none;">
@@ -1102,7 +1102,8 @@
   let originalName = nameInput.value;
 
   function updatePfpButtonText() {
-      if (profilePic.src.includes("default-avatar") || profilePic.src.includes("icon.svg") || profilePic.src.includes("data:image")) {
+      // If the image is the default icon.svg, say Upload. If it's a real image, say Change.
+      if (profilePic.src.includes("icon.svg") || profilePic.src.includes("default-avatar")) {
           pfpBtn.textContent = "Upload Profile Pic";
       } else {
           pfpBtn.textContent = "Change Profile Pic";
@@ -1118,8 +1119,15 @@
               const base64Image = event.target.result;
               profilePic.src = base64Image;
               window.tempPfp = base64Image;
+              
+              // 1. Update the button text to "Change Profile Pic"
               updatePfpButtonText();
               sfx.pop();
+              
+              // 2. Unlock the Save button because they made a change
+              saveProfileBtn.classList.remove("locked-btn");
+              saveProfileBtn.classList.add("active-save-btn");
+              saveProfileBtn.removeAttribute("disabled");
           };
           reader.readAsDataURL(e.target.files[0]); 
       }
